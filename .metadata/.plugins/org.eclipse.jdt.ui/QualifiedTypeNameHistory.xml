@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.usfirst.frc.team2875.robot.commands.Drive"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.command.Subsystem"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.SpeedController"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Talon"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.GenericHID.RumbleType"/>
-</qualifiedTypeNameHistroy>
