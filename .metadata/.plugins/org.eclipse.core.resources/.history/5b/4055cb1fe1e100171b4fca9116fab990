@@ -1,0 +1,30 @@
+package Main;
+
+public class Driving {
+
+	public Driving() {
+	
+	}
+	
+	public void mainTeleop(double forward, double left, double right, double strafe) {
+		double speedL1 = forward;
+		double speedR1 = forward;
+		double speedL2 = forward;
+		double speedR2 = forward;
+		speedL1 -= left;
+		speedL2 -= left;
+		speedR1 -= right;
+		speedR2 -= right;
+		
+		//depends on which way the XBox contr. works
+		speedL1 -= strafe;
+		speedL2 += strafe;
+		speedR1 += strafe;
+		speedR2 -= strafe;
+		Robot.gearBox.setSpeed(1,speedL1);
+		Robot.gearBox.setSpeed(2, speedL2);
+		Robot.gearBox.setSpeed(3,speedR1);
+		Robot.gearBox.setSpeed(4, speedR2);
+	
+}
+}

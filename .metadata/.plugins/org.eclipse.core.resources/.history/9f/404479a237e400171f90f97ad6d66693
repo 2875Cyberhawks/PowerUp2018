@@ -1,0 +1,54 @@
+package org.usfirst.frc.team2875.robot.subsystems;
+
+import org.usfirst.frc.team2875.robot.Robot;
+import org.usfirst.frc.team2875.robot.commands.Drive;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class Driving extends Subsystem{
+
+	public Driving() {
+	
+	}
+	
+	public void drive(double forward, double left, double right, double strafe) {
+		double speedL1 = forward;
+		double speedR1 = forward;
+		double speedL2 = forward;
+		double speedR2 = forward;
+		speedL1 -= left;
+		speedL2 -= left;
+		speedR1 -= right;
+		speedR2 -= right;
+		
+		speedL1 += right;
+		speedL2 += right;
+		speedR1 += left;
+		speedR2 += left;
+		
+		//depends on which way the XBox contr. works
+		speedL1 -= strafe;
+		speedL2 += strafe;
+		speedR1 += strafe;
+		speedR2 -= strafe;
+		SmartDashboard.putNumber("speedL1", speedL1);
+		SmartDashboard.putNumber("speedL2", speedL2);
+		SmartDashboard.putNumber("speedR1", speedR1);
+		SmartDashboard.putNumber("speedR2", speedR2);
+		Robot.gearBox.setSpeed(1,speedL1*SmartDashboard.getNumber("L1 (0-1)", 1));
+		Robot.gearBox.setSpeed(2, speedL2*SmartDashboard.getNumber("L2 (0-1)", 1));
+		Robot.gearBox.setSpeed(3,speedR1*SmartDashboard.getNumber("R1 (0-1)", 1));
+		Robot.gearBox.setSpeed(4, speedR2*SmartDashboard.getNumber("R2 (0-1)", 1));
+	
+}
+public void stop() {
+		Robot.gearBox.stop();
+	}
+
+@Override
+protected void initDefaultCommand() {
+	setDefaultCommand(new Drive());
+}
+	
+}

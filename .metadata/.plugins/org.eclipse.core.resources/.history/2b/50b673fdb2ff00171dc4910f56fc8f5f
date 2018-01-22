@@ -1,0 +1,37 @@
+package org.usfirst.frc.team2875.robot.subsystems;
+
+import org.usfirst.frc.team2875.robot.Robot;
+import edu.wpi.first.wpilibj.command.Subsystem;
+/**
+ *
+ */
+public class Drivetrain extends Subsystem {
+
+	public void setSpeed(double forward, double turning)
+	{
+		double speed1, speed2, g1, g2;
+		g1 = -forward + ((right) - (left));
+		g2 = forward + ((right) - (left));
+		speed2 = g2;
+		speed1 = g1;
+		Robot.lGearbox.setSpeed(speed1);
+		Robot.rGearbox.setSpeed(speed2);
+	}
+	
+    // Put methods for controlling this subsystem
+    // here. Call these from Commands.
+
+	public int getSign(double inp) {
+		if(inp <0) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
+	}
+    public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        //setDefaultCommand(new MySpecialCommand());
+    }
+}
+
