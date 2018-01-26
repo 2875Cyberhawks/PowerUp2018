@@ -23,7 +23,7 @@ public class Drivetrain extends Subsystem {
 	{
 		Robot.lGearbox.setSpeed(0);
 		Robot.rGearbox.setSpeed(0);
-	}s
+	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
 public class Gearbox {
+	// TODO make gearbox a subsystem
+	boolean inverted = false;
     SpeedController controller1, controller2, controller3;
     
     public Gearbox(int c1, int c2,int c3) {
@@ -11,7 +13,15 @@ public class Gearbox {
     	controller2 = new Talon(c2);
     	controller3 = new Talon(c3);
     }
-    public void setSpeed(double sped) {
+    
+    public void setInverted(boolean invertedI)
+    {
+    	inverted = invertedI;
+    }
+    
+    public void setSpeed(double speed) {
+    	double sped = speed;
+    	if (inverted) sped *= -1;
     	controller1.set(sped);
     	controller2.set(sped);
     	controller3.set(sped);
