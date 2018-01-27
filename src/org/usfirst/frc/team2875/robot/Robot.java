@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2875.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
 
 /**
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	public static Drivetrain dTrain = new Drivetrain();
 	public static Gearbox rGearbox;
 	public static Gearbox lGearbox;
+	public static Lift lift;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
 
@@ -41,7 +43,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		//TODO change according to the pins
-		
+		lift = new Lift(8);
 		lGearbox = new Gearbox(0, 1, 2);
 		rGearbox = new Gearbox(3, 4, 5);
 		rGearbox.setInverted(true);
@@ -57,7 +59,8 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
+		//the thus the end begins
+		//`
 	}
 
 	@Override
