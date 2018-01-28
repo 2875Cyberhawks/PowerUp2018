@@ -9,9 +9,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Lift extends Subsystem {
-SpeedController controller1;
-	public Lift(int pin) {
+SpeedController controller1, controller2;
+	public Lift(int pin, int pin2) {
    controller1 = new Talon(pin);
+   controller2 = new Talon(pin2);
 	}
 	
 	public void setLift(double speed) {
@@ -21,10 +22,20 @@ SpeedController controller1;
 	public void stop()
 	{
 		controller1.set(0);
+		controller2.set(0);
 	}
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    }
+    //TODO find out how many motors for box intake
+    public void boxIn(double speed) {
+    	if (speed > 0)
+    		controller2.set(1);
+    	else if (speed == 0)
+    		controller2.set(0);
+    	else if (speed<0)	
+    		controller2.set(-1);
     }
 }
 

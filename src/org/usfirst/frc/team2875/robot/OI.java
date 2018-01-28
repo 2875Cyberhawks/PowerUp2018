@@ -62,7 +62,7 @@ public class OI {
 			return false;
 	}
 	public boolean button6() {
-		return liftController.getRawButton(7);
+		return liftController.getRawButton(6);
 	}
 	public boolean button7() {
 		return liftController.getRawButton(7);
