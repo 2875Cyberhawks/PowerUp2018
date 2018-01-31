@@ -67,6 +67,7 @@ public class OI {
 		return (val > JOY_DEADZONE) ? val : 0;
 		
 	}
+	
 	public boolean isActive() {
 		if(button6() && button7() && button10() && button11())
 			return true;
@@ -91,6 +92,7 @@ public class OI {
 			driveController.setRumble(GenericHID.RumbleType.kRightRumble, 1);
 		}
 	}
+
 	public boolean gearSwitch()
 	{
 		return driveController.getRawButton(4);
