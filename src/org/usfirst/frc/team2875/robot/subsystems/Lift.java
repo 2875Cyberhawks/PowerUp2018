@@ -8,8 +8,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * :D
- *Raffi Stinks
+ *
  */
 public class Lift extends Subsystem {
 	public static final int[][] positions = new int[4][2];
@@ -31,6 +30,15 @@ public class Lift extends Subsystem {
 	}
     public void initDefaultCommand() {
         setDefaultCommand(new LiftCmd());
+    }
+    //TODO find out how many motors for box intake
+    public void boxIn(double speed) {
+    	if (speed > 0)
+    		controller2.set(1);
+    	else if (speed == 0)
+    		controller2.set(0);
+    	else if (speed<0)	
+    		controller2.set(-1);
     }
 }
 

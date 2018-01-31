@@ -46,14 +46,26 @@ public class OI {
 		double[] raw = getTurning();
 		return raw[0]-raw[1];
 	}
-	public double wheelControl() {
-		return driveController.getY(GenericHID.Hand.kRight);
+	public int wheelControl() {
+		double speed =  driveController.getY(GenericHID.Hand.kRight);
+		if (Math.abs(speed) < JOY_DEADZONE) {
+			return 0;
+		}
+		else if(speed < 0) {
+			return -1;
+		}
+		else {
+			return 1;
+		}
+					
+			
+		
 	}
 	public double getLift() {
 //TODO: Add a konami code for malicious rumble
 		double val = liftController.getY();
 		return (val > JOY_DEADZONE) ? val : 0;
-
+		
 	}
 	
 	public boolean isActive() {
