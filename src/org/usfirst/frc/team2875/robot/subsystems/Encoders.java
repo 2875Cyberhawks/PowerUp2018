@@ -10,7 +10,7 @@ public class Encoders extends Subsystem {
 	private Encoder leftEncoder;
 
 	public Encoders() {
-		//im ugly
+
 		//TODO set the correct pins
 		//TODO calibrate the distance
 		rightEncoder = new Encoder(6, 7, true, EncodingType.k1X);

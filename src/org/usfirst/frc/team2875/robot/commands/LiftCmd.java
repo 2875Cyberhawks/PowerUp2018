@@ -23,6 +23,7 @@ public class LiftCmd extends Command {
     protected void execute() {
     	double liftSpeed = Robot.oi.getLift();
     	Robot.lift.setLift(liftSpeed);
+    	Robot.lift.boxIn(liftSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -39,4 +40,5 @@ public class LiftCmd extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+   
 }

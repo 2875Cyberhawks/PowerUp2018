@@ -5,9 +5,6 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-/**
- *
- */
 public class Lift extends Subsystem {
 SpeedController controller1, controller2;
 	public Lift(int pin, int pin2) {
@@ -29,7 +26,7 @@ SpeedController controller1, controller2;
         //setDefaultCommand(new MySpecialCommand());
     }
     //TODO find out how many motors for box intake
-    public void boxIn(double speed) {
+    public void boxIn(int speed) {
     	if (speed > 0)
     		controller2.set(1);
     	else if (speed == 0)
