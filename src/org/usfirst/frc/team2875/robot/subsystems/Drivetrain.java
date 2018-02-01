@@ -2,7 +2,10 @@ package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.Drive;
+import org.usfirst.frc.team2875.robot.commands.PIDController;
 
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
@@ -19,6 +22,11 @@ public class Drivetrain extends Subsystem {
 		Robot.rGearbox.setSpeed(speedL * constants[1]);
 	}
 	
+	public void reset()
+	{
+		rightEncoder.reset();
+		leftEncoder.reset();
+	}
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -31,4 +39,3 @@ public class Drivetrain extends Subsystem {
     	setDefaultCommand(new Drive());
     }
 }
-

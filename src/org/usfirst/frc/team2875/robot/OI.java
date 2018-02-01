@@ -14,10 +14,10 @@ public class OI {
 	public static final double TRIGGER_DEADZONE = 0.02;
 	//// CREATING BUTTONS
 	public XboxController driveController;
-	public Joystick liftController;
+	public XboxController liftController;
 	public OI(){
 		driveController = new XboxController(0);
-		liftController = new Joystick(1);
+		liftController = new XboxController(1);
 		
 	}
 
@@ -59,12 +59,6 @@ public class OI {
 		}
 					
 			
-		
-	}
-	public double getLift() {
-//TODO: Add a konami code for malicious rumble
-		double val = liftController.getY();
-		return (val > JOY_DEADZONE) ? val : 0;
 		
 	}
 	

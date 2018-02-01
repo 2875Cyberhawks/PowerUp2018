@@ -8,13 +8,13 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2875.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team2875.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2875.robot.subsystems.Gearbox;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
@@ -30,8 +30,8 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain dTrain = new Drivetrain();
-	public static Gearbox rGearbox;
-	public static Gearbox lGearbox;
+	public static SpeedControllerGroup rControl;
+	public static SpeedControllerGroup lControl;
 	public static Lift lift;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -44,7 +44,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		//TODO change according to the pins
-		lift = new Lift(8);
+		lift = new Lift(8,4,5);
 		lGearbox = new Gearbox(0, 1, 2);
 		rGearbox = new Gearbox(3, 4, 5);
 		rGearbox.setInverted(true);
