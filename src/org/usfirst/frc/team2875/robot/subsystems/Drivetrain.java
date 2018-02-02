@@ -47,7 +47,7 @@ public class Drivetrain extends Subsystem {
 		lControl.set(speedR * constants[0]);
 		rControl.set(speedL * constants[1]);
 	}
-	
+	public void 
 	public void reset()
 	{
 		lEncode.reset();

@@ -9,10 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class LiftCmd extends Command {
 
+	private boolean clutchEngaged;
+	
     public LiftCmd() {
+    	clutchEngaged = false;
     	requires(Robot.lift);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
@@ -21,13 +22,18 @@ public class LiftCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.oi.getLiftA()) {
+    	if (Robot.oi.getClutch() != this.clutchEngaged)
+    	{
+    		this.clutchEngaged = !this.clutchEngaged;
+    	}
+    	Robot.lift.
+    	if(Robot.oi.getLift1()) {
     		Robot.lift.liftTo(0);
-    	} else if(Robot.oi.getLiftX()) {
+    	} else if(Robot.oi.getLift2()) {
     		Robot.lift.liftTo(1);
-    	} else if(Robot.oi.getLiftB()) {
+    	} else if(Robot.oi.getLift3()) {
     		Robot.lift.liftTo(2);
-    	} else if(Robot.oi.getLiftY()) {
+    	} else if(Robot.oi.getLift4()) {
     		Robot.lift.liftTo(3);
     	}    	
     }

@@ -59,7 +59,7 @@ public class OI {
 	}
 	
 	public boolean isActive() {
-		return getLiftA()||getLiftB()|| getLiftX() || getLiftY();
+		return getLift1()||getLift2()|| getLift3() || getLift4();
 	}
 	
 	/*public boolean button6() {
@@ -76,20 +76,24 @@ public class OI {
 	}
 	*/
 	
-	public boolean getLiftA(){
+	public boolean getLift1(){
 		return liftController.getAButton();
 	}
 	
-	public boolean getLiftB(){
+	public boolean getLift2(){
 		return liftController.getBButton();
 	}
 
-	public boolean getLiftX(){
+	public boolean getLift3(){
 		return liftController.getXButton();
 	}
 
-	public boolean getLiftY(){
+	public boolean getLift4(){
 		return liftController.getYButton();
+	}
+	
+	public boolean getClutch(){
+		return driveController.getAButton();
 	}
 	
 	public void doIt() {
@@ -99,10 +103,6 @@ public class OI {
 		}
 	}
 
-	public boolean gearSwitch()
-	{
-		return driveController.getRawButton(4);
-	}
 	//returns yaw movement input//**
 	//public double getLeftInput(){
 	//	double in = mainController.getRawAxis(2);
