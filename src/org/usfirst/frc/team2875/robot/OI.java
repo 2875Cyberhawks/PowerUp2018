@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- * This class is the glue that binds the controls on the physical operator
+ * This class is the ducktape and zipties that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
@@ -18,7 +18,6 @@ public class OI {
 	public OI(){
 		driveController = new XboxController(0);
 		liftController = new XboxController(1);
-		
 	}
 
 	public boolean getEmergencyStop(){
@@ -57,18 +56,13 @@ public class OI {
 		else {
 			return 1;
 		}
-					
-			
-		
 	}
 	
 	public boolean isActive() {
-		if(button6() && button7() && button10() && button11())
-			return true;
-		else 
-			return false;
+		return getLiftA()||getLiftB()|| getLiftX() || getLiftY();
 	}
-	public boolean button6() {
+	
+	/*public boolean button6() {
 		return liftController.getRawButton(6);
 	}
 	public boolean button7() {
@@ -80,6 +74,24 @@ public class OI {
 	public boolean button11() {
 		return liftController.getRawButton(11);
 	}
+	*/
+	
+	public boolean getLiftA(){
+		return liftController.getAButton();
+	}
+	
+	public boolean getLiftB(){
+		return liftController.getBButton();
+	}
+
+	public boolean getLiftX(){
+		return liftController.getXButton();
+	}
+
+	public boolean getLiftY(){
+		return liftController.getYButton();
+	}
+	
 	public void doIt() {
 		if(isActive()) {
 			driveController.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
