@@ -21,9 +21,15 @@ public class LiftCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double liftSpeed = Robot.oi.getLift();
-    	Robot.lift.setLift(liftSpeed);
-    	Robot.lift.boxIn(liftSpeed);
+    	if(Robot.oi.getLiftA()) {
+    		Robot.lift.liftTo(0);
+    	} else if(Robot.oi.getLiftX()) {
+    		Robot.lift.liftTo(1);
+    	} else if(Robot.oi.getLiftB()) {
+    		Robot.lift.liftTo(2);
+    	} else if(Robot.oi.getLiftY()) {
+    		Robot.lift.liftTo(3);
+    	}    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
