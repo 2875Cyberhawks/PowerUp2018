@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2875.robot;
 
-import org.usfirst.frc.team2875.robot.subsystems.PIDController;
-
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;

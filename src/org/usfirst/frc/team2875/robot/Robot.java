@@ -45,10 +45,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		//TODO change according to the pins
 		lift = new Lift(8,4,5,6,7);
-		lControl= new SpeedControllerGroup(new SpeedController())
-		lControl
 		rControl.setInverted(true);
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		//chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}

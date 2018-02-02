@@ -2,7 +2,6 @@ package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.Drive;
-import org.usfirst.frc.team2875.robot.commands.PIDController;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
