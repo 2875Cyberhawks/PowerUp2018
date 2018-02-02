@@ -18,6 +18,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Gearbox;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Talon;
 
 
 /**
@@ -29,12 +30,10 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
  */
 public class Robot extends IterativeRobot {
 	public static OI oi;
-	public static Drivetrain dTrain = new Drivetrain();
-	public static SpeedControllerGroup rControl;
-	public static SpeedControllerGroup lControl;
+	public static Drivetrain dTrain;
 	public static Lift lift;
 	Command m_autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,12 +42,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		dTrain = new Drivetrain(0,1,2,3,4,5,0,1,2,3,0);
 		//TODO change according to the pins
-		lift = new Lift(8,4,5,6,7);
-		lControl= new SpeedControllerGroup(new SpeedController())
-		lControl
-		rControl.setInverted(true);
-		chooser.addDefault("Default Auto", new ExampleCommand());
+		lift = new Lift(8,6,7,4,5);
+		chooser = new SendableChooser<>();
+		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -76,7 +74,7 @@ public class Robot extends IterativeRobot {
 	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
 	 * getString code to get the auto name from the text box below the Gyro
 	 *
-	 * <p>You can add additional auto modes by adding additional commands to the
+	 * You can add additional auto modes by adding additional commands to the
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
