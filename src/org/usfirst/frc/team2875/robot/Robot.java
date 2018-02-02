@@ -17,6 +17,7 @@ import org.usfirst.frc.team2875.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Gearbox;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 
 
 /**
@@ -27,7 +28,6 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
  * project.
  */
 public class Robot extends IterativeRobot {
-	public static final ExampleSubsystem kExampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	public static Drivetrain dTrain = new Drivetrain();
 	public static SpeedControllerGroup rControl;
@@ -44,10 +44,10 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		//TODO change according to the pins
-		lift = new Lift(8,4,5);
-		lGearbox = new Gearbox(0, 1, 2);
-		rGearbox = new Gearbox(3, 4, 5);
-		rGearbox.setInverted(true);
+		lift = new Lift(8,4,5,6,7);
+		lControl= new SpeedControllerGroup(new SpeedController())
+		lControl
+		rControl.setInverted(true);
 		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
