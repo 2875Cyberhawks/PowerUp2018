@@ -8,17 +8,13 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.usfirst.frc.team2875.robot.commands.ExampleCommand;
+
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
-import org.usfirst.frc.team2875.robot.subsystems.Gearbox;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
 
 
 /**
@@ -29,11 +25,12 @@ import edu.wpi.first.wpilibj.Talon;
  * project.
  */
 public class Robot extends IterativeRobot {
-	public static OI oi;
+	public static final OI oi = new OI();
 	public static Drivetrain dTrain;
 	public static Lift lift;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
+	public static CameraThread vis;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -41,10 +38,12 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		oi = new OI();
+		vis = new CameraThread();
+
 		dTrain = new Drivetrain(0,1,2,3,4,5,0,1,2,3,0);
 		//TODO change according to the pins
 		lift = new Lift(8,6,7,4,5);
+				
 		chooser = new SendableChooser<>();
 		// chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

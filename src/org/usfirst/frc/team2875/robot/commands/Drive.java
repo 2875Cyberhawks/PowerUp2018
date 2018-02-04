@@ -1,10 +1,7 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -37,7 +34,7 @@ public class Drive extends Command {
     protected void end() {
     	Robot.dTrain.stop();
     }
-
+    
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {

@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the ducktape and zipties that binds the controls on the physical operator
@@ -58,24 +56,6 @@ public class OI {
 		}
 	}
 	
-	public boolean isActive() {
-		return getLiftA()||getLiftB()|| getLiftX() || getLiftY();
-	}
-	
-	/*public boolean button6() {
-		return liftController.getRawButton(6);
-	}
-	public boolean button7() {
-		return liftController.getRawButton(7);
-	}
-	public boolean button10() {
-		return liftController.getRawButton(10);
-	}
-	public boolean button11() {
-		return liftController.getRawButton(11);
-	}
-	*/
-	
 	public boolean getLiftA(){
 		return liftController.getAButton();
 	}
@@ -91,17 +71,20 @@ public class OI {
 	public boolean getLiftY(){
 		return liftController.getYButton();
 	}
-	
-	public void doIt() {
-		if(isActive()) {
-			driveController.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
-			driveController.setRumble(GenericHID.RumbleType.kRightRumble, 1);
-		}
-	}
 
-	public boolean gearSwitch()
-	{
-		return driveController.getRawButton(4);
+	//driver A
+	public boolean cubeRelease() {
+		return driveController.getAButton();
+	}
+	
+	//driver y
+	public boolean cubeIntake() {
+		return driveController.getYButton();
+	}
+	
+	//driver X
+	public boolean gearSwitch(){
+		return driveController.getXButton();
 	}
 	//returns yaw movement input//**
 	//public double getLeftInput(){
