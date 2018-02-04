@@ -29,8 +29,8 @@ public class OI {
 
 	public double[] getTurning() {
 		//From OED:
-		//Old English lyft, left ‘weak’ (the left-hand side being regarded as the weaker side of the body), of West Germanic origin.
-		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus ‘ruled’, from an Indo-European root denoting movement in a straight line.
+		//Old English lyft, left ï¿½weakï¿½ (the left-hand side being regarded as the weaker side of the body), of West Germanic origin.
+		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus ï¿½ruledï¿½, from an Indo-European root denoting movement in a straight line.
 		double lyft = driveController.getTriggerAxis(GenericHID.Hand.kLeft);
 		double riht = driveController.getTriggerAxis(GenericHID.Hand.kRight);
 		double[] out = new double[2];
@@ -56,19 +56,37 @@ public class OI {
 		}
 	}
 	
-	public boolean getLiftA(){
+	public boolean isActive() {
+		return false;
+	}
+	
+	/*public boolean button6() {
+		return liftController.getRawButton(6);
+	}
+	public boolean button7() {
+		return liftController.getRawButton(7);
+	}
+	public boolean button10() {
+		return liftController.getRawButton(10);
+	}
+	public boolean button11() {
+		return liftController.getRawButton(11);
+	}
+	*/
+	
+	public boolean getLift1(){
 		return liftController.getAButton();
 	}
 	
-	public boolean getLiftB(){
+	public boolean getLift2(){
 		return liftController.getBButton();
 	}
 
-	public boolean getLiftX(){
+	public boolean getLift3(){
 		return liftController.getXButton();
 	}
 
-	public boolean getLiftY(){
+	public boolean getLift4(){
 		return liftController.getYButton();
 	}
 
@@ -82,6 +100,9 @@ public class OI {
 		return driveController.getYButton();
 	}
 	
+	public boolean getClutch(){
+		return driveController.getXButton();
+	}
 	//driver X
 	public boolean gearSwitch(){
 		return driveController.getXButton();
