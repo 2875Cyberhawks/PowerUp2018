@@ -8,6 +8,7 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -46,16 +47,14 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		vis = new CameraThread();
+		CameraServer.getInstance().startAutomaticCapture();
 
 		dTrain = new Drivetrain(0,1,2,3,4,5,0,1,2,3,0);
 		//TODO change according to the pins
 		lift = new Lift(8,6,7,4,5);
-				
 		chooser = new SendableChooser<>();
-		// chooser.addDefault("Default Auto", new ExampleCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData(dTrain);
+		SmartDashboard.putData(lift);
 	}
 
 	/**

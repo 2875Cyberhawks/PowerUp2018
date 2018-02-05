@@ -34,10 +34,10 @@ public class CameraThread {
 		hierarchy = new Mat();
 		System.out.println("SETTING UP CAMERAS");
 		//SmartDashboard.putNumber("Peg Cam Threshold", 145);
-    	//SmartDashboard.putNumber("Peg Cam Threshold Upper", 240);
+    	//SmartDashboard.put(WIDTH, HEIGHT);
+	    //camera.setExposureMNumber("Peg Cam Threshold Upper", 240);
     	camera = CameraServer.getInstance().startAutomaticCapture();
-    	camera.setResolution(WIDTH, HEIGHT);
-	    //camera.setExposureManual(-1);
+    	camera.setResolutionanual(-1);
 	    camera.setBrightness(1);
 	    camera.setFPS(15);
 	    camera.setPixelFormat(PixelFormat.kMJPEG);

@@ -33,6 +33,8 @@ public class OI {
 		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus �ruled�, from an Indo-European root denoting movement in a straight line.
 		double lyft = driveController.getTriggerAxis(GenericHID.Hand.kLeft);
 		double riht = driveController.getTriggerAxis(GenericHID.Hand.kRight);
+		if (lyft < JOY_DEADZONE) lyft = 0;
+		if (riht < JOY_DEADZONE) riht = 0;
 		double[] out = new double[2];
 		out[0] = lyft;
 		out[1] = riht;
