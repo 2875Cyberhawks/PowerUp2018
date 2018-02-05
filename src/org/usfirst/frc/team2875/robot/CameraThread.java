@@ -1,11 +1,6 @@
 package org.usfirst.frc.team2875.robot;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
-
 import org.opencv.core.*;
-import org.opencv.imgproc.*;
 
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
@@ -74,7 +69,6 @@ public class CameraThread {
 	    });
 		thread.start();
 	}
-	
 	
 	public void stop() {
 		running = false;

@@ -92,7 +92,7 @@ public class OI {
 
 	//driver A
 	public boolean cubeRelease() {
-		return driveController.getAButton();
+		return driveController.getBButton();
 	}
 	
 	//driver y
@@ -100,8 +100,11 @@ public class OI {
 		return driveController.getYButton();
 	}
 	
+	
+	//might want to reverse clutch and switch buttons
+	
 	public boolean getClutch(){
-		return driveController.getXButton();
+		return driveController.getAButton();
 	}
 	//driver X
 	public boolean gearSwitch(){
