@@ -16,8 +16,7 @@ public class Gearbox extends Subsystem{
     	controller3 = new Talon(c3);
     }
     
-    public void setInverted(boolean invertedI)
-    {
+    public void setInverted(boolean invertedI){
     	inverted = invertedI;
     }
     
@@ -29,8 +28,8 @@ public class Gearbox extends Subsystem{
     	controller2.set(sped);
     	controller3.set(sped);
     }
-    public void stop()
-    {
+    
+    public void stop(){
     	setSpeed(0);
     }
 

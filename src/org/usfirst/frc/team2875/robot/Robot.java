@@ -24,6 +24,14 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
  * creating this project, you must also update the build.properties file in the
  * project.
  */
+
+/**
+ * TO DO
+ * GYRO
+ * AUTO
+ * ???
+ *
+ */
 public class Robot extends IterativeRobot {
 	public static final OI oi = new OI();
 	public static Drivetrain dTrain;
