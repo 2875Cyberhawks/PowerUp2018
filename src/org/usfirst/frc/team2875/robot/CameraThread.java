@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2875.robot;
+/*package org.usfirst.frc.team2875.robot;
 
 import org.opencv.core.*;
 
@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 *
 * @author GRIP
 */
+/*
 public class CameraThread {
 	
 	UsbCamera camera;
@@ -74,11 +75,12 @@ public class CameraThread {
 		running = false;
 	}
 	
-	/**
+	
 	 * This is the primary method that runs the entire pipeline and updates the outputs.
-	 */
+	 
 	public void process(Mat source) {
 		outputStream.putFrame(source);
 		source.release();
 	}
 }
+*/

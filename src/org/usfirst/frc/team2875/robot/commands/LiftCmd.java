@@ -34,6 +34,7 @@ public class LiftCmd extends Command {
     	} else if(Robot.oi.cubeRelease()) {
     		Robot.lift.wheelMove(-1);
     	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

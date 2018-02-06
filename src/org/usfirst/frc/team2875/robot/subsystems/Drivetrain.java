@@ -16,6 +16,7 @@ public class Drivetrain extends Subsystem {
 	private Encoder lEncode;
 	private Encoder rEncode;
 	private Solenoid sole;
+	private boolean cEngaged;
 	
 	public Drivetrain(int t1, int t2, int t3, int t4, int t5, int t6, int e1, int e2, int e3, int e4, int s)
 	{	
@@ -24,6 +25,7 @@ public class Drivetrain extends Subsystem {
 		lEncode = new Encoder(e1,e2);
 		rEncode = new Encoder(e3,e4);
 		sole = new Solenoid(s);
+		cEngaged = false;
 	}
 	
 	public void setSpeed(double left, double right)
@@ -38,12 +40,11 @@ public class Drivetrain extends Subsystem {
 		rEncode.reset();
 	}
 	
-	public void setClutch(boolean on)
+	public void toggleClutch()
 	{
-		sole.set(on);
+		cEngaged = !cEngaged;
+		sole.set(cEngaged);
 	}
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
 	public void stop()
 	{

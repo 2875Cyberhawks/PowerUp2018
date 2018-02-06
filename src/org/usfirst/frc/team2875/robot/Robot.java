@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
@@ -26,20 +25,13 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
  * project.
  */
 
-/**
- * TO DO
- * GYRO
- * AUTO
- * ???
- *
- */
-public class Robot extends IterativeRobot {
+ public class Robot extends IterativeRobot {
 	public static final OI oi = new OI();
 	public static Drivetrain dTrain;
 	public static Lift lift;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
-	public static CameraThread vis;
+//	public static CameraThread vis;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -48,9 +40,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		CameraServer.getInstance().startAutomaticCapture();
-
 		dTrain = new Drivetrain(0,1,2,3,4,5,0,1,2,3,0);
-		//TODO change according to the pins
 		lift = new Lift(8,6,7,4,5);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
@@ -84,6 +74,7 @@ public class Robot extends IterativeRobot {
 	 * chooser code above (like the commented example) or additional comparisons
 	 * to the switch structure below with additional strings & commands.
 	 */
+	
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = chooser.getSelected();

@@ -44,7 +44,7 @@ public class Drive extends Command {
 		speedL *= constants[0];
 		speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
-    	Robot.dTrain.setClutch(Robot.oi.getClutch());
+    	if (Robot.oi.getClutch()) Robot.dTrain.toggleClutch();
     }
 
     // Make this return true when this Command no longer needs to run execute()

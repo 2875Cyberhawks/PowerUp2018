@@ -106,7 +106,7 @@ public class OI {
 	//might want to reverse clutch and switch buttons
 	
 	public boolean getClutch(){
-		return driveController.getAButton();
+		return driveController.getAButtonPressed();
 	}
 	//driver X
 	public boolean gearSwitch(){
