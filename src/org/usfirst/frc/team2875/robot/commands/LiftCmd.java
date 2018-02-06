@@ -26,7 +26,7 @@ public class LiftCmd extends Command {
     	{
     		this.clutchEngaged = !this.clutchEngaged;
     	}
-    	Robot.lift.
+    	//Robot.lift.
     	if(Robot.oi.getLift1()) {
     		Robot.lift.liftTo(0);
     	} else if(Robot.oi.getLift2()) {
