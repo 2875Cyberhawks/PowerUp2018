@@ -1,9 +1,7 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the ducktape and zipties that binds the controls on the physical operator
@@ -31,10 +29,12 @@ public class OI {
 
 	public double[] getTurning() {
 		//From OED:
-		//Old English lyft, left ‘weak’ (the left-hand side being regarded as the weaker side of the body), of West Germanic origin.
-		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus ‘ruled’, from an Indo-European root denoting movement in a straight line.
+		//Old English lyft, left ï¿½weakï¿½ (the left-hand side being regarded as the weaker side of the body), of West Germanic origin.
+		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus ï¿½ruledï¿½, from an Indo-European root denoting movement in a straight line.
 		double lyft = driveController.getTriggerAxis(GenericHID.Hand.kLeft);
 		double riht = driveController.getTriggerAxis(GenericHID.Hand.kRight);
+		if (lyft < JOY_DEADZONE) lyft = 0;
+		if (riht < JOY_DEADZONE) riht = 0;
 		double[] out = new double[2];
 		out[0] = lyft;
 		out[1] = riht;
@@ -59,7 +59,7 @@ public class OI {
 	}
 	
 	public boolean isActive() {
-		return getLift1()||getLift2()|| getLift3() || getLift4();
+		return false;
 	}
 	
 	/*public boolean button6() {
@@ -91,18 +91,27 @@ public class OI {
 	public boolean getLift4(){
 		return liftController.getYButton();
 	}
+
+	//driver A
+	public boolean cubeRelease() {
+		return driveController.getBButton();
+	}
+	
+	//driver y
+	public boolean cubeIntake() {
+		return driveController.getYButton();
+	}
+	
+	
+	//might want to reverse clutch and switch buttons
 	
 	public boolean getClutch(){
-		return driveController.getAButton();
+		return driveController.getAButtonPressed();
 	}
-	
-	public void doIt() {
-		if(isActive()) {
-			driveController.setRumble(GenericHID.RumbleType.kLeftRumble, 1);
-			driveController.setRumble(GenericHID.RumbleType.kRightRumble, 1);
-		}
+	//driver X
+	public boolean gearSwitch(){
+		return driveController.getXButton();
 	}
-
 	//returns yaw movement input//**
 	//public double getLeftInput(){
 	//	double in = mainController.getRawAxis(2);
