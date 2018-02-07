@@ -19,10 +19,6 @@ public class LiftCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.oi.getClutch() != this.clutchEngaged)
-    	{
-    		this.clutchEngaged = !this.clutchEngaged;
-    	}
     	if(Robot.oi.getLift1()) {
     		Robot.lift.liftTo(0);
     	} else if(Robot.oi.getLift2()) {
