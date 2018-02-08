@@ -11,10 +11,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class Drivetrain extends Subsystem {
+	public static final double wRadius = 4;
 	private SpeedControllerGroup rControl;
 	private SpeedControllerGroup lControl;
-	private Encoder lEncode;
-	private Encoder rEncode;
+	public Encoder lEncode;
+	public Encoder rEncode;
 	private Solenoid sole;
 	private boolean cEngaged;
 	
@@ -24,6 +25,8 @@ public class Drivetrain extends Subsystem {
 		lControl = new SpeedControllerGroup(new Talon(t4), new Talon(t5), new Talon(t6));
 		lEncode = new Encoder(e1,e2);
 		rEncode = new Encoder(e3,e4);
+		lEncode.setDistancePerPulse(2 * Math.PI * wRadius);
+		rEncode.setDistancePerPulse(2 * Math.PI * wRadius);
 		sole = new Solenoid(s);
 		cEngaged = false;
 	}

@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
+import com.analog.adis16448.frc.ADIS16448_IMU;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +31,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 	public static Lift lift;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
+	public static ADIS16448_IMU gyro;
 //	public static CameraThread vis;
 
 	/**
@@ -45,6 +46,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
+		gyro = new ADIS16448_IMU();
 	}
 
 	/**

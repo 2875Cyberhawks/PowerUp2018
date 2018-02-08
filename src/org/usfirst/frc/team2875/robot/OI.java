@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 	public static final double JOY_DEADZONE = 0.15;
 	public static final double TRIGGER_DEADZONE = 0.02;
+	private boolean usingEncoders = false;
 	//// CREATING BUTTONS
 	public XboxController driveController;
 	public XboxController liftController;
@@ -21,9 +22,15 @@ public class OI {
 	public boolean getEmergencyStop(){
 		return false;
 	}
+	
+	public boolean useEncoders(){
+		if (driveController.getXButtonPressed()) usingEncoders = !usingEncoders;
+		return usingEncoders;
+	}
+	
 	//returns forward and backward movement input
 	public double getForwardInput(){
-		double in = driveController.getY(GenericHID.Hand.kLeft);
+		double in = -1 * driveController.getY(GenericHID.Hand.kLeft);
 		return (Math.abs(in) > JOY_DEADZONE) ? in : 0;
 	}
 
@@ -109,9 +116,6 @@ public class OI {
 		return driveController.getAButtonPressed();
 	}
 	//driver X
-	public boolean gearSwitch(){
-		return driveController.getXButton();
-	}
 	//returns yaw movement input//**
 	//public double getLeftInput(){
 	//	double in = mainController.getRawAxis(2);
