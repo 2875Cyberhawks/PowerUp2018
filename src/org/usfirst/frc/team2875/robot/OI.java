@@ -60,9 +60,7 @@ public class OI {
 		}
 	}
 	
-	public boolean isActive() {
-		return false;
-	}
+
 	
 	/*public boolean button6() {
 		return liftController.getRawButton(6);
