@@ -27,12 +27,16 @@ public class DriveSide extends PIDSubsystem {
     	encode = new Encoder(e1,e2);
     	enable();
     }
+	
     @Override
     public void initDefaultCommand() {
         //Set the default command for a subsystem here.
         setDefaultCommand(new VoidCommand());
     }
-    public void reset(){encode.reset();}
+    
+    public void reset(){
+    	encode.reset();
+    }
     
     public void set(double speed)
     {
@@ -42,6 +46,7 @@ public class DriveSide extends PIDSubsystem {
     	System.out.println(side + " Set: " + speed);
     	encode.setDistancePerPulse(Math.PI * 2 * wheelRad);
     }
+    
     @Override
     protected double returnPIDInput() {
     	double val = encode.getRate();
@@ -52,6 +57,7 @@ public class DriveSide extends PIDSubsystem {
     	System.out.println(side + " PIDInput: " + val);*/
     	return val;
     }
+    
     @Override
     protected void usePIDOutput(double output) {
     	/*String side = "Left";
@@ -60,5 +66,7 @@ public class DriveSide extends PIDSubsystem {
         control.set(output);
     }
     
-    public double getDistance(){return encode.getDistance();}
+    public double getDistance(){
+    	return encode.getDistance();
+    }
 }

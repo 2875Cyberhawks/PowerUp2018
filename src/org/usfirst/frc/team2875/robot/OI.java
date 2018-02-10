@@ -93,12 +93,18 @@ public class OI {
 	public boolean getLift4(){
 		return liftController.getYButton();
 	}*/
-	public boolean liftUp(){return liftController.getYButton();}
-	public boolean liftDown() { return liftController.getAButton();}
+	public boolean liftUp(){
+		return liftController.getYButton();
+	}
+	
+	public boolean liftDown() {
+		return liftController.getAButton();
+	}
+	
 
 	//driver A
 	public boolean cubeRelease() {
-		return driveController.getXButton();
+		return driveController.getAButton();
 	}
 	
 	//driver y
