@@ -53,7 +53,7 @@ public class DriveSide extends PIDSubsystem {
     	double val = encode.getRate();
     	if (right)
     		val *= -1;
-    	val = val/maxWheelSpeed;
+    	val = val/MAX_WHEEL_SPEED;
     	/*String side = "Left";
     	if (right)side = "Right";
     	System.out.println(side + " PIDInput: " + val);*/
