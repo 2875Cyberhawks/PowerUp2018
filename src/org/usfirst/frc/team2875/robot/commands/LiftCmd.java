@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftCmd extends Command {
-	
+	private final static double speed = .5;
     public LiftCmd() {
     	requires(Robot.lift);
     }
@@ -18,7 +18,7 @@ public class LiftCmd extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
+    protected void execute() {/*
     	if(Robot.oi.getLift1()) {
     		Robot.lift.liftTo(0);
     	} else if(Robot.oi.getLift2()) {
@@ -27,7 +27,9 @@ public class LiftCmd extends Command {
     		Robot.lift.liftTo(2);
     	} else if(Robot.oi.getLift4()) {
     		Robot.lift.liftTo(3);
-    	}
+    	}*/
+    	if (Robot.oi.liftUp())Robot.lift.raiseLift(speed);
+    	if (Robot.oi.liftDown())Robot.lift.raiseLift(-speed);
     	//grasper
     	if(Robot.oi.cubeIntake()) {
     		Robot.lift.wheelMove(1);

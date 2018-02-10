@@ -31,28 +31,21 @@ public class Drive extends Command {
     protected void execute() {
     	double turning = Robot.oi.getTurningDegree();
     	double forward = Robot.oi.getForwardInput();
-    	if (turning == 0)straightDrive(forward);
-    	else
-    	{
-    		double speedR, speedL;
-    		speedL = turning + forward;
-    		speedR = -turning + forward;
-    		speedL *= constants[0];
-    		speedR *= constants[1];
-    		Robot.dTrain.setSpeed(speedL,speedR);
-    	}
+    	double speedR, speedL;
+    	speedL = turning + forward;
+    	speedR = -turning + forward;
+    	speedL *= constants[0];
+    	speedR *= constants[1];
+    	Robot.dTrain.setSpeed(speedL,speedR);
     	if (Robot.oi.getClutch()) Robot.dTrain.toggleClutch();
     }
-    protected static void straightDrive(double forward)
-    {
-    	System.out.println("F: " + forward);
-    	double speedL,speedR;
-    	double lEncode = Robot.dTrain.lEncode.getRate();
-    	double rEncode = Robot.dTrain.rEncode.getRate();
-    	speedL = forward * (lEncode/rEncode);
-    	speedR = forward * (rEncode/lEncode);
-    	System.out.println("L: " + speedL);
-    	System.out.println("R: " + speedR);
+    
+    public static void move(double turning, double forward){
+    	double speedR, speedL;
+    	speedL = turning + forward;
+    	speedR = -turning + forward;
+    	//speedL *= constants[0];
+    	//speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
     }
     // Make this return true when this Command no longer needs to run execute()

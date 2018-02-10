@@ -23,11 +23,6 @@ public class OI {
 		return false;
 	}
 	
-	public boolean useEncoders(){
-		if (driveController.getXButtonPressed()) usingEncoders = !usingEncoders;
-		return usingEncoders;
-	}
-	
 	//returns forward and backward movement input
 	public double getForwardInput(){
 		double in = -1 * driveController.getY(GenericHID.Hand.kLeft);
@@ -43,14 +38,14 @@ public class OI {
 		if (lyft < JOY_DEADZONE) lyft = 0;
 		if (riht < JOY_DEADZONE) riht = 0;
 		double[] out = new double[2];
-		out[0] = lyft;
-		out[1] = riht;
+		out[1] = lyft;
+		out[0] = riht;
 		return out;
 	}
 
 	public double getTurningDegree() {
 		double[] raw = getTurning();
-		return raw[0]-raw[1];
+		return raw[0]-raw[1]; 
 	}
 	public int wheelControl() {
 		double speed =  driveController.getY(GenericHID.Hand.kRight);
@@ -82,7 +77,7 @@ public class OI {
 		return liftController.getRawButton(11);
 	}
 	*/
-	
+	/*
 	public boolean getLift1(){
 		return liftController.getAButton();
 	}
@@ -97,23 +92,25 @@ public class OI {
 
 	public boolean getLift4(){
 		return liftController.getYButton();
-	}
+	}*/
+	public boolean liftUp(){return liftController.getYButton();}
+	public boolean liftDown() { return liftController.getAButton();}
 
 	//driver A
 	public boolean cubeRelease() {
-		return driveController.getBButton();
+		return driveController.getXButton();
 	}
 	
 	//driver y
 	public boolean cubeIntake() {
-		return driveController.getYButton();
+		return driveController.getBButton();
 	}
 	
 	
 	//might want to reverse clutch and switch buttons
 	
 	public boolean getClutch(){
-		return driveController.getAButtonPressed();
+		return driveController.getXButtonPressed();
 	}
 	//driver X
 	//returns yaw movement input//**

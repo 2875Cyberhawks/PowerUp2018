@@ -41,7 +41,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	@Override
 	public void robotInit() {
 		CameraServer.getInstance().startAutomaticCapture();
-		dTrain = new Drivetrain(0,1,2,3,4,5,0,1,2,3,0);
+		dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3,0);
 		lift = new Lift(8,6,7,4,5);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
@@ -119,6 +119,9 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
+		//System.out.println(""+ dTrain.lEncode.getRate());
+		//System.out.println("" + dTrain.rEncode.getRate());
 	}
 
 	/**
@@ -126,5 +129,6 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	 */
 	@Override
 	public void testPeriodic() {
+		
 	}
 }

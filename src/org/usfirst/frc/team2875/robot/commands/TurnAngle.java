@@ -6,11 +6,13 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
+//TODO add nonlinear function for speed
 public class TurnAngle extends Command {
 	private double goal;
 	private boolean movingL = false;
 	private static final double mVal = -.7;
 	private static final double bVal = 1;
+	
 	
     public TurnAngle(double degree) {
     	super("TurnAngle");
@@ -19,6 +21,7 @@ public class TurnAngle extends Command {
     }
 
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
     	Robot.gyro.reset();
     	if (goal < 0)movingL=true;
@@ -26,6 +29,7 @@ public class TurnAngle extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
+   @Override
     protected void execute() {
     	double speed = bVal + (mVal * (Robot.gyro.getAngle() / goal));
     	if (movingL) speed *= -1;
@@ -34,16 +38,19 @@ public class TurnAngle extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
+   @Override 
+   protected boolean isFinished() {
        return Math.abs(Robot.gyro.getAngle()) >=goal;
     }
 
     // Called once after isFinished returns true
-    protected void end() {
+   @Override 
+   protected void end() {
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
-    protected void interrupted() {
+   @Override 
+   protected void interrupted() {
     }
 }
