@@ -43,17 +43,17 @@ public class DriveSide extends PIDSubsystem {
     {
     	setSetpoint(speed);
     	String side = "Left";
-    	if (right)side = "Right";
-    	
+    	if (right)
+    		side = "Right";
     	System.out.println(side + " Set: " + speed);
     }
     
     @Override
     protected double returnPIDInput() {
     	double val = encode.getRate();
-    	if  (right)
+    	if (right)
     		val *= -1;
-    	val = val/MAX_WHEEL_SPEED;
+    	val = val/maxWheelSpeed;
     	/*String side = "Left";
     	if (right)side = "Right";
     	System.out.println(side + " PIDInput: " + val);*/
