@@ -1,8 +1,10 @@
 package org.usfirst.frc.team2875.robot.subsystems;
 
+import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.VoidCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
@@ -12,8 +14,9 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
+	private PIDController gearControl;
 	private static final double WHEEL_RAD = 4.0;
-	private static final double MAX_WHEEL_SPEED = 22500;
+	private static final double WHEEL_NORMALIZER= 22500;
 	public Encoder encode;
 	public boolean right;
     // Initialize your subsystem here
@@ -53,7 +56,7 @@ public class DriveSide extends PIDSubsystem {
     	double val = encode.getRate();
     	if (right)
     		val *= -1;
-    	val = val/MAX_WHEEL_SPEED;
+    	val = val/(2*WHEEL_NORMALIZER);
     	/*String side = "Left";
     	if (right)side = "Right";
     	System.out.println(side + " PIDInput: " + val);*/

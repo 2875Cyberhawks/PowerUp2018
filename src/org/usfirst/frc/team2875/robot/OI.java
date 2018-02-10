@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.XboxController;
 public class OI {
 	public static final double JOY_DEADZONE = 0.15;
 	public static final double TRIGGER_DEADZONE = 0.02;
-	private boolean usingEncoders = false;
 	//// CREATING BUTTONS
 	public XboxController driveController;
 	public XboxController liftController;

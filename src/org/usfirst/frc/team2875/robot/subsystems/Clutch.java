@@ -17,8 +17,9 @@ public class Clutch extends Subsystem {
 	private boolean cEngaged;
 
 	public Clutch(int s) {
+		super("Clutch");
 		sole = new Solenoid(s);
-		cEngaged = false;
+		cEngaged = true;
 	}
 	
 	public void toggleClutch()

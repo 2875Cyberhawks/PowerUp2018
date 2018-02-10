@@ -4,14 +4,9 @@ import org.usfirst.frc.team2875.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- *
- */
 public class ClutchCmd extends Command {
 
     public ClutchCmd() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.clutch);
     }
 
