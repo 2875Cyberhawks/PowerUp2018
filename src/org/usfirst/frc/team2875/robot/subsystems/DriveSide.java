@@ -21,6 +21,8 @@ public class DriveSide extends PIDSubsystem {
 	public boolean right;
     // Initialize your subsystem here
     
+	
+	
 	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2) {
     	super("driveSide",1,0,0);
     	right = rightSide;
@@ -41,6 +43,12 @@ public class DriveSide extends PIDSubsystem {
     public void reset(){
     	encode.reset();
     }
+    
+    public void setpid(int p, int i, int d){
+    	getPIDController().setPID(p, i, d);
+    	
+    }
+    
     
     public void set(double speed)
     {
