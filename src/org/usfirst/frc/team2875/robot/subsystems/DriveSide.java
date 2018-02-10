@@ -12,8 +12,8 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
-	private static final double wheelRad = 4.0;
-	private static final double maxWheelSpeed = 22500;
+	private static final double WHEEL_RAD = 4.0;
+	private static final double MAX_WHEEL_SPEED = 22500;
 	public Encoder encode;
 	public boolean right;
     // Initialize your subsystem here
@@ -25,6 +25,7 @@ public class DriveSide extends PIDSubsystem {
     	getPIDController().setContinuous(false);
     	control = new SpeedControllerGroup(new Talon(t1),new Talon(t2), new Talon(t3));
     	encode = new Encoder(e1,e2);
+    	encode.setDistancePerPulse(Math.PI * 2 * WHEEL_RAD);
     	enable();
     }
 	
@@ -43,15 +44,16 @@ public class DriveSide extends PIDSubsystem {
     	setSetpoint(speed);
     	String side = "Left";
     	if (right)side = "Right";
+    	
     	System.out.println(side + " Set: " + speed);
-    	encode.setDistancePerPulse(Math.PI * 2 * wheelRad);
     }
     
     @Override
     protected double returnPIDInput() {
     	double val = encode.getRate();
-    	if  (right) val *= -1;
-    	val = val/maxWheelSpeed;
+    	if  (right)
+    		val *= -1;
+    	val = val/MAX_WHEEL_SPEED;
     	/*String side = "Left";
     	if (right)side = "Right";
     	System.out.println(side + " PIDInput: " + val);*/

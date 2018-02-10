@@ -15,7 +15,7 @@ public class Clutch extends Subsystem {
 
 	private Solenoid sole;
 	private boolean cEngaged;
-	
+
 	public Clutch(int s) {
 		sole = new Solenoid(s);
 		cEngaged = false;
@@ -31,4 +31,3 @@ public class Clutch extends Subsystem {
         setDefaultCommand(new ClutchCmd());
     }
 }
-

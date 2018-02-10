@@ -107,7 +107,7 @@ public class OI {
 		return driveController.getAButton();
 	}
 	
-	//driver y
+	//driver B
 	public boolean cubeIntake() {
 		return driveController.getBButton();
 	}

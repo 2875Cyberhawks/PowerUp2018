@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * :D
- *Raffi Stinks
  */
 public class Lift extends Subsystem {
 	//Liam smells good
