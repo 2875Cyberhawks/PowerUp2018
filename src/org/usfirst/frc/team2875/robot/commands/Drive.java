@@ -36,6 +36,8 @@ public class Drive extends Command {
     	speedR = -turning + forward;
     	speedL *= constants[0];
     	speedR *= constants[1];
+    	
+    	
     	Robot.dTrain.setSpeed(speedL,speedR);
     }
     

@@ -14,9 +14,8 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
-	private PIDController gearControl;
-	private static final double WHEEL_RAD = 4.0;
-	private static final double WHEEL_NORMALIZER= 22500;
+	private static final double WHEEL_RAD = 4.000;
+	private static final double MAX_WHEEL_SPEED = 22500;
 	public Encoder encode;
 	public boolean right;
     // Initialize your subsystem here
