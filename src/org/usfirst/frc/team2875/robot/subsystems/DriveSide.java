@@ -15,15 +15,18 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
 	private static final double WHEEL_RAD = 4.000;
-	private static final double MAX_WHEEL_SPEED = 22500;
+	private static final double WHEEL_NORMALIZER = 22500;
 	public Encoder encode;
 	public boolean right;
+	private boolean clutch;
+	private static final double[] cluUE = {1,0,0};
+	private static final double[] cluE = {1,0,0};
     // Initialize your subsystem here
     
 	
 	
 	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2) {
-    	super("driveSide",1,0,0);
+    	super("driveSide",cluUE[0],cluE[1],cluUE[2]);
     	right = rightSide;
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(false);
@@ -43,7 +46,7 @@ public class DriveSide extends PIDSubsystem {
     	encode.reset();
     }
     
-    public void setpid(int p, int i, int d){
+    public void setPID(double p, double i, double d){
     	getPIDController().setPID(p, i, d);
     	
     }
@@ -51,6 +54,7 @@ public class DriveSide extends PIDSubsystem {
     
     public void set(double speed)
     {
+    	
     	setSetpoint(speed);
     	String side = "Left";
     	if (right)
@@ -60,10 +64,18 @@ public class DriveSide extends PIDSubsystem {
     
     @Override
     protected double returnPIDInput() {
+    	if (Robot.clutch.engaged())
+    	{
+    		this.setPID(cluE[0],cluE[1],cluE[2]);
+    	}
+    	else
+    	{
+    		this.setPID(cluUE[0],cluUE[1],cluUE[2]);
+    	}
     	double val = encode.getRate();
     	if (right)
     		val *= -1;
-    	val = val/(2*WHEEL_NORMALIZER);
+    	val = val/WHEEL_NORMALIZER;
     	/*String side = "Left";
     	if (right)side = "Right";
     	System.out.println(side + " PIDInput: " + val);*/

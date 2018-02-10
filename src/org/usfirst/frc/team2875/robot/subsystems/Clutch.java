@@ -19,7 +19,7 @@ public class Clutch extends Subsystem {
 	public Clutch(int s) {
 		super("Clutch");
 		sole = new Solenoid(s);
-		cEngaged = true;
+		cEngaged = false;
 	}
 	
 	public void toggleClutch()
@@ -27,6 +27,8 @@ public class Clutch extends Subsystem {
 		cEngaged = !cEngaged;
 		sole.set(cEngaged);
 	}
+	
+	public boolean engaged() {return cEngaged;}
 	
     public void initDefaultCommand() {
         setDefaultCommand(new ClutchCmd());
