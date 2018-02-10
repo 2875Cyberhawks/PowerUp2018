@@ -14,15 +14,12 @@ public class Drivetrain extends Subsystem {
 	public static final double wRadius = 4;
 	public DriveSide right;
 	public DriveSide left;
-	private Solenoid sole;
-	private boolean cEngaged;
 	
-	public Drivetrain(int t1, int t2, int t3, int t4, int t5, int t6, int e1, int e2, int e3, int e4, int s)
+	public Drivetrain(int t1, int t2, int t3, int t4, int t5, int t6, int e1, int e2, int e3, int e4)
 	{	
 		right = new DriveSide(true,t1,t2,t3,e1,e2);
 		left = new DriveSide(false,t4,t5,t6,e3,e4);
-		sole = new Solenoid(s);
-		cEngaged = false;
+		
 	}
 	
 	public void setSpeed(double leftI, double rightI)
@@ -37,11 +34,6 @@ public class Drivetrain extends Subsystem {
 		right.reset();
 	}
 	
-	public void toggleClutch()
-	{
-		cEngaged = !cEngaged;
-		sole.set(cEngaged);
-	}
 
 	public void stop()
 	{

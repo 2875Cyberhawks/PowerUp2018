@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team2875.robot.subsystems.Clutch;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 import com.analog.adis16448.frc.ADIS16448_IMU;
@@ -29,6 +31,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	public static final OI oi = new OI();
 	public static Drivetrain dTrain;
 	public static Lift lift;
+	public static Clutch clutch;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
 	public static ADIS16448_IMU gyro;
@@ -41,7 +44,8 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	@Override
 	public void robotInit() {
 		CameraServer.getInstance().startAutomaticCapture();
-		dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3,0);
+		dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
+		clutch = new Clutch(0);
 		lift = new Lift(8,6,7,4,5);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);

@@ -37,7 +37,8 @@ public class Drive extends Command {
     	speedL *= constants[0];
     	speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
-    	if (Robot.oi.getClutch()) Robot.dTrain.toggleClutch();
+    	if (Robot.oi.getClutch())
+    		Robot.clutch.toggleClutch();
     }
     
     public static void move(double turning, double forward){
