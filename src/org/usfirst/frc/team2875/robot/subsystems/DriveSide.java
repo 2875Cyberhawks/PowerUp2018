@@ -4,13 +4,12 @@ import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.VoidCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
-/**
- *
+/** 
+ * 
  */
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
@@ -19,14 +18,12 @@ public class DriveSide extends PIDSubsystem {
 	public Encoder encode;
 	public boolean right;
 	private boolean clutch;
-	private static final double[] cluUE = {1,0,0};
-	private static final double[] cluE = {1,0,0};
+	private static final double[] clutchUnengaged = {1,0,0};
+	private static final double[] clutchEngaged = {1,0,2};
     // Initialize your subsystem here
-    
-	
 	
 	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2) {
-    	super("driveSide",cluUE[0],cluE[1],cluUE[2]);
+    	super("driveSide" + rightSide,clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
     	right = rightSide;
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(false);
@@ -51,26 +48,22 @@ public class DriveSide extends PIDSubsystem {
     	
     }
     
-    
     public void set(double speed)
-    {
-    	
+    {	
     	setSetpoint(speed);
-    	String side = "Left";
-    	if (right)
-    		side = "Right";
-    	System.out.println(side + " Set: " + speed);
+    	System.out.println((right ? "Right" : "Left") + " Set: " + speed);
+    	System.out.println(encode.getRate());
     }
     
     @Override
-    protected double returnPIDInput() {
+      protected double returnPIDInput() {
     	if (Robot.clutch.engaged())
     	{
-    		this.setpid(cluE[0],cluE[1],cluE[2]);
+    		this.setpid(clutchEngaged[0],clutchEngaged[1],clutchEngaged[2]);
     	}
     	else
     	{
-    		this.setpid(cluUE[0],cluUE[1],cluUE[2]);
+    		this.setpid(clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
     	}
     	double val = encode.getRate();
     	if (right)
