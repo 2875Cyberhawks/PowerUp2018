@@ -66,11 +66,11 @@ public class DriveSide extends PIDSubsystem {
     protected double returnPIDInput() {
     	if (Robot.clutch.engaged())
     	{
-    		this.setPID(cluE[0],cluE[1],cluE[2]);
+    		this.setpid(cluE[0],cluE[1],cluE[2]);
     	}
     	else
     	{
-    		this.setPID(cluUE[0],cluUE[1],cluUE[2]);
+    		this.setpid(cluUE[0],cluUE[1],cluUE[2]);
     	}
     	double val = encode.getRate();
     	if (right)
