@@ -15,17 +15,23 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
 	private static final double WHEEL_RAD = 4.000;
-	private static double normalizer = 15000;
+	private static double normalizer = 11000;
 	public Encoder encode;
 	public boolean right;
 	private boolean clutch;
-	private static final double[] clutchUnengaged = {.5,0,0};
-	private static final double[] clutchEngaged = {1,0,0};
+	private static double[] clutchUnengaged = {1,0,0}; //do not change
+	private static double[] clutchEngaged ={1,0,0};  //do not change
     // Initialize your subsystem here
 	
 	
-	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2) {
-    	super("driveSide" + rightSide + Math.random() + "" + Math.random(), clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
+	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2, double PE, double IE , double DE, double PU, double IU, double DU) {
+    	super("driveSide" + rightSide + Math.random() + "" + Math.random(), PU,IU,DU);
+    	clutchUnengaged[0] = PU;
+    	clutchUnengaged[1] = IU;
+    	clutchUnengaged[2] = DU;
+    	clutchEngaged[0] = PE;
+    	clutchEngaged[1] = IE;
+    	clutchEngaged[2] = DE;
     	right = rightSide;
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(false);
@@ -56,7 +62,7 @@ public class DriveSide extends PIDSubsystem {
     }
     public void disengageClutch() {
     	setpid(clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
-    	normalizer = 15000;
+    	normalizer = 11000;
     }
     public void set(double speed)
     {	
@@ -68,6 +74,7 @@ public class DriveSide extends PIDSubsystem {
     @Override
       protected double returnPIDInput() {
     	double val = encode.getRate();
+    	
     	if (right)
     		val *= -1;
     	val = val/normalizer;
