@@ -46,7 +46,7 @@ public class DriveSide extends PIDSubsystem {
     	encode.reset();
     }
     
-    public void setPID(double p, double i, double d){
+    public void setpid(double p, double i, double d){
     	getPIDController().setPID(p, i, d);
     	
     }
