@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2875.robot.subsystems;
 
+import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.ClutchCmd;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -24,6 +25,13 @@ public class Clutch extends Subsystem {
 	
 	public void toggleClutch()
 	{
+		if (cEngaged) {
+			Robot.dTrain.left.disengageClutch();
+			Robot.dTrain.right.disengageClutch();
+		}else {
+			Robot.dTrain.left.engageClutch();
+			Robot.dTrain.right.engageClutch();
+		}
 		cEngaged = !cEngaged;
 		sole.set(cEngaged);
 	}
