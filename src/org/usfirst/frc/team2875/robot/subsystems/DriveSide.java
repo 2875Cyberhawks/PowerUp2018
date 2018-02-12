@@ -68,7 +68,7 @@ public class DriveSide extends PIDSubsystem {
     {	
     	setSetpoint(speed);
     	//System.out.println((right ? "Right" : "Left") + " Set: " + speed);
-    	System.out.println(encode.getRate());
+    	//System.out.println(encode.getRate());
     }
     
     @Override

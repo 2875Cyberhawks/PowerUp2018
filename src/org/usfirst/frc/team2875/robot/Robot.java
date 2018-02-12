@@ -32,6 +32,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	public static Drivetrain dTrain;
 	public static Lift lift;
 	public static Clutch clutch;
+	public static int iter = 0;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
 	public static ADIS16448_IMU gyro;
@@ -115,6 +116,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+		
 	}
 
 	/**
@@ -126,6 +128,13 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());
+		//System.out.println("X" + gyro.getAccelX());
+		if (iter == 10) {
+		System.out.println("Y " + gyro.getAccelY());
+		iter =0;
+		}
+		iter++;
+		//System.out.println("Z" + gyro.getAccelZ());
 	}
 
 	/**
