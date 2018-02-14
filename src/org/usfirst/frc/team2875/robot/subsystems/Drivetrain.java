@@ -17,8 +17,12 @@ public class Drivetrain extends Subsystem {
 	
 	public Drivetrain(int t1, int t2, int t3, int t4, int t5, int t6, int e1, int e2, int e3, int e4)
 	{	
-		left = new DriveSide(false,t4,t5,t6,e3,e4,1,0,0,1,0,.2);
-		right = new DriveSide(true,t1,t2,t3,e1,e2,1,0,0,1,0,0);
+		double[] lEn = {1,0,0};
+		double[] rEn = {1,0,0};
+		double[] lUn = {1,0,0};
+		double[] rUn = {1,0,0};
+		left = new DriveSide(false,t4,t5,t6,e3,e4,lEn,lUn);
+		right = new DriveSide(true,t1,t2,t3,e1,e2,rEn,rUn);
 		
 		
 	}
