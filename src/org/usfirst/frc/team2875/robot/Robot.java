@@ -9,6 +9,7 @@ package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -33,6 +34,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	public static Lift lift;
 	public static Clutch clutch;
 	public static int iter = 0;
+	public static boolean leftSwitch;
 	Command m_autonomousCommand;
 	SendableChooser<Command> chooser;
 	public static ADIS16448_IMU gyro;
@@ -85,7 +87,10 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	@Override
 	public void autonomousInit() {
 		m_autonomousCommand = chooser.getSelected();
-
+		//TODO how to get scale information
+		String gameData;
+		gameData = DriverStation.getInstance().getGameSpecificMessage();
+		leftSwitch = (gameData.charAt(0) == 'L') ? true : false;
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

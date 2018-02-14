@@ -1,16 +1,25 @@
 package autonomous;
 
 public class Scale {
-public void fromRightSwitch()
-{
-	/*if scaleRight
-	 * ifscaleLeft
-	 */
-}
-public void fromLeftSwitch()
-{
-	/*if scaleRight
-	 * ifscaleLeft
-	 */
-}
+	public static void fromRightSwitch()
+	{
+		/*if scaleRight
+		 * ifscaleLeft
+		 */
+	
+	}
+	public static void fromLeftSwitch()
+	{
+		/*if scaleRight
+		 * ifscaleLeft
+		 */
+		if(scaleLeft)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 }
