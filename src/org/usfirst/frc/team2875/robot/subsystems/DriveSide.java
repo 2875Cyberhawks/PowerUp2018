@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
 	private static final double WHEEL_RAD = 4.000;
-	private static double normalizer[] = {11000,33000};
+	private static double normalizer=11000;
 	public Encoder encode;
 	public boolean right;
 	private static double[] clutchUnengaged = {1,0,0}; //do not change
@@ -33,7 +33,6 @@ public class DriveSide extends PIDSubsystem {
     	control = new SpeedControllerGroup(new Spark(t1),new Spark(t2), new Spark(t3));
     	encode = new Encoder(e1,e2);
     	encode.setDistancePerPulse(Math.PI * 2 * WHEEL_RAD);
-    	this.getPIDController().setInputRange(-normalizer[0],normalizer[0]);
     	enable();
     }
 	
@@ -49,15 +48,14 @@ public class DriveSide extends PIDSubsystem {
     
     public void setPID(double p, double i, double d){
     	getPIDController().setPID(p, i, d);
-    	
     }
     public void engageClutch() {
     	setPID(clutchEngaged[0],clutchEngaged[1],clutchEngaged[2]);
-    	this.getPIDController().setInputRange(-normalizer[1],normalizer[1]);
+    	normalizer = 30000;
     }
     public void disengageClutch() {
     	setPID(clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
-    	this.getPIDController().setInputRange(-normalizer[0],normalizer[0]);
+    	normalizer = 11000;
     }
     public void set(double speed)
     {	
@@ -67,9 +65,10 @@ public class DriveSide extends PIDSubsystem {
     @Override
       protected double returnPIDInput() {
     	double val = encode.getRate();
+    	System.out.println(val);
     	if (right)
     		val *= -1;
-    	return val;
+    	return val/normalizer;
     }
     
     @Override

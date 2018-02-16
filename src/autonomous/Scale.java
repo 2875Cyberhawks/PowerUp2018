@@ -13,7 +13,11 @@ public class Scale {
 		/*if scaleRight
 		 * ifscalewLeft
 		 */
+<<<<<<< Updated upstream
 		/*if(scaleLeft)
+=======
+		if(true)
+>>>>>>> Stashed changes
 		{
 			
 		}
