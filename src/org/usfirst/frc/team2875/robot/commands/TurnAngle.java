@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
+import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -9,10 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 //TODO add nonlinear function for speed
 public class TurnAngle extends Command {
 	private double goal;
-	private boolean movingL = false;
-	private static final double mVal = -.7;
-	private static final double bVal = 1;
-	
+	private TurnAnglePID sub;
 	
     public TurnAngle(double degree) {
     	super("TurnAngle");
@@ -24,28 +23,34 @@ public class TurnAngle extends Command {
     @Override
     protected void initialize() {
     	Robot.gyro.reset();
-    	if (goal < 0)movingL=true;
-    	goal = Math.abs(goal);
+    	sub = new TurnAnglePID(3,4,5,0,1,2);
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
    @Override
     protected void execute() {
-    	double speed = bVal + (mVal * (Robot.gyro.getAngle() / goal));
-    	if (movingL) speed *= -1;
-    	if(goal < Robot.gyro.getAngle())Robot.dTrain.setSpeed(-speed, speed);
-    	else Robot.dTrain.setSpeed(speed,-speed);
+	   
+    	if (!isFinished()) {
+    		sub.enable();
+    		sub.set(goal);
+    	}else {
+    		end();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
    @Override 
    protected boolean isFinished() {
-       return Math.abs(Robot.gyro.getAngle()) >=goal;
+	  if (sub.onTarget())
+		  return true;
+	  return false;
     }
 
     // Called once after isFinished returns true
    @Override 
    protected void end() {
+	   sub.disable();
     }
 
     // Called when another command which requires one or more of the same

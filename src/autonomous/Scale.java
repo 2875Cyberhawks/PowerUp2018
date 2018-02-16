@@ -11,15 +11,15 @@ public class Scale {
 	public static void fromLeftSwitch()
 	{
 		/*if scaleRight
-		 * ifscaleLeft
+		 * ifscalewLeft
 		 */
-		if(scaleLeft)
+		/*if(scaleLeft)
 		{
 			
 		}
 		else
 		{
 			
-		}
+		}*/
 	}
 }
