@@ -16,7 +16,6 @@ public class DriveSide extends PIDSubsystem {
 	private static final double WHEEL_RAD = 4.000;
 	private static double normalizer=11000;
 	public Encoder encode;
-	public boolean right;
 	private static double[] clutchUnengaged = {1,0,0}; //do not change
 	private static double[] clutchEngaged ={1,0,0};  //do not change
     // Initialize your subsystem here
@@ -26,10 +25,17 @@ public class DriveSide extends PIDSubsystem {
     	super("driveSide" + rightSide + Math.random() + "" + Math.random(), 0,0,0);
     	clutchUnengaged = PVU;
     	clutchEngaged = PVE;
-    	right = rightSide;
     	this.setPID(clutchUnengaged[0], clutchUnengaged[1], clutchUnengaged[2]);
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(false);
+    	Spark s1 = new Spark(t1);
+    	Spark s2 = new Spark(t2);
+    	Spark s3 = new Spark(t3);
+    	if (rightSide) {
+    	s1.setInverted(true);
+    	s2.setInverted(true);
+    	s3.setInverted(true);
+    	}
     	control = new SpeedControllerGroup(new Spark(t1),new Spark(t2), new Spark(t3));
     	encode = new Encoder(e1,e2);
     	encode.setDistancePerPulse(Math.PI * 2 * WHEEL_RAD);
