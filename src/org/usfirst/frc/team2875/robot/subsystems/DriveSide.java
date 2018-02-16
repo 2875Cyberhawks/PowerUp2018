@@ -66,8 +66,6 @@ public class DriveSide extends PIDSubsystem {
       protected double returnPIDInput() {
     	double val = encode.getRate();
     	System.out.println(val);
-    	if (right)
-    		val *= -1;
     	return val/normalizer;
     }
     

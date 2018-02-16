@@ -16,9 +16,15 @@ public class TurnAnglePID extends PIDSubsystem{
 	public TurnAnglePID(int t1,int t2, int t3, int t4 ,int t5, int t6) {
     	super("driveSide" + Math.random() + "" + Math.random(),1,0,0);
     	this.setPID(PID[0], PID[1], PID[2]);
+    	Spark s4 = new Spark(t4);
+    	s4.setInverted(true);
+    	Spark s5 = new Spark(t5);
+    	s5.setInverted(true);
+    	Spark s6 = new Spark(t6);
+    	s6.setInverted(true);
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(true);
-    	control = new SpeedControllerGroup(new Spark(t1),new Spark(t2), new Spark(t3),new Spark(t4),new Spark(t5), new Spark(t6));
+    	control = new SpeedControllerGroup(new Spark(t1),new Spark(t2), new Spark(t3),s4,s5,s6);
     	this.getPIDController().setInputRange(0,360);
     	enable();
     }
