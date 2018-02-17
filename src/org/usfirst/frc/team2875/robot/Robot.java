@@ -141,6 +141,7 @@ import autonomous.LeftStarting;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println(gyro.getAngleZ());
 		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());

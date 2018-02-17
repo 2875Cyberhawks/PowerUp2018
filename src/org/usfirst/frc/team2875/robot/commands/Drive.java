@@ -50,8 +50,9 @@ public class Drive extends Command {
     
     public static boolean straightDriveGyro(double forward, double goalAngle) {
     	double currentError = Robot.gyro.getAngleZ() - goalAngle;
+    	System.out.println(currentError);
     	move(currentError / 180,forward);
-    	return currentError < 90;
+    	return currentError < 45;
     	
     }
     

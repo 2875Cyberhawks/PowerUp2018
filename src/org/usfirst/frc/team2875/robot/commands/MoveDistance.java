@@ -28,14 +28,14 @@ public class MoveDistance extends Command {
     @Override
     protected void initialize() {
     	Robot.dTrain.reset();
-    } 	
+    }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
     	//Drive.move(0,speed);
     	Drive.straightDriveGyro(speed, startAngle);
-    	System.out.println(Robot.dTrain.getDistances() [0]);
+    	//System.out.println(Robot.dTrain.getDistances() [0]);
     	//if (isFinished()) end();
     }
 
