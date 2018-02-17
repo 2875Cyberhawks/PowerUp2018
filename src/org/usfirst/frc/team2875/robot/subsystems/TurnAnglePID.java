@@ -1,3 +1,4 @@
+
 package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.Robot;
@@ -14,7 +15,7 @@ public class TurnAnglePID extends PIDSubsystem{
 	private static final double[] PID = {1,0,0}; //do not change
 	
 	public TurnAnglePID(int t1,int t2, int t3, int t4 ,int t5, int t6) {
-    	super("driveSide" + Math.random() + "" + Math.random(),1,0,0);
+    	super("turnAngle" + Math.random() + "" + Math.random(),1,0,0);
     	this.setPID(PID[0], PID[1], PID[2]);
     	Spark s4 = new Spark(t4);
     	s4.setInverted(true);

@@ -15,10 +15,16 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team2875.robot.commands.CmdRotateAngle;
+//import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+//import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 import org.usfirst.frc.team2875.robot.subsystems.Clutch;
+//import org.usfirst.frc.team2875.robot.subsystems.DTrain2;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 import com.analog.adis16448.frc.ADIS16448_IMU;
+
+import autonomous.LeftStarting;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,6 +36,8 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 
  public class Robot extends IterativeRobot {
 	public static final OI oi = new OI();
+	public static Gearbox left = new Gearbox(3,4,5);
+	public static Gearbox right = new Gearbox(0,1,2);
 	public static Drivetrain dTrain;
 	public static Lift lift;
 	public static Clutch clutch;
@@ -47,9 +55,10 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	@Override
 	public void robotInit() {
 		CameraServer.getInstance().startAutomaticCapture();
-		dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
+		dTrain = new Drivetrain();
+		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
-		lift = new Lift(8,6,7,4,5);
+		lift = new Lift(8,9,6,7,4,5);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
@@ -86,7 +95,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	
 	@Override
 	public void autonomousInit() {
-		m_autonomousCommand = chooser.getSelected();
+	/*	m_autonomousCommand = chooser.getSelected();
 		//TODO how to get scale information
 		String gameData;
 		gameData = DriverStation.getInstance().getGameSpecificMessage();
@@ -99,9 +108,11 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 		 */
 
 		// schedule the autonomous command (example)
-		if (m_autonomousCommand != null) {
+		//if (m_autonomousCommand != null) {
+			//m_autonomousCommand.start();
+			m_autonomousCommand = new LeftStarting();
 			m_autonomousCommand.start();
-		}
+		
 	}
 
 	/**
@@ -135,7 +146,7 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 		//System.out.println("" + dTrain.rEncode.getRate());
 		//System.out.println("X" + gyro.getAccelX());
 		if (iter == 10) {
-		System.out.println("Y " + gyro.getAccelY());
+		//System.out.println("Y " + gyro.getAccelY());
 		iter =0;
 		}
 		iter++;
@@ -146,7 +157,12 @@ import com.analog.adis16448.frc.ADIS16448_IMU;
 	 * This function is called periodically during test mode.
 	 */
 	@Override
+	public void testInit() {
+		m_autonomousCommand = new LeftStarting();
+		m_autonomousCommand.start();
+	}
+	@Override
 	public void testPeriodic() {
-		//Robot.dTrain.setSpeed(1,1);
+		Scheduler.getInstance().run();
 	}
 }

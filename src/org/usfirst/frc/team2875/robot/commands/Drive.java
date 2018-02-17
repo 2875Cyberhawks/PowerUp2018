@@ -32,8 +32,8 @@ public class Drive extends Command {
     	double turning = Robot.oi.getTurningDegree();
     	double forward = Robot.oi.getForwardInput();
     	double speedR, speedL;
-    	speedL = turning + forward;
-    	speedR = -turning + forward;
+    	speedL = -turning + forward;
+    	speedR = turning + forward;
     	speedL *= constants[0];
     	speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
@@ -46,6 +46,19 @@ public class Drive extends Command {
     	//speedL *= constants[0];
     	//speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
+    }
+    
+    public static boolean straightDriveGyro(double forward, double goalAngle) {
+    	double currentError = Robot.gyro.getAngleZ() - goalAngle;
+    	move(currentError / 180,forward);
+    	return currentError < 90;
+    	
+    }
+    
+    public static boolean straightDriveEncoders(double forward) {
+    	double rateDiff = Robot.dTrain.l.getRate() - Robot.dTrain.r.getRate();
+    	move(rateDiff / 5, forward);
+    	return rateDiff < 90;
     }
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {

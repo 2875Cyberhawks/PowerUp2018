@@ -12,8 +12,7 @@ public class VoidCommand extends Command {
     public VoidCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.dTrain.left);
-    	requires(Robot.dTrain.right);
+    	requires(Robot.dTrain);
     }
 
     // Called just before this Command runs the first time

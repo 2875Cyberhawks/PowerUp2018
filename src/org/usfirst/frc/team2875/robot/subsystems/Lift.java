@@ -3,9 +3,9 @@ package org.usfirst.frc.team2875.robot.subsystems;
 import org.usfirst.frc.team2875.robot.commands.LiftCmd;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,15 +15,18 @@ public class Lift extends Subsystem {
 	//Liam smells good
 	//TODO set position values
 	//public static final double[] positions = {0,0,0,0};
-	SpeedController lift,lIntake,rIntake;
+	SpeedController lIntake,rIntake;
+	SpeedControllerGroup lift;
 	Encoder encoder;
 	
-	public Lift(int li, int wl,int wr, int e1, int e2) {
+	public Lift(int li,int lii, int wl,int wr, int e1, int e2) {
 		//Name and P, I, D constants
 		super("Lift");
-		lift = new Talon(li);
-		rIntake = new Talon(wl);
-		lIntake = new Talon(wr);
+		Spark lift1 = new Spark(li);
+		Spark lift2 = new Spark(lii);
+		lift = new SpeedControllerGroup(lift1,lift2);
+		rIntake = new Spark(wl);
+		lIntake = new Spark(wr);
 		rIntake.setInverted(true);
 		encoder = new Encoder(e1,e2);
 	}

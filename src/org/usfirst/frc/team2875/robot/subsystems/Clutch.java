@@ -26,11 +26,11 @@ public class Clutch extends Subsystem {
 	public void toggleClutch()
 	{
 		if (cEngaged) {
-			Robot.dTrain.left.disengageClutch();
-			Robot.dTrain.right.disengageClutch();
+			//Robot.dTrain.left.disengageClutch();
+			//Robot.dTrain.right.disengageClutch();
 		}else {
-			Robot.dTrain.left.engageClutch();
-			Robot.dTrain.right.engageClutch();
+		//	Robot.dTrain.left.engageClutch();
+		//	Robot.dTrain.right.engageClutch();
 		}
 		cEngaged = !cEngaged;
 		sole.set(cEngaged);
