@@ -12,7 +12,7 @@ public class LeftStarting extends CommandGroup{
 	//right or left
 	public LeftStarting() {
 		//addSequential(new CmdRotateAngle(10, .5, 1));
-		addSequential(new MoveDistance(12 * 6,.6));
+		//addSequential(new MoveDistance(12 * 6,.6));
 		//System.out.println("BIG PENER");
 	}
 }

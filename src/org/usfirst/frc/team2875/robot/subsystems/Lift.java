@@ -3,6 +3,7 @@ package org.usfirst.frc.team2875.robot.subsystems;
 import org.usfirst.frc.team2875.robot.commands.LiftCmd;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
@@ -18,8 +19,9 @@ public class Lift extends Subsystem {
 	SpeedController lIntake,rIntake;
 	SpeedControllerGroup lift;
 	Encoder encoder;
+	Solenoid sol;
 	
-	public Lift(int li,int lii, int wl,int wr, int e1, int e2) {
+	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so) {
 		//Name and P, I, D constants
 		super("Lift");
 		Spark lift1 = new Spark(li);
@@ -29,6 +31,8 @@ public class Lift extends Subsystem {
 		lIntake = new Spark(wr);
 		rIntake.setInverted(true);
 		encoder = new Encoder(e1,e2);
+		encoder.setDistancePerPulse((.75*Math.PI)/360);
+		sol = new Solenoid(so);
 	}
 		
 	public void stop(){
@@ -53,6 +57,24 @@ public class Lift extends Subsystem {
     public void wheelMove(double speed){
     	lIntake.set(speed);
     	rIntake.set(speed);
+    }
+    
+    public void toggleSol()
+    {
+    	sol.set(!sol.get());
+    }
+    public boolean getSol()
+    {
+    	return sol.get();
+    }
+    public double getDistance()
+    {
+    	return encoder.getDistance();
+    }
+    
+    public void reset()
+    {
+    	encoder.reset();
     }
     /*
 	@Override

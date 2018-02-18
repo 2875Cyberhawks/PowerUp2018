@@ -111,6 +111,10 @@ public class OI {
 	public boolean getClutch(){
 		return driveController.getXButtonPressed();
 	}
+	
+	public boolean getLiftSol() {
+		return driveController.getAButtonPressed();
+	}
 	//driver X
 	//returns yaw movement input//**
 	//public double getLeftInput(){

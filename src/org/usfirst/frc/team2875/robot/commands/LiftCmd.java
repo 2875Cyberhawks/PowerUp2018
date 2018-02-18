@@ -32,6 +32,7 @@ public class LiftCmd extends Command {
     	//System.out.println(Robot.oi.liftUp() + " " + Robot.oi.liftDown());
     	//grasper
     	Robot.lift.wheelMove(Robot.oi.cubeIntake());
+    	if (Robot.oi.getLiftSol()) Robot.lift.toggleSol();
     	
     }
 

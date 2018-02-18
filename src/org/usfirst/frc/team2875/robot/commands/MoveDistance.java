@@ -46,7 +46,7 @@ public class MoveDistance extends Command {
         double avg = distances[0] + distances[1];
         avg = avg / 2;
         System.out.println(avg);
-        return avg >= Math.abs(distance);
+        return Math.abs(avg) >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true

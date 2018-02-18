@@ -58,7 +58,7 @@ import autonomous.LeftStarting;
 		dTrain = new Drivetrain();
 		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
-		lift = new Lift(8,9,6,7,4,5);
+		lift = new Lift(8,9,6,7,4,5,1);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
@@ -105,14 +105,14 @@ import autonomous.LeftStarting;
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
 		 * = new MyAutoCommand(); break; case "Default Auto": default:
 		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+		 *SOOOOOOOOOOOOOOOOONnNnNnNnNnnnnnnnnNNNn/
 
 		// schedule the autonomous command (example)
 		//if (m_autonomousCommand != null) {
 			//m_autonomousCommand.start();
-			m_autonomousCommand = new LeftStarting();
-			m_autonomousCommand.start();
-		
+			//m_autonomousCommand = new LeftStarting();
+			//m_autonomousCommand.start();
+		*/
 	}
 
 	/**
