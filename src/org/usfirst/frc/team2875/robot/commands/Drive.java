@@ -4,6 +4,8 @@ import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
+
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -63,6 +65,14 @@ if (Robot.lift.getDistance() > 36) {
     	move(currentError / 180,forward);
     	return currentError < 45;
     	
+    }
+    
+    public static void turnAngleGyro(double degree)
+    {
+    	double diff =degree - Robot.gyro.getAngleZ();
+    	double speed = -4 * Math.log(1-(diff/90));
+    	if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
+    	move(speed,0);
     }
     
     public static boolean straightDriveEncoders(double forward) {
