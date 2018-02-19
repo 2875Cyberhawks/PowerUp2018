@@ -7,10 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class LiftCmd extends Command {
-	//private final static double speed = 1;
-    public LiftCmd() {
-    	requires(Robot.lift);
+public class AutoLift extends Command {
+	private double height;
+	private static final double speed = .5;
+	private int direction;
+	
+    public AutoLift(double heightX) {
+        requires(Robot.lift);
+        height = heightX;
+        if (height > Robot.lift.getDistance()) direction = 1;
+        else direction = -1;
     }
 
     // Called just before this Command runs the first time
@@ -18,27 +24,13 @@ public class LiftCmd extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-    protected void execute() {/*
-    	if(Robot.oi.getLift1()) {
-    		Robot.lift.liftTo(0);
-    	} else if(Robot.oi.getLift2()) {
-    		Robot.lift.liftTo(1);
-    	} else if(Robot.oi.getLift3()) {
-    		Robot.lift.liftTo(2);
-    	} else if(Robot.oi.getLift4()) {
-    		Robot.lift.liftTo(3);
-    	}*/
-    	Robot.lift.raiseLift(Robot.oi.lift());
-    	//System.out.println(Robot.oi.liftUp() + " " + Robot.oi.liftDown());
-    	//grasper
-    	Robot.lift.wheelMove(Robot.oi.cubeIntake());
-    	if (Robot.oi.getLiftSol()) Robot.lift.toggleSol();
-    	
+    protected void execute() {
+    	Robot.lift.raiseToPost(height);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.lift.getDistance() >= height;
     }
 
     // Called once after isFinished returns true

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.commands.VoidCommand;
+//import org.usfirst.frc.team2875.robot.commands.VoidCommand;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
@@ -10,30 +10,39 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 /** 
  * 
- */
+ *
 public class DriveSide extends PIDSubsystem {
 	private SpeedControllerGroup control;
 	private static final double WHEEL_RAD = 4.000;
-	private static double normalizer[] = {11000,33000};
+	private static double normalizer=11000;
 	public Encoder encode;
-	public boolean right;
+	private boolean right;
 	private static double[] clutchUnengaged = {1,0,0}; //do not change
 	private static double[] clutchEngaged ={1,0,0};  //do not change
     // Initialize your subsystem here
 	
 	
 	public DriveSide(boolean rightSide, int t1,int t2, int t3, int e1, int e2, double[] PVE, double[] PVU) {
-    	super("driveSide" + rightSide + Math.random() + "" + Math.random(), 0,0,0);
+		
+		super("driveSide" + rightSide + Math.random() + "" + Math.random(), 0,0,0);
+		right = rightSide;
     	clutchUnengaged = PVU;
     	clutchEngaged = PVE;
-    	right = rightSide;
     	this.setPID(clutchUnengaged[0], clutchUnengaged[1], clutchUnengaged[2]);
     	setAbsoluteTolerance(.05);
     	getPIDController().setContinuous(false);
-    	control = new SpeedControllerGroup(new Spark(t1),new Spark(t2), new Spark(t3));
+    	Spark s1 = new Spark(t1);
+    	Spark s2 = new Spark(t2);
+    	Spark s3 = new Spark(t3);
     	encode = new Encoder(e1,e2);
     	encode.setDistancePerPulse(Math.PI * 2 * WHEEL_RAD);
-    	this.getPIDController().setInputRange(-normalizer[0],normalizer[0]);
+    	if (rightSide) {
+    	s1.setInverted(true);
+    	s2.setInverted(true);
+    	s3.setInverted(true);
+    	encode.setReverseDirection(true);
+    	}
+    	control = new SpeedControllerGroup(s1,s2,s3);
     	enable();
     }
 	
@@ -49,15 +58,14 @@ public class DriveSide extends PIDSubsystem {
     
     public void setPID(double p, double i, double d){
     	getPIDController().setPID(p, i, d);
-    	
     }
     public void engageClutch() {
     	setPID(clutchEngaged[0],clutchEngaged[1],clutchEngaged[2]);
-    	this.getPIDController().setInputRange(-normalizer[1],normalizer[1]);
+    	normalizer = 30000;
     }
     public void disengageClutch() {
     	setPID(clutchUnengaged[0],clutchUnengaged[1],clutchUnengaged[2]);
-    	this.getPIDController().setInputRange(-normalizer[0],normalizer[0]);
+    	normalizer = 11000;
     }
     public void set(double speed)
     {	
@@ -67,9 +75,8 @@ public class DriveSide extends PIDSubsystem {
     @Override
       protected double returnPIDInput() {
     	double val = encode.getRate();
-    	if (right)
-    		val *= -1;
-    	return val;
+    	System.out.println(val);
+    	return val/normalizer;
     }
     
     @Override
@@ -80,4 +87,4 @@ public class DriveSide extends PIDSubsystem {
     public double getDistance(){
     	return encode.getDistance();
     }
-}
+}*/

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -90,23 +91,21 @@ public class OI {
 	public boolean getLift4(){
 		return liftController.getYButton();
 	}*/
-	public boolean liftUp(){
-		return liftController.getYButton();
+	public double lift(){
+		return liftController.getTriggerAxis(GenericHID.Hand.kLeft) - liftController.getTriggerAxis(GenericHID.Hand.kRight);
 	}
-	
-	public boolean liftDown() {
-		return liftController.getAButton();
-	}
-	
-
+/*
 	//driver A
 	public boolean cubeRelease() {
 		return driveController.getAButton();
-	}
+	}*/
 	
 	//driver B
-	public boolean cubeIntake() {
-		return driveController.getBButton();
+	public double[] cubeIntake() {
+		double[] m = new double[2];
+		m[0] = liftController.getX(GenericHID.Hand.kLeft);
+		m[1] = liftController.getX(GenericHID.Hand.kRight);
+		return m;
 	}
 	
 	
@@ -114,6 +113,10 @@ public class OI {
 	
 	public boolean getClutch(){
 		return driveController.getXButtonPressed();
+	}
+	
+	public boolean getLiftSol() {
+		return driveController.getBButtonPressed();
 	}
 	//driver X
 	//returns yaw movement input//**
