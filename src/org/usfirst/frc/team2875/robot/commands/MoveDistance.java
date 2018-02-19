@@ -45,13 +45,13 @@ public class MoveDistance extends Command {
     	double[] distances = Robot.dTrain.getDistances();
         double avg = distances[0] + distances[1];
         avg = avg / 2;
-        System.out.println(avg);
+        //System.out.println(avg);
         return Math.abs(avg) >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("ran");
+    	//System.out.println("ran");
     	Robot.dTrain.stop();
     }
 

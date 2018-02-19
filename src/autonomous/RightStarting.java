@@ -14,16 +14,16 @@ public class RightStarting extends CommandGroup {
 	if (start == 'R')
 	{
 		addSequential(new MoveDistance(307.818));
-		addSequential(new TurnAngle().setAngle(270));
+		addSequential(new TurnAngle(270));
 		addSequential(new MoveDistance(28.219));
 	}
 	else {
 		addSequential(new MoveDistance(40));
-		addSequential(new TurnAngle().setAngle(270));
+		addSequential(new TurnAngle(270));
 		addSequential(new MoveDistance(234.297));
-		addSequential(new TurnAngle().setAngle(90));
+		addSequential(new TurnAngle(90));
 		addSequential(new MoveDistance(267.803));
-		addSequential(new TurnAngle().setAngle(90));
+		addSequential(new TurnAngle(90));
 		addSequential(new MoveDistance(10));
 	}
 	}

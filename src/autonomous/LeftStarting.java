@@ -18,18 +18,18 @@ public class LeftStarting extends CommandGroup{
 		if (gd == 'L')
 		{
 			addSequential(new MoveDistance(313.15));
-			addSequential(new TurnAngle().setAngle(90));
+			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(11.88));
 		}
 		else
 		{
 			addSequential(new MoveDistance(40));
-			addSequential(new TurnAngle().setAngle(90));
+			addSequential(new TurnAngle(90));
 			//addSequential(new MoveDistance(41.56));
 			addSequential(new MoveDistance(224.12));
-			addSequential(new TurnAngle().setAngle(90));
+			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(273.15));
-			addSequential(new TurnAngle().setAngle(270));
+			addSequential(new TurnAngle(270));
 		}
 	}
 }

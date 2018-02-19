@@ -26,7 +26,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Clutch;
 //import org.usfirst.frc.team2875.robot.subsystems.DTrain2;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
-import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
+//import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
@@ -58,7 +58,7 @@ import autonomous.TotalAuto;
 	Command auto;
 	SendableChooser<Command> chooser;
 	public static ADIS16448_IMU gyro;
-	public static TurnAnglePID pidT;
+	//public static TurnAnglePID pidT;
 //	public static CameraThread vis;
 
 	/**
@@ -82,7 +82,7 @@ import autonomous.TotalAuto;
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
 		gyro = new ADIS16448_IMU();
-		pidT = new TurnAnglePID();
+		//pidT = new TurnAnglePID();
 	}
 
 	/**

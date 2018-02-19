@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
+//import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -13,9 +13,10 @@ public class TurnAngle extends Command {
 	private double goal;
 	private boolean movingForward = true;
 	
-    public TurnAngle() {
+    public TurnAngle(double goalX) {
     	super("TurnAngle");
-    	requires(Robot.pidT);
+    	goal = goalX;
+    	requires(Robot.dTrain);
     	//goal = degree;
     }
 
@@ -32,11 +33,6 @@ public class TurnAngle extends Command {
     protected void execute() {
 	   Drive.turnAngleGyro(goal);
     }
-   
-   	public TurnAngle setAngle(double an) {
-   		goal = an;
-   		return this;
-   	}
 
     // Make this return true when this Command no longer needs to run execute()
    @Override 

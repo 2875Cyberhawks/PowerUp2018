@@ -3,7 +3,9 @@ package autonomous;
 import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.LiftWheelSpeed;
+import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -23,9 +25,11 @@ public class TotalAuto extends CommandGroup {
     	//requires(Robot.clutch);
     	//requires(Robot.lift);
     	//Move back and forth to lower lift to base
+    	addSequential(new Marker("Start initial moves"));
+    	addSequential(new TurnAngle(300));
     	addSequential(new MoveDistance(-2,-.5));
     	addSequential(new MoveDistance(2));
-    	
+    	addSequential(new Marker("Finished initial moveD"));
     	
     	//Take control of box here
     	
@@ -33,12 +37,15 @@ public class TotalAuto extends CommandGroup {
     	//Move the bot
     	switch (start) {
     		case 'L':
+    			addSequential(new Marker("Found L case"));
     			addSequential(new LeftStarting(switchSide));
     			break;
     		case 'M':
+    			addSequential(new Marker("Found M case"));
     			addSequential(new MidStarting(switchSide));
     			break;
     		default :
+    			addSequential(new Marker("Found R case"));
     			addSequential(new RightStarting(switchSide));
     			break;
     	}

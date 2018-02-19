@@ -35,14 +35,15 @@ public class Drive extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double turning = Robot.oi.getTurningDegree();
+    	double forward = Robot.oi.getTurningDegree();
+    	double turning = Robot.oi.getForwardInput();
+
 if (Robot.lift.getDistance() > 36) {
 		turning /=4;
 }
-    	double forward = Robot.oi.getForwardInput();
     	double speedR, speedL;
-    	speedL = -turning + forward;
-    	speedR = turning + forward;
+    	speedL = -turning - forward;
+    	speedR = turning - forward;
     	speedL *= constants[0];
     	speedR *= constants[1];
     	Robot.dTrain.setSpeed(speedL,speedR);
@@ -51,8 +52,8 @@ if (Robot.lift.getDistance() > 36) {
     public static void move(double turning, double forward){
     	double speedR, speedL;
     	//double turning = turningX/(HEIGHT_CONSTANT * (Robot.lift.getDistance()/Lift.MAX_HEIGHT));
-    	speedL = turning + forward;
-    	speedR = -turning + forward;
+    	speedL = -forward + turning;
+    	speedR = forward + turning;
     	//speedL *= constants[0];
     	//speedR *= constants[1];
     	
@@ -61,7 +62,7 @@ if (Robot.lift.getDistance() > 36) {
     
     public static boolean straightDriveGyro(double forward, double goalAngle) {
     	double currentError = Robot.gyro.getAngleZ() - goalAngle;
-    	System.out.println(currentError);
+    	//System.out.println(currentError);
     	move(currentError / 180,forward);
     	return currentError < 45;
     	
