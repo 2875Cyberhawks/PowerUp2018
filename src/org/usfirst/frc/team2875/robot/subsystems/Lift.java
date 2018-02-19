@@ -66,7 +66,7 @@ public class Lift extends PIDSubsystem {
     {
     	teleop = true;
     	getPIDController().setPID(pids[1][0], pids[1][1], pids[1][2]);
-    //	if (speed == 0) getPIDController().setI(.2);
+    	if (Math.abs(speed) <= .1) getPIDController().setI(.2);
     	if (speed > 0 && !Robot.lsLow.get())
     		speed = 0;
     	setSetpoint(speed);
