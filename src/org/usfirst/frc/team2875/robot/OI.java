@@ -92,7 +92,10 @@ public class OI {
 		return liftController.getYButton();
 	}*/
 	public double lift(){
-		return liftController.getTriggerAxis(GenericHID.Hand.kLeft) - liftController.getTriggerAxis(GenericHID.Hand.kRight);
+		double v = liftController.getTriggerAxis(GenericHID.Hand.kLeft) - liftController.getTriggerAxis(GenericHID.Hand.kRight);
+		double rV = -.55 * Math.log10(1-Math.abs(v));
+		if (v < 0) rV *= -1;
+		return rV;
 	}
 /*
 	//driver A
