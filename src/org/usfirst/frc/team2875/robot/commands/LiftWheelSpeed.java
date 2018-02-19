@@ -1,41 +1,44 @@
 package org.usfirst.frc.team2875.robot.commands;
 
+
 import org.usfirst.frc.team2875.robot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class AutoLift extends Command {
-	private double height;
-	private static final double speed = .5;
-	private int direction;
-	
-    public AutoLift(double heightX) {
+public class LiftWheelSpeed extends Command {
+	Timer time;
+	double totT;
+	double speed;
+    public LiftWheelSpeed(double speed, double t) {
         requires(Robot.lift);
-        height = heightX;
-        if (height > Robot.lift.getDistance()) direction = 1;
-        else direction = -1;
+        time = new Timer();
+        this.speed = speed;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	time.start();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lift.raiseToPost(height);
+    	double[] m = {speed,speed};
+    	Robot.lift.wheelMove(m);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.lift.getDistance() >= height;
+        return time.hasPeriodPassed(totT);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.lift.stop();
+    	double[] m = {0,0};
+    	Robot.lift.wheelMove(m);
     }
 
     // Called when another command which requires one or more of the same

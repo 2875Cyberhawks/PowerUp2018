@@ -1,6 +1,8 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
+import org.usfirst.frc.team2875.robot.subsystems.Lift;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,6 +12,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command {
 	private double[] constants = {1,1};
+	private static final double HEIGHT_CONSTANT = .3;
+
 
     public Drive() {
     	super("Drive");
@@ -30,6 +34,9 @@ public class Drive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double turning = Robot.oi.getTurningDegree();
+if (Robot.lift.getDistance() > 36) {
+		turning /=4;
+}
     	double forward = Robot.oi.getForwardInput();
     	double speedR, speedL;
     	speedL = -turning + forward;
@@ -41,10 +48,12 @@ public class Drive extends Command {
     
     public static void move(double turning, double forward){
     	double speedR, speedL;
+    	//double turning = turningX/(HEIGHT_CONSTANT * (Robot.lift.getDistance()/Lift.MAX_HEIGHT));
     	speedL = turning + forward;
     	speedR = -turning + forward;
     	//speedL *= constants[0];
     	//speedR *= constants[1];
+    	
     	Robot.dTrain.setSpeed(speedL,speedR);
     }
     

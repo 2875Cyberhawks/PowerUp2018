@@ -92,17 +92,20 @@ public class OI {
 		return liftController.getYButton();
 	}*/
 	public double lift(){
-		return liftController.getRawAxis(1);
+		return liftController.getTriggerAxis(GenericHID.Hand.kLeft) - liftController.getTriggerAxis(GenericHID.Hand.kRight);
 	}
-
+/*
 	//driver A
 	public boolean cubeRelease() {
 		return driveController.getAButton();
-	}
+	}*/
 	
 	//driver B
-	public double cubeIntake() {
-		return driveController.getX(GenericHID.Hand.kRight);
+	public double[] cubeIntake() {
+		double[] m = new double[2];
+		m[0] = liftController.getX(GenericHID.Hand.kLeft);
+		m[1] = liftController.getX(GenericHID.Hand.kRight);
+		return m;
 	}
 	
 	
@@ -113,7 +116,7 @@ public class OI {
 	}
 	
 	public boolean getLiftSol() {
-		return driveController.getAButtonPressed();
+		return driveController.getBButtonPressed();
 	}
 	//driver X
 	//returns yaw movement input//**

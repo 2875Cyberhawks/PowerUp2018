@@ -8,7 +8,9 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -35,10 +37,12 @@ import autonomous.LeftStarting;
  */
 
  public class Robot extends IterativeRobot {
-	public static final OI oi = new OI();
+	
+	 public static final OI oi = new OI();
 	public static Gearbox left = new Gearbox(3,4,5);
 	public static Gearbox right = new Gearbox(0,1,2);
 	public static Drivetrain dTrain;
+	public static DigitalInput lsLow;
 	public static Lift lift;
 	public static Clutch clutch;
 	public static int iter = 0;
@@ -54,11 +58,13 @@ import autonomous.LeftStarting;
 	 */
 	@Override
 	public void robotInit() {
-		CameraServer.getInstance().startAutomaticCapture();
+		UsbCamera a = CameraServer.getInstance().startAutomaticCapture();
+		a.setResolution(640, 480);
 		dTrain = new Drivetrain();
 		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
-		lift = new Lift(8,9,6,7,4,5,1);
+		lift = new Lift(8,9,6,7,8,9,1);
+		lsLow = new DigitalInput(6);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
@@ -72,8 +78,8 @@ import autonomous.LeftStarting;
 	 */
 	@Override
 	public void disabledInit() {
-		//the thus the end begins
-		//`
+		lift.enable();
+		lift.raiseToPost(0);
 	}
 
 	@Override
@@ -141,7 +147,7 @@ import autonomous.LeftStarting;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println(gyro.getAngleZ());
+		//System.out.println(gyro.getAngleZ());
 		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());
@@ -159,8 +165,8 @@ import autonomous.LeftStarting;
 	 */
 	@Override
 	public void testInit() {
-		m_autonomousCommand = new LeftStarting();
-		m_autonomousCommand.start();
+		//m_autonomousCommand = new LeftStarting();
+		//m_autonomousCommand.start();
 	}
 	@Override
 	public void testPeriodic() {

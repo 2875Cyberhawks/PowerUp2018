@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class TurnAnglePID extends PIDSubsystem{
 	private SpeedControllerGroup control;
+	private int direction;
 	private static final double[] PID = {1,0,0}; //do not change
 	
 	public TurnAnglePID(int t1,int t2, int t3, int t4 ,int t5, int t6) {
@@ -46,7 +47,7 @@ public class TurnAnglePID extends PIDSubsystem{
     }
     
     public void set(double angle)
-    {	
+    {
     	setSetpoint(angle);
     }
     
