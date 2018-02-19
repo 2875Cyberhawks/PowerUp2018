@@ -1,6 +1,8 @@
 package autonomous;
 
 import org.usfirst.frc.team2875.robot.Robot;
+import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -8,15 +10,21 @@ public class RightStarting extends CommandGroup {
 	//go to switch and drop
 	//right or left
 	public RightStarting(char start) {
-	if(Robot.leftSwitch) {
-	//go left switch	
-		Scale.fromLeftSwitch();
-	}
-	else
-	{
-		//go right switch
-		Scale.fromRightSwitch();
-	}
 	
+	if (start == 'R')
+	{
+		addSequential(new MoveDistance(307.818));
+		addSequential(new TurnAngle().setAngle(270));
+		addSequential(new MoveDistance(28.219));
+	}
+	else {
+		addSequential(new MoveDistance(40));
+		addSequential(new TurnAngle().setAngle(270));
+		addSequential(new MoveDistance(234.297));
+		addSequential(new TurnAngle().setAngle(90));
+		addSequential(new MoveDistance(267.803));
+		addSequential(new TurnAngle().setAngle(90));
+		addSequential(new MoveDistance(10));
+	}
 	}
 }

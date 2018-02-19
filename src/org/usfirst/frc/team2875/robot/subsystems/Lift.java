@@ -69,6 +69,8 @@ public class Lift extends PIDSubsystem {
     //	if (speed == 0) getPIDController().setI(.2);
     	if (speed > 0 && !Robot.lsLow.get())
     		speed = 0;
+    	if (speed < 0 && !Robot.lsHigh.get())
+    		speed = 0;
     	setSetpoint(speed);
     	//System.out.println("Setpoint: " + speed);
     	//raiseToPost(encoder.getDistance() + (speed* MANUAL_SPEED_CONSTANT));
@@ -80,8 +82,8 @@ public class Lift extends PIDSubsystem {
     	teleop = false;
     	getPIDController().setPID(pids[0][0], pids[0][1], pids[1][1]);
     	height = pos;
-    	if (Robot.lsLow.get())
-    		pos = 0;
+    	if (Robot.lsLow.get() || Robot.lsHigh.get())
+    		pos = encoder.getDistance();
     	setSetpoint(pos);
     	//System.out.println("Setpoint at: " + pos);
     }

@@ -38,8 +38,8 @@ public class Drivetrain extends Subsystem {
 	
 	public void setSpeed(double leftI, double rightI)
 	{
-		Robot.left.setSpeed(-leftI);
-		Robot.right.setSpeed(rightI);
+		Robot.left.set(-leftI);
+		Robot.right.set(rightI);
 		//left.set(leftI);
 		//right.set(rightI);
 	}
@@ -53,8 +53,8 @@ public class Drivetrain extends Subsystem {
 
 	public void stop()
 	{
-		Robot.left.setSpeed(0);
-		Robot.right.setSpeed(0);
+		Robot.left.set(0);
+		Robot.right.set(0);
 	}
     public void initDefaultCommand() {
     	setDefaultCommand(new Drive());

@@ -8,6 +8,8 @@
 package org.usfirst.frc.team2875.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -24,9 +26,12 @@ import org.usfirst.frc.team2875.robot.subsystems.Clutch;
 //import org.usfirst.frc.team2875.robot.subsystems.DTrain2;
 import org.usfirst.frc.team2875.robot.subsystems.Drivetrain;
 import org.usfirst.frc.team2875.robot.subsystems.Lift;
+import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
+
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import autonomous.LeftStarting;
+import autonomous.TotalAuto;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -38,18 +43,22 @@ import autonomous.LeftStarting;
 
  public class Robot extends IterativeRobot {
 	
-	 public static final OI oi = new OI();
-	public static Gearbox left = new Gearbox(3,4,5);
-	public static Gearbox right = new Gearbox(0,1,2);
+	public static final OI oi = new OI();
+	//public static Gearbox left = new Gearbox(3,4,5);
+	//public static Gearbox right = new Gearbox(0,1,2);
+	public static SpeedControllerGroup left;
+	public static SpeedControllerGroup right;
 	public static Drivetrain dTrain;
 	public static DigitalInput lsLow;
+	public static DigitalInput lsHigh;
 	public static Lift lift;
 	public static Clutch clutch;
 	public static int iter = 0;
 	public static boolean leftSwitch;
-	Command m_autonomousCommand;
+	Command auto;
 	SendableChooser<Command> chooser;
 	public static ADIS16448_IMU gyro;
+	public static TurnAnglePID pidT;
 //	public static CameraThread vis;
 
 	/**
@@ -61,14 +70,19 @@ import autonomous.LeftStarting;
 		UsbCamera a = CameraServer.getInstance().startAutomaticCapture();
 		a.setResolution(640, 480);
 		dTrain = new Drivetrain();
+		left = new SpeedControllerGroup(new Spark(0),new Spark(1),new Spark(2));
+		right = new SpeedControllerGroup(new Spark(3),new Spark(4),new Spark(5));
+		right.setInverted(true);
 		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
 		lift = new Lift(8,9,6,7,8,9,1);
 		lsLow = new DigitalInput(6);
+		lsHigh = new DigitalInput(7);
 		chooser = new SendableChooser<>();
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
 		gyro = new ADIS16448_IMU();
+		pidT = new TurnAnglePID();
 	}
 
 	/**
@@ -101,6 +115,8 @@ import autonomous.LeftStarting;
 	
 	@Override
 	public void autonomousInit() {
+		auto = new TotalAuto('M','R');
+		auto.start();
 	/*	m_autonomousCommand = chooser.getSelected();
 		//TODO how to get scale information
 		String gameData;
@@ -135,9 +151,9 @@ import autonomous.LeftStarting;
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (m_autonomousCommand != null) {
-			m_autonomousCommand.cancel();
-		}
+		if (auto != null) {
+			auto.cancel();
+		}	
 		
 	}
 

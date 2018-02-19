@@ -106,8 +106,8 @@ public class OI {
 	//driver B
 	public double[] cubeIntake() {
 		double[] m = new double[2];
-		m[0] = liftController.getX(GenericHID.Hand.kLeft);
-		m[1] = liftController.getX(GenericHID.Hand.kRight);
+		m[1] = liftController.getX(GenericHID.Hand.kLeft);
+		m[0] = liftController.getX(GenericHID.Hand.kRight);
 		return m;
 	}
 	
