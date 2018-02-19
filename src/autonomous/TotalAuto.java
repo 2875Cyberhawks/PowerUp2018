@@ -26,7 +26,7 @@ public class TotalAuto extends CommandGroup {
     	//requires(Robot.lift);
     	//Move back and forth to lower lift to base
     	addSequential(new Marker("Start initial moves"));
-    	addSequential(new TurnAngle(300));
+    	//addSequential(new TurnAngle(300));
     	addSequential(new MoveDistance(-2,-.5));
     	addSequential(new MoveDistance(2));
     	addSequential(new Marker("Finished initial moveD"));

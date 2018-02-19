@@ -13,7 +13,9 @@ public class ClutchCmd extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.oi.getClutch())
-    		Robot.clutch.toggleClutch();
+    		System.out.println("Clutch wants to toggle");
+    		//Robot.clutch.toggleClutch();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -28,7 +28,9 @@ public class LiftCmd extends Command {
     	} else if(Robot.oi.getLift4()) {
     		Robot.lift.liftTo(3);
     	}*/
-    	Robot.lift.raiseLift(Robot.oi.lift());
+    	double lv = Robot.oi.lift();
+    	if (lv <= 0 || Robot.lsHigh.get())Robot.lift.raiseLift(lv);
+    	else Robot.lift.stop();
     	//System.out.println(Robot.oi.liftUp() + " " + Robot.oi.liftDown());
     	//grasper
     	Robot.lift.wheelMove(Robot.oi.cubeIntake());
