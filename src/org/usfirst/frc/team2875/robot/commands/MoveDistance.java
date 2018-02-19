@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveDistance extends Command {
 	private double distance;
-	private double speed = .9;
+	private double speed = .5;
 	private double startAngle;
     public MoveDistance(double distanceI) {
         super("MoveDistance");

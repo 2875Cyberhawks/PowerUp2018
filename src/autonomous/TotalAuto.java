@@ -19,11 +19,11 @@ public class TotalAuto extends CommandGroup {
     	start = startingPos;
     	switchSide = Character.toUpperCase(gd);
     	if (gd == 'A')switchSide = DriverStation.getInstance().getGameSpecificMessage().charAt(1);
-    	requires(Robot.dTrain);
-    	requires(Robot.clutch);
-    	requires(Robot.lift);
+    	//requires(Robot.dTrain);
+    	//requires(Robot.clutch);
+    	//requires(Robot.lift);
     	//Move back and forth to lower lift to base
-    	addSequential(new MoveDistance(-2,-.9));
+    	addSequential(new MoveDistance(-2,-.5));
     	addSequential(new MoveDistance(2));
     	
     	
