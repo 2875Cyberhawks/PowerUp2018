@@ -11,13 +11,16 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LeftStarting extends CommandGroup{
 	//go to switch and drop
 	//right or left
-	public LeftStarting(char gd){
+	public LeftStarting(char gd, char au){
 		//addSequential(new CmdRotateAngle(10, .5, 1));
 		//addSequential(new MoveDistance(12 * 6,.6));
 		//System.out.println("Yes indeed");
 		if (gd == 'L')
 		{
-			addSequential(new MoveDistance(313.15));
+			if (au == 'C')
+				addSequential(new MoveDistance(313.15));
+			else if (au =='W')
+				addSequential(new MoveDistance(150));
 			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(1.88));
 		}
@@ -27,8 +30,11 @@ public class LeftStarting extends CommandGroup{
 			addSequential(new TurnAngle(90));
 			//addSequential(new MoveDistance(41.56));
 			addSequential(new MoveDistance(214.12));
-			addSequential(new TurnAngle(90));
-			addSequential(new MoveDistance(273.15));
+			addSequential(new TurnAngle(-90));
+			if (au == 'C')
+				addSequential(new MoveDistance(273.15));
+			else if (au == 'W')
+				addSequential(new MoveDistance(110));
 			addSequential(new TurnAngle(-90));
 		}
 	}

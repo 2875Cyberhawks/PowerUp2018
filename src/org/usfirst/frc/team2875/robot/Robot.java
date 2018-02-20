@@ -56,7 +56,10 @@ import autonomous.TotalAuto;
 	public static int iter = 0;
 	public static boolean leftSwitch;
 	Command auto;
-	SendableChooser<Command> chooser;
+	SendableChooser<Character> scaleChooser;
+	SendableChooser<Character> switchChooser;
+	SendableChooser<Character> startChooser;
+	SendableChooser<Character> autoChooser;
 	public static ADIS16448_IMU gyro;
 	//public static TurnAnglePID pidT;
 //	public static CameraThread vis;
@@ -78,7 +81,22 @@ import autonomous.TotalAuto;
 		lift = new Lift(8,9,6,7,8,9,1,3);
 		lsLow = new DigitalInput(6);
 		lsHigh = new DigitalInput(7);
-		chooser = new SendableChooser<>();
+		scaleChooser = new SendableChooser<Character>();
+		scaleChooser.addDefault("Listen for FRC input", 'A');
+		scaleChooser.addObject("Scale is right", 'R');
+		scaleChooser.addObject("Scale is left", 'L');
+		switchChooser = new SendableChooser<Character>();
+		switchChooser.addDefault("Listen for FRC input", 'A');
+		switchChooser.addObject("Switch is right",'R');
+		switchChooser.addObject("Switch is left", 'L');
+		startChooser = new SendableChooser<Character>();
+		startChooser.addDefault("Middle start", 'M');
+		startChooser.addObject("Left start", 'L');
+		startChooser.addObject("Right start", 'R');
+		autoChooser = new SendableChooser<Character>();
+		autoChooser.addDefault("Scale autonomous", 'C');
+		autoChooser.addObject("Switch autonomous", 'W');
+		autoChooser.addObject("No autonomous", 'N');
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
 		gyro = new ADIS16448_IMU();
@@ -115,9 +133,11 @@ import autonomous.TotalAuto;
 	
 	@Override
 	public void autonomousInit() {
-		Robot.lift.toggleLiftSol();
-		Robot.lift.toggleOpenSol();
-		auto = new TotalAuto('R','R');
+		if (!Robot.lift.getLiftSol())
+			Robot.lift.toggleLiftSol();
+		if (!Robot.lift.getOpenSol())
+			Robot.lift.toggleOpenSol();
+		auto = new TotalAuto(autoChooser.getSelected(),startChooser.getSelected(),scaleChooser.getSelected(),switchChooser.getSelected());
 		auto.start();
 		Robot.lift.reset();
 	/*	m_autonomousCommand = chooser.getSelected();

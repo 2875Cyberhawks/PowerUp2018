@@ -9,11 +9,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightStarting extends CommandGroup {
 	//go to switch and drop
 	//right or left
-	public RightStarting(char start) {
+	public RightStarting(char start, char au) {
 	
 	if (start == 'R')
 	{
-		addSequential(new MoveDistance(307.818));
+		if (au == 'C')
+			addSequential(new MoveDistance(307.818));
+		else if (au == 'W')
+			addSequential(new MoveDistance(150));
 		addSequential(new TurnAngle(-90));
 		addSequential(new MoveDistance(8.219));
 	}
@@ -22,7 +25,10 @@ public class RightStarting extends CommandGroup {
 		addSequential(new TurnAngle(-90));
 		addSequential(new MoveDistance(234.297));
 		addSequential(new TurnAngle(90));
-		addSequential(new MoveDistance(267.803));
+		if (au == 'C')
+			addSequential(new MoveDistance(267.803));
+		else if (au == 'W')
+			addSequential(new MoveDistance(110));
 		addSequential(new TurnAngle(90));
 		//addSequential(new MoveDistance(10));
 	}
