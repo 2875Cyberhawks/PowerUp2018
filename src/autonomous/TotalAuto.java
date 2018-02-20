@@ -68,6 +68,7 @@ public class TotalAuto extends CommandGroup {
     			addSequential(new MoveDistance(-5,-.5));
     			addSequential(new AutoLift(0));
     			addSequential(new Marker("Finished lift for scale"));
+    			break;
     		case 'W':
     			addSequential(new Marker("Starting Lift for switch"));
     			addSequential(new AutoLift(10));
@@ -76,6 +77,9 @@ public class TotalAuto extends CommandGroup {
     			addSequential(new MoveDistance(-5,-.5));
     			addSequential(new AutoLift(0));
     			addSequential(new Marker("Finished lift for switch"));
+    			break;
+    		default :
+    			break;
     	}
     	
     }
