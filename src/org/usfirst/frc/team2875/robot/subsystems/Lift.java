@@ -27,7 +27,7 @@ public class Lift extends PIDSubsystem {
 	double height;
 	private static final double MAX_ENCODER_SPEED = 17;
 	private static final double SPOOLING_CONSTANT = 1.01;//Constant to account for spooling of the motor
-	public static final double MAX_HEIGHT = 72;
+	public static final double MAX_HEIGHT = 10;
 	boolean teleop = false;
 	
 	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so, int so2) {

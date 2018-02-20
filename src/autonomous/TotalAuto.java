@@ -6,6 +6,7 @@ import org.usfirst.frc.team2875.robot.commands.LiftWheelSpeed;
 import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
+import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -53,10 +54,8 @@ public class TotalAuto extends CommandGroup {
     	}
     	
     	//Lift to the scale
-    	addSequential(new AutoLift(5.5 * 12));
-    	addSequential(new MoveDistance(1,.9));
-    	addSequential(new LiftWheelSpeed(1,.3));
-    	addSequential(new MoveDistance(-1,-.9));
-    	addSequential(new AutoLift(3));
+    	addSequential(new Marker("Starting Lift for scale"));
+    	addSequential(new AutoLift(Lift.MAX_HEIGHT));
+    	addSequential
     }
 }
