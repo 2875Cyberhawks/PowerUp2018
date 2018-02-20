@@ -78,7 +78,7 @@ import autonomous.TotalAuto;
 		right.setInverted(true);
 		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
-		lift = new Lift(8,9,6,7,8,9,1,3);
+		lift = new Lift(8,9,6,7,8,9,1,2);
 		lsLow = new DigitalInput(6);
 		lsHigh = new DigitalInput(7);
 		scaleChooser = new SendableChooser<Character>();
