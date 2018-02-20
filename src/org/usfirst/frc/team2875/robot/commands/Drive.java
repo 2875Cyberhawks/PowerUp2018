@@ -71,11 +71,11 @@ if (Robot.lift.getDistance() > 36) {
     public static void turnAngleGyro(double degree)
     {
     	double diff =degree - Robot.gyro.getAngleZ();
-    	double speed = diff/90;
+    	double speed = -diff/90;
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
-    	System.out.println("Difference :" + diff);
-    	System.out.println("Degree :" + degree);
-    	System.out.println("Speed :" + speed);
+    	//System.out.println("Difference :" + diff);
+    	//System.out.println("Degree :" + degree);
+    	//System.out.println("Speed :" + speed);
     	move(speed,0);
     }
     

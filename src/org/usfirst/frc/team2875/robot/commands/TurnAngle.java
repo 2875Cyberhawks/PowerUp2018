@@ -37,6 +37,8 @@ public class TurnAngle extends Command {
     // Make this return true when this Command no longer needs to run execute()
    @Override 
    protected boolean isFinished() {
+	   System.out.println("Angle is: " + Robot.gyro.getAccelZ());
+	   System.out.println("Goal is: " + goal);
 	   if (movingForward)return Robot.gyro.getAngleZ() >= goal;
 	   else return Robot.gyro.getAngleZ() <= goal;
     }

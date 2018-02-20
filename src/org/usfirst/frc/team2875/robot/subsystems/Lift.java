@@ -69,15 +69,18 @@ public class Lift extends PIDSubsystem {
     	//if (Math.abs(speed) <= .1) {
     		//getPIDController().setI(.6);
     	//getPIDController().setP(.3);
+    	//System.out.println("Speed: " + speed);
+    	//System.out.println("High Switch: " + Robot.lsHigh.get());
     	if (speed > 0 && !Robot.lsLow.get())
     		speed = 0;
-    	if (Math.abs(speed) < .1) {
-    		getPIDController().enable();
+    	if  (speed < 0 && !Robot.lsHigh.get())
+    		speed = 0;
+    	if (Math.abs(speed) < .05) {
+    		enable();
     		setSetpoint(0);
     	}else {
-    		getPIDController().disable();
+    		disable();
     		lift.set(speed);
-    		
     	}
     	//setSetpoint(speed);
     	//System.out.println("Setpoint: " + speed);

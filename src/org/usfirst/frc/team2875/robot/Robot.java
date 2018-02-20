@@ -117,6 +117,7 @@ import autonomous.TotalAuto;
 	public void autonomousInit() {
 		auto = new TotalAuto('M','R');
 		auto.start();
+		Robot.lift.reset();
 	/*	m_autonomousCommand = chooser.getSelected();
 		//TODO how to get scale information
 		String gameData;
@@ -163,7 +164,7 @@ import autonomous.TotalAuto;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		//System.out.println(gyro.getAngleZ());
+		System.out.println("Angle: " + Robot.gyro.getAngleZ());
 		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());

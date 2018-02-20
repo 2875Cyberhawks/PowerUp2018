@@ -18,6 +18,7 @@ public class TotalAuto extends CommandGroup {
 	private char start; //Either (L)eft, (M)iddle, (R)ight
 	//The starting positions are either all the way left or right, or directly to the right of the center line
     public TotalAuto(char gd, char startingPos) {
+    	Robot.dTrain.reset();
     	start = startingPos;
     	switchSide = Character.toUpperCase(gd);
     	if (gd == 'A')switchSide = DriverStation.getInstance().getGameSpecificMessage().charAt(1);
