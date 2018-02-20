@@ -13,11 +13,11 @@ public class MidStarting extends CommandGroup {
 	//right or left
 	
 	
-	public MidStarting(char startSide, char au) {
+	public MidStarting(char gd, char au) {
 		//addSequential(new Marker("Moving the 40"));
 		addSequential(new MoveDistance(40));
 		//addSequential(new Marker("Started Middle Conditional"));
-		if (startSide == 'R') {
+		if (gd == 'R') {
 			//addSequential(new Marker("Middle Right"));
 			addSequential(new TurnAngle(90));
 			//addSequential(new Marker("Turned"));

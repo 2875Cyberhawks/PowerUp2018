@@ -58,10 +58,25 @@ public class TotalAuto extends CommandGroup {
     		default :
     			break;
     	}
+    	addSequential(new Marker("Movement finished, starting lift"));
+    	switch (auto) {
+    		case 'C':
+    			addSequential(new Marker("Starting Lift for scale"));
+    			addSequential(new AutoLift(15));
+    			addSequential(new MoveDistance(5));
+    			addSequential(new LiftWheelSpeed(1,.5));
+    			addSequential(new MoveDistance(-5,-.5));
+    			addSequential(new AutoLift(0));
+    			addSequential(new Marker("Finished lift for scale"));
+    		case 'W':
+    			addSequential(new Marker("Starting Lift for switch"));
+    			addSequential(new AutoLift(10));
+    			addSequential(new MoveDistance(5));
+    			addSequential(new LiftWheelSpeed(1,.5));
+    			addSequential(new MoveDistance(-5,-.5));
+    			addSequential(new AutoLift(0));
+    			addSequential(new Marker("Finished lift for switch"));
+    	}
     	
-    	//Lift to the scale
-    	addSequential(new Marker("Starting Lift for scale"));
-    	addSequential(new AutoLift(Lift.MAX_HEIGHT));
-    	addSequential(new Marker("Finished lift for scale"));
     }
 }

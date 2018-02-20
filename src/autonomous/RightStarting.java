@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class RightStarting extends CommandGroup {
 	//go to switch and drop
 	//right or left
-	public RightStarting(char start, char au) {
+	public RightStarting(char gd, char au) {
 	
-	if (start == 'R')
+	if (gd == 'R')
 	{
 		if (au == 'C')
 			addSequential(new MoveDistance(307.818));
