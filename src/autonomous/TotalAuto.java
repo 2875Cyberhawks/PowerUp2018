@@ -26,16 +26,17 @@ public class TotalAuto extends CommandGroup {
     	//requires(Robot.clutch);
     	//requires(Robot.lift);
     	//Move back and forth to lower lift to base
-    	addSequential(new Marker("Start initial moves"));
+    	//addSequential(new Marker("Start initial moves"));
     	//addSequential(new TurnAngle(300));
-    	addSequential(new MoveDistance(-2,-.5));
-    	addSequential(new MoveDistance(2));
-    	addSequential(new Marker("Finished initial moveD"));
+    	//addSequential(new MoveDistance(-2,-.5));
+    	//addSequential(new MoveDistance(2));
+    	//addSequential(new Marker("Finished initial moveD"));
     	
     	//Take control of box here
     	
     	
     	//Move the bot
+    	addSequential(new Marker("start position is: " + start));
     	switch (start) {
     		case 'L':
     			addSequential(new Marker("Found L case"));

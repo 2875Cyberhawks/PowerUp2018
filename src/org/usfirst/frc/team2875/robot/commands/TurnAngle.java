@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 //TODO add nonlinear function for speed
 public class TurnAngle extends Command {
 	private double goal;
-	private boolean movingForward = true;
-	
+	private static final double ACCEPTABLE_RANGE = 5;
     public TurnAngle(double goalX) {
     	super("TurnAngle");
     	goal = goalX;
@@ -23,9 +22,7 @@ public class TurnAngle extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.gyro.reset();
-    	if (goal < Robot.gyro.getAngleZ()) movingForward = false;
-    	
+    	Robot.gyro.reset();    	
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,16 +34,17 @@ public class TurnAngle extends Command {
     // Make this return true when this Command no longer needs to run execute()
    @Override 
    protected boolean isFinished() {
-	   System.out.println("Angle is: " + Robot.gyro.getAccelZ());
-	   System.out.println("Goal is: " + goal);
-	   if (movingForward)return Robot.gyro.getAngleZ() >= goal;
-	   else return Robot.gyro.getAngleZ() <= goal;
+	   //System.out.println("Angle is: " + Robot.gyro.getAccelZ());
+	   //System.out.println("Goal is: " + goal);
+	   //if (movingForward)return Robot.gyro.getAngleZ() >= goal;
+	   //else return Robot.gyro.getAngleZ() <= goal;
+	   return (Math.abs(Robot.gyro.getAngleZ()-goal) <= ACCEPTABLE_RANGE);
     }
 
     // Called once after isFinished returns true
    @Override 
    protected void end() {
-	   
+	   Robot.dTrain.stop();
     }
 
     // Called when another command which requires one or more of the same

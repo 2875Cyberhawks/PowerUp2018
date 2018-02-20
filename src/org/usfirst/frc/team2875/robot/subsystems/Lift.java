@@ -22,14 +22,15 @@ public class Lift extends PIDSubsystem {
 	SpeedController lIntake,rIntake;
 	SpeedControllerGroup lift;
 	Encoder encoder;
-	Solenoid sol;
+	Solenoid openSol;
+	Solenoid liftSol;
 	double height;
 	private static final double MAX_ENCODER_SPEED = 17;
 	private static final double SPOOLING_CONSTANT = 1.01;//Constant to account for spooling of the motor
 	public static final double MAX_HEIGHT = 72;
 	boolean teleop = false;
 	
-	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so) {
+	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so, int so2) {
 		//Name and P, I, D constants
 		super("Lift",0,0,0);
 		Spark lift1 = new Spark(li);
@@ -43,7 +44,8 @@ public class Lift extends PIDSubsystem {
 		encoder = new Encoder(e1,e2);
 		//encoder.setReverseDirection(true);
 		encoder.setDistancePerPulse(SPOOLING_CONSTANT * ((.75*Math.PI)/360));
-		sol = new Solenoid(so);
+		openSol = new Solenoid(so);
+		liftSol = new Solenoid(so2);
 		height = 0;
 		//lift.setInverted(true);
 		enable();
@@ -104,14 +106,19 @@ public class Lift extends PIDSubsystem {
     	rIntake.set(speed[1]);
     }
     
-    public void toggleSol()
+    public void toggleOpenSol()
     {
-    	sol.set(!sol.get());
+    	openSol.set(!openSol.get());
     }
-    public boolean getSol()
+    public boolean getOpenSol()
     {
-    	return sol.get();
+    	return openSol.get();
     }
+    public void toggleLiftSol()
+    {
+    	liftSol.set(!liftSol.get());
+    }
+    public boolean getLiftSol() {return liftSol.get();}
     
     public double getDistance()
     {

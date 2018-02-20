@@ -1,11 +1,6 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.subsystems.Lift;
-
-import com.analog.adis16448.frc.ADIS16448_IMU;
-
-import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -14,7 +9,11 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class Drive extends Command {
 	private double[] constants = {1,1};
-	private static final double HEIGHT_CONSTANT = .3;
+	private static final double ANGLE_SPEED = 100;
+	private static final double STRAIGHT_CONST = 180;
+	private static final double MINIMUM_TURN = .1;
+	private static boolean isForward = false;
+	//private static final double HEIGHT_CONSTANT = .3;
 
 
     public Drive() {
@@ -35,18 +34,22 @@ public class Drive extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double forward = Robot.oi.getTurningDegree();
-    	double turning = Robot.oi.getForwardInput();
-
-if (Robot.lift.getDistance() > 36) {
-		turning /=4;
-}
-    	double speedR, speedL;
-    	speedL = -turning - forward;
-    	speedR = turning - forward;
-    	speedL *= constants[0];
-    	speedR *= constants[1];
-    	Robot.dTrain.setSpeed(speedL,speedR);
+    	double forward = Robot.oi.getForwardInput();
+    	double turning = Robot.oi.getTurningDegree();
+    	if (Robot.lift.getDistance() > 36) {
+    		turning /=4;
+    	}
+		if (Math.abs(turning) < MINIMUM_TURN && !isForward)
+		{
+			Robot.gyro.reset();
+			isForward = true;
+			straightDriveGyro(forward, 0);
+		}else if(Math.abs(turning) > MINIMUM_TURN) {
+			isForward = false;
+			move(turning, forward);
+    	}else if(isForward) {
+			straightDriveGyro(forward, 0);
+		}
     }
     
     public static void move(double turning, double forward){
@@ -63,19 +66,21 @@ if (Robot.lift.getDistance() > 36) {
     public static boolean straightDriveGyro(double forward, double goalAngle) {
     	double currentError = Robot.gyro.getAngleZ() - goalAngle;
     	//System.out.println(currentError);
-    	move(currentError / 180,forward);
+    	move(currentError / STRAIGHT_CONST,forward);
     	return currentError < 45;
     	
     }
     
     public static void turnAngleGyro(double degree)
     {
-    	double diff =degree - Robot.gyro.getAngleZ();
-    	double speed = -diff/90;
+    	double diff = degree - Robot.gyro.getAngleZ();
+    	int direction = -1;
+    	if (diff < 0) direction = 1;
+    	double speed = direction * (.7 * (Math.abs(diff)/ANGLE_SPEED) + .3);
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
-    	//System.out.println("Difference :" + diff);
-    	//System.out.println("Degree :" + degree);
-    	//System.out.println("Speed :" + speed);
+    	System.out.println("Difference :" + diff);
+    	System.out.println("Degree :" + degree);
+    	System.out.println("Speed :" + speed);
     	move(speed,0);
     }
     

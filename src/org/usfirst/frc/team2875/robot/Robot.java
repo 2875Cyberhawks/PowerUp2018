@@ -75,7 +75,7 @@ import autonomous.TotalAuto;
 		right.setInverted(true);
 		//dTrain = new Drivetrain(3,4,5,0,1,2,0,1,2,3);
 		clutch = new Clutch(0);
-		lift = new Lift(8,9,6,7,8,9,1);
+		lift = new Lift(8,9,6,7,8,9,1,3);
 		lsLow = new DigitalInput(6);
 		lsHigh = new DigitalInput(7);
 		chooser = new SendableChooser<>();
@@ -115,7 +115,9 @@ import autonomous.TotalAuto;
 	
 	@Override
 	public void autonomousInit() {
-		auto = new TotalAuto('M','R');
+		Robot.lift.toggleLiftSol();
+		Robot.lift.toggleOpenSol();
+		auto = new TotalAuto('R','R');
 		auto.start();
 		Robot.lift.reset();
 	/*	m_autonomousCommand = chooser.getSelected();

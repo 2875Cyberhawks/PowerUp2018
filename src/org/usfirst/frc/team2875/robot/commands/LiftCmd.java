@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftCmd extends Command {
+	private boolean liftHasBeenPressed = false;
+	private boolean openHasBeenPressed = false;
 	//private final static double speed = 1;
     public LiftCmd() {
     	requires(Robot.lift);
@@ -33,7 +35,18 @@ public class LiftCmd extends Command {
     	//System.out.println(Robot.oi.liftUp() + " " + Robot.oi.liftDown());
     	//grasper
     	Robot.lift.wheelMove(Robot.oi.cubeIntake());
-    	if (Robot.oi.getLiftSol()) Robot.lift.toggleSol();
+    	if(!liftHasBeenPressed && Robot.oi.getLiftSol()) {
+    		liftHasBeenPressed = true;
+    		Robot.lift.toggleLiftSol();
+    	}else if(!Robot.oi.getLiftSol()){
+    		liftHasBeenPressed = false;
+    	}
+    	if(!openHasBeenPressed && Robot.oi.getOpenSol()) {
+    		openHasBeenPressed = true;
+    		Robot.lift.toggleOpenSol();
+    	}else if(!Robot.oi.getOpenSol()) {
+    		openHasBeenPressed = false;
+    	}
     	
     }
 
