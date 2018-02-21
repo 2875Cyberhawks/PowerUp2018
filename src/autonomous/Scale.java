@@ -1,12 +1,11 @@
-package autonomous;
+/*package autonomous;
 
 public class Scale {
 	public static void fromRightSwitch()
 	{
 		/*if scaleRight
 		 * ifscaleLeft
-		 */
-	
+		 *
 	}
 	public static void fromLeftSwitch()
 	{
@@ -22,5 +21,3 @@ public class Scale {
 		{
 			
 		}*/
-	}
-}
