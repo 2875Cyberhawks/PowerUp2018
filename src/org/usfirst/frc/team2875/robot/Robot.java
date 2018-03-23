@@ -31,6 +31,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import autonomous.LeftStarting;
+import autonomous.TestCommand;
 import autonomous.TotalAuto;
 
 /**
@@ -97,6 +98,10 @@ import autonomous.TotalAuto;
 		autoChooser.addDefault("Scale autonomous", 'C');
 		autoChooser.addObject("Switch autonomous", 'W');
 		autoChooser.addObject("No autonomous", 'N');
+		SmartDashboard.putData("Choose Scale Position", scaleChooser);
+		SmartDashboard.putData("Choose Switch Position",switchChooser);
+		SmartDashboard.putData("Choose Start position",startChooser);
+		SmartDashboard.putData("Choose automonous program",autoChooser);
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
 		gyro = new ADIS16448_IMU();
@@ -112,6 +117,7 @@ import autonomous.TotalAuto;
 	public void disabledInit() {
 		lift.enable();
 		lift.raiseToPost(0);
+		lift.disable();
 	}
 
 	@Override
@@ -133,11 +139,13 @@ import autonomous.TotalAuto;
 	
 	@Override
 	public void autonomousInit() {
-		if (!Robot.lift.getLiftSol())
-			Robot.lift.toggleLiftSol();
-		if (!Robot.lift.getOpenSol())
-			Robot.lift.toggleOpenSol();
+		//if (!Robot.lift.getLiftSol())
+		Robot.lift.toggleLiftSol();
+		//if (!Robot.lift.getOpenSol())
+		//Robot.lift.toggleOpenSol();
 		auto = new TotalAuto(autoChooser.getSelected(),startChooser.getSelected(),scaleChooser.getSelected(),switchChooser.getSelected());
+		//auto.start();
+		//auto = new TestCommand();
 		auto.start();
 		Robot.lift.reset();
 	/*	m_autonomousCommand = chooser.getSelected();

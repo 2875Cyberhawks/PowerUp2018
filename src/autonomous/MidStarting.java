@@ -28,7 +28,7 @@ public class MidStarting extends CommandGroup {
 			if (au == 'C')
 				addSequential(new MoveDistance(252.803));
 			else if (au == 'W')
-				addSequential(new MoveDistance(110));
+				addSequential(new MoveDistance(92));
 			//addSequential(new Marker("Moved"));
 			addSequential(new TurnAngle(-90));
 			//addSequential(new Marker("Done Conditional"));
@@ -41,7 +41,7 @@ public class MidStarting extends CommandGroup {
 			if  (au == 'C')
 				addSequential(new MoveDistance(264.803));
 			else if (au == 'W')
-				addSequential(new MoveDistance(110.381));
+				addSequential(new MoveDistance(92.381));
 			addSequential(new TurnAngle(90));
 		}
 		//addSequential(new MoveDistance(10));

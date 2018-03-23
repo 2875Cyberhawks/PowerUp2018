@@ -16,7 +16,7 @@ public class RightStarting extends CommandGroup {
 		if (au == 'C')
 			addSequential(new MoveDistance(307.818));
 		else if (au == 'W')
-			addSequential(new MoveDistance(150));
+			addSequential(new MoveDistance(129));
 		addSequential(new TurnAngle(-90));
 		addSequential(new MoveDistance(8.219));
 	}
@@ -28,7 +28,7 @@ public class RightStarting extends CommandGroup {
 		if (au == 'C')
 			addSequential(new MoveDistance(267.803));
 		else if (au == 'W')
-			addSequential(new MoveDistance(110));
+			addSequential(new MoveDistance(91));
 		addSequential(new TurnAngle(90));
 		//addSequential(new MoveDistance(10));
 	}

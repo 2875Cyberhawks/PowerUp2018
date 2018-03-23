@@ -51,7 +51,9 @@ public class Lift extends PIDSubsystem {
 		enable();
 		
 	}
-		
+	public void setLiftSpeed(double spd) {
+		lift.set(spd);
+	}
 	public void stop(){
 		disable();
 		lift.set(0);
@@ -93,11 +95,11 @@ public class Lift extends PIDSubsystem {
     {
     	//enable();
     	teleop = false;
-    	getPIDController().setPID(pids[0][0], pids[0][1], pids[1][1]);
+    	//getPIDController().setPID(pids[0][0], pids[0][1], pids[1][1]);
     	height = pos;
-    	if (Robot.lsLow.get() || Robot.lsHigh.get())
-    		pos = encoder.getDistance();
-    	setSetpoint(pos);
+    	//if (Robot.lsLow.get() || Robot.lsHigh.get())
+    	//	pos = encoder.getDistance();
+    	
     	//System.out.println("Setpoint at: " + pos);
     }
     
@@ -139,7 +141,8 @@ public class Lift extends PIDSubsystem {
 			//System.out.println("Encoder rate: " + (encoder.getRate()/MAX_ENCODER_SPEED));
 			return encoder.getRate() / MAX_ENCODER_SPEED;
 		}
-		return encoder.getDistance();
+		//System.out.println("PID loop in: " + -encoder.getDistance());
+		return -encoder.getDistance();
 	}
 
 	@Override
@@ -150,7 +153,7 @@ public class Lift extends PIDSubsystem {
 			//System.out.println("PIDOut: " + output);
 			return;
 		}
-		lift.pidWrite(output);
-		//System.out.println("PID loop out: " + output);
+		lift.pidWrite(-output);
+		//System.out.println("PID loop out: " + -output);
 	}
 }

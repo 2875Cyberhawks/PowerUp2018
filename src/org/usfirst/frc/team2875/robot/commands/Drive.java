@@ -77,10 +77,11 @@ public class Drive extends Command {
     	int direction = -1;
     	if (diff < 0) direction = 1;
     	double speed = direction * (.7 * (Math.abs(diff)/ANGLE_SPEED) + .3);
+    	speed = speed * .75;
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
-    	System.out.println("Difference :" + diff);
-    	System.out.println("Degree :" + degree);
-    	System.out.println("Speed :" + speed);
+    	//System.out.println("Difference :" + diff);
+    	//System.out.println("Degree :" + degree);
+    	//System.out.println("Speed :" + speed);
     	move(speed,0);
     }
     

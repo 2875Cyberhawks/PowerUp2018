@@ -20,7 +20,7 @@ public class LeftStarting extends CommandGroup{
 			if (au == 'C')
 				addSequential(new MoveDistance(313.15));
 			else if (au =='W')
-				addSequential(new MoveDistance(150));
+				addSequential(new MoveDistance(135));
 			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(1.88));
 		}
@@ -34,7 +34,7 @@ public class LeftStarting extends CommandGroup{
 			if (au == 'C')
 				addSequential(new MoveDistance(273.15));
 			else if (au == 'W')
-				addSequential(new MoveDistance(110));
+				addSequential(new MoveDistance(95));
 			addSequential(new TurnAngle(-90));
 		}
 	}

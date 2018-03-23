@@ -1,13 +1,10 @@
 package autonomous;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.LiftWheelSpeed;
 import org.usfirst.frc.team2875.robot.commands.Marker;
-import org.usfirst.frc.team2875.robot.commands.MoveDistance;
-import org.usfirst.frc.team2875.robot.commands.TurnAngle;
-import org.usfirst.frc.team2875.robot.subsystems.Lift;
-
+import org.usfirst.frc.team2875.robot.commands.ToggleLiftVertical;
+import org.usfirst.frc.team2875.robot.commands.Wait;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -35,11 +32,18 @@ public class TotalAuto extends CommandGroup {
     	char sideUsed = scaleSide;
     	if (auto == 'W')sideUsed = switchSide;
     	if (auto == 'N')start = 'N';
-
+    	boolean exit = true;
+    	//addSequential(new AutoLift(10));
     	
+    	if(exit) {
+    	//	return;
+    	}
     	//Take control of box here
-    	
-    	
+    	addSequential(new ToggleLiftVertical());
+    	addSequential(new Wait(1));
+    	addSequential(new LiftWheelSpeed(.5,.3));
+    	addSequential(new ToggleLiftVertical());
+    	//addSequential(new ToggleLift());
     	//Move the bot
     	addSequential(new Marker("start position is: " + start));
     	switch (start) {
@@ -58,25 +62,27 @@ public class TotalAuto extends CommandGroup {
     		default :
     			break;
     	}
+    	
     	addSequential(new Marker("Movement finished, starting lift"));
     	switch (auto) {
     		case 'C':
-    			addSequential(new Marker("Starting Lift for scale"));
-    			addSequential(new AutoLift(15));
-    			addSequential(new MoveDistance(5));
-    			addSequential(new LiftWheelSpeed(1,.5));
-    			addSequential(new MoveDistance(-5,-.5));
-    			addSequential(new AutoLift(0));
-    			addSequential(new Marker("Finished lift for scale"));
+    			//addSequential(new Marker("Starting Lift for scale"));
+    		//	addSequential(new AutoLift(25));
+    			//addSequential(new Marker("AutoLift finished"));
+    			//addSequential(new MoveDistance(15));
+    		//	addSequential(new LiftWheelSpeed(-1,1.5));
+    			//addSequential(new MoveDistance(-5,-.5));
+    			//addSequential(new AutoLift(0));
+    			//addSequential(new Marker("Finished lift for scale"));
     			break;
     		case 'W':
-    			addSequential(new Marker("Starting Lift for switch"));
-    			addSequential(new AutoLift(10));
-    			addSequential(new MoveDistance(5));
-    			addSequential(new LiftWheelSpeed(1,.5));
-    			addSequential(new MoveDistance(-5,-.5));
-    			addSequential(new AutoLift(0));
-    			addSequential(new Marker("Finished lift for switch"));
+    			//addSequential(new Marker("Starting Lift for switch"));
+    			//addSequential(new AutoLift(15));
+    			//addSequential(new MoveDistance(5));
+    			//addSequential(new LiftWheelSpeed(-1,.5));
+    			//addSequential(new MoveDistance(-5,-.5));
+    			//addSequential(new AutoLift(0));
+    			//addSequential(new Marker("Finished lift for switch"));
     			break;
     		default :
     			break;
