@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveDistance extends Command {
 	private double distance;
-	private double speed = .6;
+	private double speed = .70;
     public MoveDistance(double distanceI) {
         super("MoveDistance");
         requires(Robot.dTrain);
@@ -33,17 +33,24 @@ public class MoveDistance extends Command {
     @Override
     protected void execute() {
     	//Drive.move(0,speed);
+    	if (distance - getDistance() <= 10)
+    	Drive.straightDriveGyro(((speed -.1) * ((distance - getDistance())/10)+.1), 0);
+    	else
     	Drive.straightDriveGyro(speed, 0);
     	//System.out.println(Robot.dTrain.getDistances() [0]);
     	//if (isFinished()) end();
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    protected double getDistance() {
+    	double[] distances = Robot.dTrain.getDistances();
+        double avg = (Math.abs(distances[0]) + Math.abs(distances[1])) / 2;
+    	return avg;
+    }
     @Override
     protected boolean isFinished() {
-    	double[] distances = Robot.dTrain.getDistances();
-        double avg = distances[0] + distances[1];
-        avg = avg / 2;
+    	double avg = getDistance();
         //System.out.println(avg);
         return Math.abs(avg) >= Math.abs(distance);
     }

@@ -49,10 +49,10 @@ public class TotalAuto extends CommandGroup {
     	//addSequential(new ToggleLift());
     	//Move the bot
     	//addSequential(new Marker("start position is: " + start));
-    	addSequential(new MoveDistance(25));
+    	addSequential(new MoveDistance(30));
     	if (auto == 'N')
     	{
-    		addSequential(new BaseLine(start));
+    		//addSequential(new BaseLine(start));
     		return;
     	}
     	switch (start) {

@@ -43,7 +43,7 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Started L"));
 			addSequential(new TurnAngle(-90));
 			if (au == 'W')
-				addSequential(new MoveDistance(59.564));
+				addSequential(new MoveDistance(30));
 			else if (au == 'C')
 				addSequential(new MoveDistance(131.199));
 			addSequential(new TurnAngle(90));

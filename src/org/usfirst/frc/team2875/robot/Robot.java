@@ -28,6 +28,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
+import autonomous.TestCommand;
 import autonomous.TotalAuto;
 
 /**
@@ -141,6 +142,7 @@ import autonomous.TotalAuto;
 	
 	@Override
 	public void autonomousInit() {
+		
 		//if (!Robot.lift.getLiftSol())
 		Robot.lift.toggleLiftSol();
 		//if (!Robot.lift.getOpenSol())
