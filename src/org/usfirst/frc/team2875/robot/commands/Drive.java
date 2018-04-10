@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drive extends Command {
-	private double[] constants = {1,1};
 	private static final double ANGLE_SPEED = 100;
 	private static final double STRAIGHT_CONST = 180;
 	private static final double MINIMUM_TURN = .1;
@@ -25,7 +24,6 @@ public class Drive extends Command {
     {
     	super("Drive");
     	requires(Robot.dTrain);
-    	this.constants = constantsI;
     }
 
     // Called just before this Command runs the first time
@@ -36,9 +34,9 @@ public class Drive extends Command {
     protected void execute() {
     	double forward = Robot.oi.getForwardInput();
     	double turning = Robot.oi.getTurningDegree();
-    	if (Robot.lift.getDistance() > 36) {
-    		turning /=4;
-    	}
+    	double heightEffect = ((21-Robot.lift.getDistance())/21);
+    	forward *= (.5 + (.5 * heightEffect));
+    	turning *= (.5 + (.5 * heightEffect));
 		if (Math.abs(turning) < MINIMUM_TURN && !isForward)
 		{
 			Robot.gyro.reset();
@@ -59,14 +57,17 @@ public class Drive extends Command {
     	speedR = forward + turning;
     	//speedL *= constants[0];
     	//speedR *= constants[1];
-    	
     	Robot.dTrain.setSpeed(speedL,speedR);
     }
     
     public static boolean straightDriveGyro(double forward, double goalAngle) {
     	double currentError = Robot.gyro.getAngleZ() - goalAngle;
     	//System.out.println(currentError);
-    	move(currentError / STRAIGHT_CONST,forward);
+    	if(forward != 0) {
+    		move(currentError / STRAIGHT_CONST,forward);
+    	}else {
+    		move(0,0);
+    	}
     	return currentError < 45;
     	
     }
@@ -76,8 +77,8 @@ public class Drive extends Command {
     	double diff = degree - Robot.gyro.getAngleZ();
     	int direction = -1;
     	if (diff < 0) direction = 1;
-    	double speed = direction * (.7 * (Math.abs(diff)/ANGLE_SPEED) + .3);
-    	speed = speed * .75;
+    	double speed = direction * (.5 * (Math.abs(diff)/ANGLE_SPEED) + .5);
+    	speed = speed * .55;
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
     	//System.out.println("Difference :" + diff);
     	//System.out.println("Degree :" + degree);

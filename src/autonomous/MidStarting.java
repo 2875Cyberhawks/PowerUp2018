@@ -1,51 +1,59 @@
 package autonomous;
 
-import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 public class MidStarting extends CommandGroup {
 	//go to switch and drop
 	//right or left
-	
-	
 	public MidStarting(char gd, char au) {
 		//addSequential(new Marker("Moving the 40"));
-		addSequential(new MoveDistance(40));
-		//addSequential(new Marker("Started Middle Conditional"));
+		//Moved 40 already
+		addSequential(new Marker("Started Middle Conditional"));
 		if (gd == 'R') {
-			//addSequential(new Marker("Middle Right"));
+			addSequential(new Marker("Started R"));
 			addSequential(new TurnAngle(90));
-			//addSequential(new Marker("Turned"));
-			addSequential(new MoveDistance(114.19));
-			//addSequential(new Marker("Moved"));
-			addSequential(new TurnAngle(-90));
-			//addSequential(new Marker("Turned"));
+			addSequential(new Marker("Finished turn"));
 			if (au == 'C')
-				addSequential(new MoveDistance(252.803));
-			else if (au == 'W')
-				addSequential(new MoveDistance(92));
-			//addSequential(new Marker("Moved"));
+			{
+				addSequential(new MoveDistance(119.823));
+			}
+			if (au == 'W')
+			{
+				addSequential(new MoveDistance(46.188));
+				addSequential(new Marker("Finished MoveDistance"));
+			}
 			addSequential(new TurnAngle(-90));
-			//addSequential(new Marker("Done Conditional"));
-			//addSequential(new MoveDistance())
+			addSequential(new Marker("Finished turn"));
+			if (au == 'C')
+			{
+				addSequential(new MoveDistance(279.33));
+				addSequential(new TurnAngle(-90));
+			}
+			else if (au == 'W')
+			{
+				addSequential(new MoveDistance(59.91));
+			}
 		}
 		else {
+			addSequential(new Marker("Started L"));
 			addSequential(new TurnAngle(-90));
-			addSequential(new MoveDistance(112.107));
+			if (au == 'W')
+				addSequential(new MoveDistance(59.564));
+			else if (au == 'C')
+				addSequential(new MoveDistance(131.199));
 			addSequential(new TurnAngle(90));
-			if  (au == 'C')
-				addSequential(new MoveDistance(264.803));
+			if  (au == 'C') {
+				addSequential(new MoveDistance(279.33));
+				addSequential(new TurnAngle(90));
+			}
 			else if (au == 'W')
-				addSequential(new MoveDistance(92.381));
-			addSequential(new TurnAngle(90));
+				addSequential(new MoveDistance(59.910));
+			
 		}
-		//addSequential(new MoveDistance(10));
-		
-	}
-		
+	}	
 }
+

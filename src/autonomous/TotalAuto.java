@@ -1,16 +1,16 @@
 package autonomous;
 
 import org.usfirst.frc.team2875.robot.Robot;
+import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.LiftWheelSpeed;
 import org.usfirst.frc.team2875.robot.commands.Marker;
+import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+import org.usfirst.frc.team2875.robot.commands.ToggleLift;
 import org.usfirst.frc.team2875.robot.commands.ToggleLiftVertical;
 import org.usfirst.frc.team2875.robot.commands.Wait;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
-
-/**
- *
- */
+//TODO purge
 public class TotalAuto extends CommandGroup {
 	private char scaleSide;
 	private char auto;
@@ -26,18 +26,21 @@ public class TotalAuto extends CommandGroup {
     	if (cP == 'A' || wP == 'A')
     	{
     		String message = DriverStation.getInstance().getGameSpecificMessage();
-        	if (cP == 'A')scaleSide = message.charAt(1);
-        	if (wP == 'A')switchSide = message.charAt(0);
+        	if (cP == 'A')
+        		scaleSide = message.charAt(1);
+        	if (wP == 'A')
+        		switchSide = message.charAt(0);
+    	}
+    	if (aC == 'S')
+    	{	
+    		if (switchSide == start)
+    			auto = 'W';
+    		else
+    			auto = 'N';
     	}
     	char sideUsed = scaleSide;
     	if (auto == 'W')sideUsed = switchSide;
     	if (auto == 'N')start = 'N';
-    	boolean exit = true;
-    	//addSequential(new AutoLift(10));
-    	
-    	if(exit) {
-    	//	return;
-    	}
     	//Take control of box here
     	addSequential(new ToggleLiftVertical());
     	addSequential(new Wait(1));
@@ -45,7 +48,13 @@ public class TotalAuto extends CommandGroup {
     	addSequential(new ToggleLiftVertical());
     	//addSequential(new ToggleLift());
     	//Move the bot
-    	addSequential(new Marker("start position is: " + start));
+    	//addSequential(new Marker("start position is: " + start));
+    	addSequential(new MoveDistance(25));
+    	if (auto == 'N')
+    	{
+    		addSequential(new BaseLine(start));
+    		return;
+    	}
     	switch (start) {
     		case 'L':
     			addSequential(new Marker("Found L case"));
@@ -62,31 +71,30 @@ public class TotalAuto extends CommandGroup {
     		default :
     			break;
     	}
-    	
     	addSequential(new Marker("Movement finished, starting lift"));
     	switch (auto) {
     		case 'C':
-    			//addSequential(new Marker("Starting Lift for scale"));
-    		//	addSequential(new AutoLift(25));
-    			//addSequential(new Marker("AutoLift finished"));
-    			//addSequential(new MoveDistance(15));
-    		//	addSequential(new LiftWheelSpeed(-1,1.5));
-    			//addSequential(new MoveDistance(-5,-.5));
+    			addSequential(new Marker("Starting Lift for scale"));
+    			addSequential(new AutoLift(21));
+    			addSequential(new Marker("AutoLift finished"));
+    			addSequential(new MoveDistance(15));
+    			addSequential(new LiftWheelSpeed(-1,1.5));
+    			addSequential(new MoveDistance(-5,-.5));
     			//addSequential(new AutoLift(0));
-    			//addSequential(new Marker("Finished lift for scale"));
+    			addSequential(new Marker("Finished lift for scale"));
     			break;
     		case 'W':
-    			//addSequential(new Marker("Starting Lift for switch"));
-    			//addSequential(new AutoLift(15));
-    			//addSequential(new MoveDistance(5));
+    			addSequential(new Marker("Starting Lift for switch"));
+    			addSequential(new AutoLift(5));
+    			addSequential(new MoveDistance(7));
+    			addSequential(new ToggleLift());
     			//addSequential(new LiftWheelSpeed(-1,.5));
-    			//addSequential(new MoveDistance(-5,-.5));
+    			addSequential(new MoveDistance(-5,-.5));
     			//addSequential(new AutoLift(0));
-    			//addSequential(new Marker("Finished lift for switch"));
+    			addSequential(new Marker("Finished lift for switch"));
     			break;
     		default :
     			break;
     	}
-    	
     }
 }

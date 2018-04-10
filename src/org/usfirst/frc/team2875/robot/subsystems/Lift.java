@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * :D
@@ -18,7 +17,7 @@ public class Lift extends PIDSubsystem {
 	//Liam smells good
 	//TODO set position values
 	//public static final double[] positions = {0,0,0,0};
-	private final static double[][] pids = {{1,0,0},{.3,.6,0}};//auto,teleop
+	private final static double[][] pids = {{1,0,0},{.3,.4,0}};//auto,teleop
 	SpeedController lIntake,rIntake;
 	SpeedControllerGroup lift;
 	Encoder encoder;
@@ -60,7 +59,6 @@ public class Lift extends PIDSubsystem {
 		lIntake.set(0);
 		rIntake.set(0);
 	}
-	
 	@Override
     public void initDefaultCommand() {
         setDefaultCommand(new LiftCmd());
@@ -69,6 +67,7 @@ public class Lift extends PIDSubsystem {
     public void raiseLift(double speed)
     {
     	teleop = true;
+    	//System.out.println("Distance: " + getDistance());
     	getPIDController().setPID(pids[1][0], pids[1][1], pids[1][2]);
     	//if (Math.abs(speed) <= .1) {
     		//getPIDController().setI(.6);
@@ -124,7 +123,7 @@ public class Lift extends PIDSubsystem {
     
     public double getDistance()
     {
-    	return encoder.getDistance();
+    	return -encoder.getDistance();
     }
     
     public void reset()

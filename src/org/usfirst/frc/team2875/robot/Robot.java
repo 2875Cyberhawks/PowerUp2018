@@ -13,13 +13,11 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team2875.robot.commands.CmdRotateAngle;
 //import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 //import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 import org.usfirst.frc.team2875.robot.subsystems.Clutch;
@@ -30,8 +28,6 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
-import autonomous.LeftStarting;
-import autonomous.TestCommand;
 import autonomous.TotalAuto;
 
 /**
@@ -61,6 +57,7 @@ import autonomous.TotalAuto;
 	SendableChooser<Character> switchChooser;
 	SendableChooser<Character> startChooser;
 	SendableChooser<Character> autoChooser;
+	SendableChooser<Character> priorityChooser;
 	public static ADIS16448_IMU gyro;
 	//public static TurnAnglePID pidT;
 //	public static CameraThread vis;
@@ -72,8 +69,9 @@ import autonomous.TotalAuto;
 	@Override
 	public void robotInit() {
 		UsbCamera a = CameraServer.getInstance().startAutomaticCapture();
-		a.setResolution(640, 480);
+		a.setResolution(320, 240);
 		dTrain = new Drivetrain();
+		//Left on ports 0-1-2, Right on ports 3-4-5
 		left = new SpeedControllerGroup(new Spark(0),new Spark(1),new Spark(2));
 		right = new SpeedControllerGroup(new Spark(3),new Spark(4),new Spark(5));
 		right.setInverted(true);
@@ -81,7 +79,8 @@ import autonomous.TotalAuto;
 		clutch = new Clutch(0);
 		lift = new Lift(8,9,6,7,8,9,1,2);
 		lsLow = new DigitalInput(6);
-		lsHigh = new DigitalInput(7);
+		lsHigh = new DigitalInput(4);
+		//Start SmartDashboard
 		scaleChooser = new SendableChooser<Character>();
 		scaleChooser.addDefault("Listen for FRC input", 'A');
 		scaleChooser.addObject("Scale is right", 'R');
@@ -95,15 +94,18 @@ import autonomous.TotalAuto;
 		startChooser.addObject("Left start", 'L');
 		startChooser.addObject("Right start", 'R');
 		autoChooser = new SendableChooser<Character>();
-		autoChooser.addDefault("Scale autonomous", 'C');
+		autoChooser.addDefault("Go for the switch if its on your side",'S');
+		autoChooser.addDefault("TEST", 'T');
+		autoChooser.addObject("Scale autonomous", 'C');
 		autoChooser.addObject("Switch autonomous", 'W');
-		autoChooser.addObject("No autonomous", 'N');
+		autoChooser.addObject("Just Baseline", 'N');
 		SmartDashboard.putData("Choose Scale Position", scaleChooser);
 		SmartDashboard.putData("Choose Switch Position",switchChooser);
 		SmartDashboard.putData("Choose Start position",startChooser);
 		SmartDashboard.putData("Choose automonous program",autoChooser);
 		SmartDashboard.putData(dTrain);
 		SmartDashboard.putData(lift);
+		//End SmartDashboard
 		gyro = new ADIS16448_IMU();
 		//pidT = new TurnAnglePID();
 	}
@@ -194,7 +196,7 @@ import autonomous.TotalAuto;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		System.out.println("Angle: " + Robot.gyro.getAngleZ());
+		//System.out.println("Angle: " + Robot.gyro.getAngleZ());
 		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());

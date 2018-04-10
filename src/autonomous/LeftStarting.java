@@ -1,8 +1,5 @@
 package autonomous;
 
-import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.commands.CmdDriveDistance;
-import org.usfirst.frc.team2875.robot.commands.CmdRotateAngle;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
@@ -18,23 +15,22 @@ public class LeftStarting extends CommandGroup{
 		if (gd == 'L')
 		{
 			if (au == 'C')
-				addSequential(new MoveDistance(313.15));
+				addSequential(new MoveDistance(288.15));
 			else if (au =='W')
-				addSequential(new MoveDistance(135));
+				addSequential(new MoveDistance(60));
 			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(1.88));
 		}
 		else
 		{
-			addSequential(new MoveDistance(40));
 			addSequential(new TurnAngle(90));
 			//addSequential(new MoveDistance(41.56));
 			addSequential(new MoveDistance(214.12));
 			addSequential(new TurnAngle(-90));
 			if (au == 'C')
-				addSequential(new MoveDistance(273.15));
+				addSequential(new MoveDistance(288.15));
 			else if (au == 'W')
-				addSequential(new MoveDistance(95));
+				addSequential(new MoveDistance(60));
 			addSequential(new TurnAngle(-90));
 		}
 	}

@@ -1,13 +1,5 @@
 package org.usfirst.frc.team2875.robot.subsystems;
 
-import org.usfirst.frc.team2875.robot.Robot;
-//import org.usfirst.frc.team2875.robot.commands.VoidCommand;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-
 /** 
  * 
  *
