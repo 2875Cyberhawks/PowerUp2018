@@ -1,5 +1,7 @@
 package autonomous;
 
+import org.usfirst.frc.team2875.robot.commands.AutoLift;
+import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
@@ -14,6 +16,9 @@ public class LeftStarting extends CommandGroup{
 		//System.out.println("Yes indeed");
 		if (gd == 'L')
 		{
+			addSequential(new Marker("Starting Lift for scale"));
+			addSequential(new AutoLift(21));
+			addSequential(new Marker("AutoLift finished"));
 			if (au == 'C')
 				addSequential(new MoveDistance(288.15));
 			else if (au =='W')
