@@ -33,13 +33,12 @@ public class CmdRotateAngle extends Command {
 
 	@Override
 	protected void execute() {
-		System.out.println(Robot.gyro.getAngleZ());
 		if(direction==1){
-			Robot.right.setSpeed(speed);
-			Robot.left.setSpeed(speed);
+			Robot.right.set(speed);
+			Robot.left.set(speed);
 		}else{
-			Robot.right.setSpeed(speed);
-			Robot.left.setSpeed(speed);
+			Robot.right.set(speed);
+			Robot.left.set(speed);
 		}
 	}
 

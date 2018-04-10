@@ -2,10 +2,7 @@ package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.Drive;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -27,19 +24,13 @@ public class Drivetrain extends Subsystem {
 	}
 	
 	public Drivetrain(int t1, int t2, int t3, int t4, int t5, int t6, int e1, int e2, int e3, int e4)
-	{	
-		double[] lEn = {1,0,0};
-		double[] rEn = {1,0,0};
-		double[] lUn = {1,0,0};
-		double[] rUn = {1,0,0};
-		//left = new DriveSide(false,t4,t5,t6,e3,e4,lEn,lUn);
-		//right = new DriveSide(true,t1,t2,t3,e1,e2,rEn,rUn);
+	{
 	}
 	
 	public void setSpeed(double leftI, double rightI)
 	{
-		Robot.left.setSpeed(-leftI);
-		Robot.right.setSpeed(rightI);
+		Robot.left.set(-leftI);
+		Robot.right.set(rightI);
 		//left.set(leftI);
 		//right.set(rightI);
 	}
@@ -53,8 +44,8 @@ public class Drivetrain extends Subsystem {
 
 	public void stop()
 	{
-		Robot.left.setSpeed(0);
-		Robot.right.setSpeed(0);
+		Robot.left.set(0);
+		Robot.right.set(0);
 	}
     public void initDefaultCommand() {
     	setDefaultCommand(new Drive());

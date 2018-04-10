@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * :D
@@ -18,18 +17,19 @@ public class Lift extends PIDSubsystem {
 	//Liam smells good
 	//TODO set position values
 	//public static final double[] positions = {0,0,0,0};
-	private final static double[][] pids = {{1,0,0},{.3,.6,0}};//auto,teleop
+	private final static double[][] pids = {{1,0,0},{.3,.4,0}};//auto,teleop
 	SpeedController lIntake,rIntake;
 	SpeedControllerGroup lift;
 	Encoder encoder;
-	Solenoid sol;
+	Solenoid openSol;
+	Solenoid liftSol;
 	double height;
 	private static final double MAX_ENCODER_SPEED = 17;
 	private static final double SPOOLING_CONSTANT = 1.01;//Constant to account for spooling of the motor
-	public static final double MAX_HEIGHT = 72;
+	public static final double MAX_HEIGHT = 10;
 	boolean teleop = false;
 	
-	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so) {
+	public Lift(int li,int lii, int wl,int wr, int e1, int e2,int so, int so2) {
 		//Name and P, I, D constants
 		super("Lift",0,0,0);
 		Spark lift1 = new Spark(li);
@@ -43,20 +43,22 @@ public class Lift extends PIDSubsystem {
 		encoder = new Encoder(e1,e2);
 		//encoder.setReverseDirection(true);
 		encoder.setDistancePerPulse(SPOOLING_CONSTANT * ((.75*Math.PI)/360));
-		sol = new Solenoid(so);
+		openSol = new Solenoid(so);
+		liftSol = new Solenoid(so2);
 		height = 0;
 		//lift.setInverted(true);
 		enable();
 		
 	}
-		
+	public void setLiftSpeed(double spd) {
+		lift.set(spd);
+	}
 	public void stop(){
 		disable();
 		lift.set(0);
 		lIntake.set(0);
 		rIntake.set(0);
 	}
-	
 	@Override
     public void initDefaultCommand() {
         setDefaultCommand(new LiftCmd());
@@ -65,19 +67,23 @@ public class Lift extends PIDSubsystem {
     public void raiseLift(double speed)
     {
     	teleop = true;
+    	//System.out.println("Distance: " + getDistance());
     	getPIDController().setPID(pids[1][0], pids[1][1], pids[1][2]);
     	//if (Math.abs(speed) <= .1) {
     		//getPIDController().setI(.6);
     	//getPIDController().setP(.3);
+    	//System.out.println("Speed: " + speed);
+    	//System.out.println("High Switch: " + Robot.lsHigh.get());
     	if (speed > 0 && !Robot.lsLow.get())
     		speed = 0;
-    	if (Math.abs(speed) < .1) {
-    		getPIDController().enable();
+    	if  (speed < 0 && !Robot.lsHigh.get())
+    		speed = 0;
+    	if (Math.abs(speed) < .05) {
+    		enable();
     		setSetpoint(0);
     	}else {
-    		getPIDController().disable();
+    		disable();
     		lift.set(speed);
-    		
     	}
     	//setSetpoint(speed);
     	//System.out.println("Setpoint: " + speed);
@@ -88,11 +94,11 @@ public class Lift extends PIDSubsystem {
     {
     	//enable();
     	teleop = false;
-    	getPIDController().setPID(pids[0][0], pids[0][1], pids[1][1]);
+    	//getPIDController().setPID(pids[0][0], pids[0][1], pids[1][1]);
     	height = pos;
-    	if (Robot.lsLow.get())
-    		pos = 0;
-    	setSetpoint(pos);
+    	//if (Robot.lsLow.get() || Robot.lsHigh.get())
+    	//	pos = encoder.getDistance();
+    	
     	//System.out.println("Setpoint at: " + pos);
     }
     
@@ -101,18 +107,23 @@ public class Lift extends PIDSubsystem {
     	rIntake.set(speed[1]);
     }
     
-    public void toggleSol()
+    public void toggleOpenSol()
     {
-    	sol.set(!sol.get());
+    	openSol.set(!openSol.get());
     }
-    public boolean getSol()
+    public boolean getOpenSol()
     {
-    	return sol.get();
+    	return openSol.get();
     }
+    public void toggleLiftSol()
+    {
+    	liftSol.set(!liftSol.get());
+    }
+    public boolean getLiftSol() {return liftSol.get();}
     
     public double getDistance()
     {
-    	return encoder.getDistance();
+    	return -encoder.getDistance();
     }
     
     public void reset()
@@ -129,7 +140,8 @@ public class Lift extends PIDSubsystem {
 			//System.out.println("Encoder rate: " + (encoder.getRate()/MAX_ENCODER_SPEED));
 			return encoder.getRate() / MAX_ENCODER_SPEED;
 		}
-		return encoder.getDistance();
+		//System.out.println("PID loop in: " + -encoder.getDistance());
+		return -encoder.getDistance();
 	}
 
 	@Override
@@ -140,7 +152,7 @@ public class Lift extends PIDSubsystem {
 			//System.out.println("PIDOut: " + output);
 			return;
 		}
-		lift.pidWrite(output);
-		//System.out.println("PID loop out: " + output);
+		lift.pidWrite(-output);
+		//System.out.println("PID loop out: " + -output);
 	}
 }

@@ -9,37 +9,49 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AutoLift extends Command {
 	private double height;
-	private static final double speed = .5;
-	private int direction;
+	private static final double DEADZONE = 0.5;
+	//private static final double speed = .5;
+	//private int direction;
 	
     public AutoLift(double heightX) {
         requires(Robot.lift);
         height = heightX;
-        if (height > Robot.lift.getDistance()) direction = 1;
-        else direction = -1;
+        //if (height > Robot.lift.getDistance()) direction = 1;
+        //else direction = -1;
     }
-
+    
     // Called just before this Command runs the first time
+    @Override
     protected void initialize() {
+    	//this.setTimeout(1.5);
     }
 
     // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-    	Robot.lift.raiseToPost(height);
+    	Robot.lift.raiseLift(-.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()
+    @Override
     protected boolean isFinished() {
-        return Robot.lift.getDistance() >= height;
+    	//Syste
+       //if (direction == -1)
+    	//System.out.println("Height is: " + Math.abs(Robot.lift.getDistance()));
+    	//System.out.println("Goal is: " + height);
+        return Math.abs(Math.abs(Robot.lift.getDistance()) - height) < DEADZONE;
+        //return Robot.lift.getDistance() <= height;
     }
 
     // Called once after isFinished returns true
+    @Override
     protected void end() {
-    	Robot.lift.stop();
+    	Robot.lift.raiseLift(-.1);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
+    @Override
     protected void interrupted() {
     }
 }

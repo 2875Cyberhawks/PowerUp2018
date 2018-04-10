@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2875.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.XboxController;
 
 /**
@@ -25,7 +23,7 @@ public class OI {
 	
 	//returns forward and backward movement input
 	public double getForwardInput(){
-		double in = -1 * driveController.getY(GenericHID.Hand.kLeft);
+		double in = -1 * driveController.getRawAxis(1);
 		return (Math.abs(in) > JOY_DEADZONE) ? in : 0;
 	}
 
@@ -33,8 +31,8 @@ public class OI {
 		//From OED:
 		//Old English lyft, left �weak� (the left-hand side being regarded as the weaker side of the body), of West Germanic origin.
 		//Old English riht (adjective and noun), rihtan (verb), rihte (adverb), of Germanic origin; related to Latin rectus �ruled�, from an Indo-European root denoting movement in a straight line.
-		double lyft = driveController.getTriggerAxis(GenericHID.Hand.kLeft);
-		double riht = driveController.getTriggerAxis(GenericHID.Hand.kRight);
+		double lyft = driveController.getRawAxis(3);
+		double riht = driveController.getRawAxis(2);
 		if (lyft < JOY_DEADZONE) lyft = 0;
 		if (riht < JOY_DEADZONE) riht = 0;
 		double[] out = new double[2];
@@ -48,7 +46,8 @@ public class OI {
 		return raw[0]-raw[1]; 
 	}
 	public int wheelControl() {
-		double speed =  driveController.getY(GenericHID.Hand.kRight);
+		return 0;
+		/*double speed =  driveController.getY(GenericHID.Hand.kRight);
 		if (Math.abs(speed) < JOY_DEADZONE) {
 			return 0;
 		}
@@ -57,7 +56,7 @@ public class OI {
 		}
 		else {
 			return 1;
-		}
+		}*/
 	}
 	
 
@@ -92,22 +91,19 @@ public class OI {
 		return liftController.getYButton();
 	}*/
 	public double lift(){
-		double v = liftController.getTriggerAxis(GenericHID.Hand.kLeft) - liftController.getTriggerAxis(GenericHID.Hand.kRight);
+		double v = liftController.getRawAxis(2) - liftController.getRawAxis(3);
 		double rV = -.55 * Math.log10(1-Math.abs(v));
 		if (v < 0) rV *= -1;
 		return rV;
 	}
-/*
+
 	//driver A
-	public boolean cubeRelease() {
-		return driveController.getAButton();
-	}*/
 	
 	//driver B
 	public double[] cubeIntake() {
 		double[] m = new double[2];
-		m[0] = liftController.getX(GenericHID.Hand.kLeft);
-		m[1] = liftController.getX(GenericHID.Hand.kRight);
+		m[0] = liftController.getRawAxis(0);
+		m[1] = liftController.getRawAxis(4);
 		return m;
 	}
 	
@@ -115,12 +111,17 @@ public class OI {
 	//might want to reverse clutch and switch buttons
 	
 	public boolean getClutch(){
-		return driveController.getXButtonPressed();
+		return driveController.getRawButton(3);
 	}
 	
 	public boolean getLiftSol() {
-		return driveController.getBButtonPressed();
+		return liftController.getRawButton(3);
 	}
+	
+	public boolean getOpenSol() {
+		return driveController.getRawButton(2);
+	}
+	
 	//driver X
 	//returns yaw movement input//**
 	//public double getLeftInput(){

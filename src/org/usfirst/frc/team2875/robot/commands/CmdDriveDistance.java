@@ -28,14 +28,14 @@ public class CmdDriveDistance extends Command{
 		//Debug.log("Straight", straight);
 		
 			if (cur> 0){
-				Robot.left.setSpeed((forward-Math.abs(cur)/90));
-				Robot.right.setSpeed((forward+Math.abs(cur)/90));
+				Robot.left.set((forward-Math.abs(cur)/90));
+				Robot.right.set((forward+Math.abs(cur)/90));
 			}else if(cur <0 ){
-				Robot.right.setSpeed((forward-Math.abs(cur)/90));
-				Robot.left.setSpeed((forward+Math.abs(cur)/90));
+				Robot.right.set((forward-Math.abs(cur)/90));
+				Robot.left.set((forward+Math.abs(cur)/90));
 			}else{
-				Robot.right.setSpeed(forward);
-				Robot.left.setSpeed(forward);
+				Robot.right.set(forward);
+				Robot.left.set(forward);
 			}
 		
 		}

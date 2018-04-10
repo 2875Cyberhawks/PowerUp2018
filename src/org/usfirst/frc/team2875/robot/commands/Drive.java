@@ -1,9 +1,6 @@
 package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
-import org.usfirst.frc.team2875.robot.subsystems.Lift;
-
-import com.analog.adis16448.frc.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.command.Command;
 
 
@@ -11,8 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class Drive extends Command {
-	private double[] constants = {1,1};
-	private static final double HEIGHT_CONSTANT = .3;
+	private static final double ANGLE_SPEED = 100;
+	private static final double STRAIGHT_CONST = 180;
+	private static final double MINIMUM_TURN = .1;
+	private static boolean isForward = false;
+	//private static final double HEIGHT_CONSTANT = .3;
 
 
     public Drive() {
@@ -24,7 +24,6 @@ public class Drive extends Command {
     {
     	super("Drive");
     	requires(Robot.dTrain);
-    	this.constants = constantsI;
     }
 
     // Called just before this Command runs the first time
@@ -33,36 +32,58 @@ public class Drive extends Command {
     
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double turning = Robot.oi.getTurningDegree();
-if (Robot.lift.getDistance() > 36) {
-		turning /=4;
-}
     	double forward = Robot.oi.getForwardInput();
-    	double speedR, speedL;
-    	speedL = -turning + forward;
-    	speedR = turning + forward;
-    	speedL *= constants[0];
-    	speedR *= constants[1];
-    	Robot.dTrain.setSpeed(speedL,speedR);
+    	double turning = Robot.oi.getTurningDegree();
+    	double heightEffect = ((21-Robot.lift.getDistance())/21);
+    	forward *= (.5 + (.5 * heightEffect));
+    	turning *= (.5 + (.5 * heightEffect));
+		if (Math.abs(turning) < MINIMUM_TURN && !isForward)
+		{
+			Robot.gyro.reset();
+			isForward = true;
+			straightDriveGyro(forward, 0);
+		}else if(Math.abs(turning) > MINIMUM_TURN) {
+			isForward = false;
+			move(turning, forward);
+    	}else if(isForward) {
+			straightDriveGyro(forward, 0);
+		}
     }
     
     public static void move(double turning, double forward){
     	double speedR, speedL;
     	//double turning = turningX/(HEIGHT_CONSTANT * (Robot.lift.getDistance()/Lift.MAX_HEIGHT));
-    	speedL = turning + forward;
-    	speedR = -turning + forward;
+    	speedL = -forward + turning;
+    	speedR = forward + turning;
     	//speedL *= constants[0];
     	//speedR *= constants[1];
-    	
     	Robot.dTrain.setSpeed(speedL,speedR);
     }
     
     public static boolean straightDriveGyro(double forward, double goalAngle) {
     	double currentError = Robot.gyro.getAngleZ() - goalAngle;
-    	System.out.println(currentError);
-    	move(currentError / 180,forward);
+    	//System.out.println(currentError);
+    	if(forward != 0) {
+    		move(currentError / STRAIGHT_CONST,forward);
+    	}else {
+    		move(0,0);
+    	}
     	return currentError < 45;
     	
+    }
+    
+    public static void turnAngleGyro(double degree)
+    {
+    	double diff = degree - Robot.gyro.getAngleZ();
+    	int direction = -1;
+    	if (diff < 0) direction = 1;
+    	double speed = direction * (.5 * (Math.abs(diff)/ANGLE_SPEED) + .5);
+    	speed = speed * .55;
+    	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
+    	//System.out.println("Difference :" + diff);
+    	//System.out.println("Degree :" + degree);
+    	//System.out.println("Speed :" + speed);
+    	move(speed,0);
     }
     
     public static boolean straightDriveEncoders(double forward) {

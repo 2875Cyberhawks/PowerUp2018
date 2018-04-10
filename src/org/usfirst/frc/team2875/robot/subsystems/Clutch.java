@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2875.robot.subsystems;
 
-import org.usfirst.frc.team2875.robot.Robot;
 import org.usfirst.frc.team2875.robot.commands.ClutchCmd;
 
 import edu.wpi.first.wpilibj.Solenoid;

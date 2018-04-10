@@ -6,12 +6,10 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class MoveDistance extends Command {
 	private double distance;
-	private double speed = .9;
-	private double startAngle;
+	private double speed = .6;
     public MoveDistance(double distanceI) {
         super("MoveDistance");
         requires(Robot.dTrain);
-        startAngle = Robot.gyro.getAngleZ();
         this.distance = distanceI;
         if (distance < 0)speed *= -1;
     }
@@ -27,6 +25,7 @@ public class MoveDistance extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
+    	Robot.gyro.reset();
     	Robot.dTrain.reset();
     }
 
@@ -34,7 +33,7 @@ public class MoveDistance extends Command {
     @Override
     protected void execute() {
     	//Drive.move(0,speed);
-    	Drive.straightDriveGyro(speed, startAngle);
+    	Drive.straightDriveGyro(speed, 0);
     	//System.out.println(Robot.dTrain.getDistances() [0]);
     	//if (isFinished()) end();
     }
@@ -45,13 +44,13 @@ public class MoveDistance extends Command {
     	double[] distances = Robot.dTrain.getDistances();
         double avg = distances[0] + distances[1];
         avg = avg / 2;
-        System.out.println(avg);
+        //System.out.println(avg);
         return Math.abs(avg) >= Math.abs(distance);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("ran");
+    	//System.out.println("ran");
     	Robot.dTrain.stop();
     }
 
