@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveDistance extends Command {
 	private double distance;
 	private double speed = .70;
+	
     public MoveDistance(double distanceI) {
         super("MoveDistance");
         requires(Robot.dTrain);
@@ -33,10 +34,11 @@ public class MoveDistance extends Command {
     @Override
     protected void execute() {
     	//Drive.move(0,speed);
-    	if (distance - getDistance() <= 10)
-    	Drive.straightDriveGyro(((speed -.1) * ((distance - getDistance())/10)+.1), 0);
-    	else
-    	Drive.straightDriveGyro(speed, 0);
+    	if (Math.abs(distance - getDistance()) <= 10){
+    		Drive.straightDriveGyro(((speed * .4) + (speed * (Math.abs(distance - getDistance()))/10)*.4), 0);
+    	}else{
+    		Drive.straightDriveGyro(speed, 0);
+    	}
     	//System.out.println(Robot.dTrain.getDistances() [0]);
     	//if (isFinished()) end();
     	

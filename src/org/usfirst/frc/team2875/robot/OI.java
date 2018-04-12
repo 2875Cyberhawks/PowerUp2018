@@ -119,7 +119,7 @@ public class OI {
 	}
 	
 	public boolean getOpenSol() {
-		return driveController.getRawButton(2);
+		return driveController.getRawButton(2) || liftController.getRawButton(4);
 	}
 	
 	//driver X

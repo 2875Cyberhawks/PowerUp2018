@@ -102,9 +102,9 @@ public class Lift extends PIDSubsystem {
     	//System.out.println("Setpoint at: " + pos);
     }
     
-    public void wheelMove(double[] speed){
-    	lIntake.set(speed[0]);
-    	rIntake.set(speed[1]);
+    public void wheelMove(double[] speed){	
+    	lIntake.set(speed[0] * .55);
+    	rIntake.set(speed[1] * .55);
     }
     
     public void toggleOpenSol()

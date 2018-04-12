@@ -1,5 +1,6 @@
 package autonomous;
 
+import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
@@ -15,9 +16,10 @@ public class RightStarting extends CommandGroup {
 		if (au == 'C')
 			addSequential(new MoveDistance(282.818));
 		else if (au == 'W')
-			addSequential(new MoveDistance(60));
+			addSequential(new MoveDistance(145));
 		addSequential(new TurnAngle(-90));
 		addSequential(new MoveDistance(8.219));
+		addSequential(new AutoLift(12));
 	}
 	else {
 		addSequential(new TurnAngle(-90));

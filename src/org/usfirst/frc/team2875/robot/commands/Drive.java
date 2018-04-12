@@ -35,9 +35,9 @@ public class Drive extends Command {
     	double forward = Robot.oi.getForwardInput();
     	double turning = Robot.oi.getTurningDegree();
     	double heightEffect = ((21-Robot.lift.getDistance())/21);
-    	forward *= (.5 + (.5 * heightEffect));
-    	turning *= (.5 + (.5 * heightEffect));
-    	System.out.println(Robot.dTrain.getDistances()[0] + " "+ Robot.dTrain.getDistances()[1]);
+    	forward *= (.8 + (.3 * heightEffect));
+    	turning *= (.8 + (.3 * heightEffect));
+    	//System.out.println(Robot.dTrain.getDistances()[0] + " "+ Robot.dTrain.getDistances()[1]);
 		if (Math.abs(turning) < MINIMUM_TURN && !isForward)
 		{
 			Robot.gyro.reset();
@@ -79,7 +79,7 @@ public class Drive extends Command {
     	double diff = degree - Robot.gyro.getAngleZ();
     	int direction = -1;
     	if (diff < 0) direction = 1;
-    	double speed = direction * (.5 * (Math.abs(diff)/ANGLE_SPEED) + .5);
+    	double speed = direction * (.55 * (Math.abs(diff)/ANGLE_SPEED) + .45);
     	speed = speed * .7;
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
     	//System.out.println("Difference :" + diff);

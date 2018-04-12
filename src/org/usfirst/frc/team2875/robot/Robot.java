@@ -43,7 +43,7 @@ import autonomous.TotalAuto;
 	
 	public static final OI oi = new OI();
 	//public static Gearbox left = new Gearbox(3,4,5);
-	//public static Gearbox right = new Gearbox(0,1,2);
+	//public static Gearbojnx right = new Gearbox(0,1,2);
 	public static SpeedControllerGroup left;
 	public static SpeedControllerGroup right;
 	public static Drivetrain dTrain;
