@@ -26,7 +26,8 @@ public class LeftStarting extends CommandGroup{
 
 			addSequential(new TurnAngle(90));
 			addSequential(new MoveDistance(1.88));
-			addSequential(new AutoLift(12));
+			addSequential(new AutoLift(10));
+			addSequential(new MoveDistance(23));
 		}
 		else
 		{

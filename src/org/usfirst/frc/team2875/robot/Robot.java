@@ -70,7 +70,7 @@ import autonomous.TotalAuto;
 	@Override
 	public void robotInit() {
 		UsbCamera a = CameraServer.getInstance().startAutomaticCapture();
-		a.setResolution(320, 240);
+		a.setResolution(160, 120);
 		dTrain = new Drivetrain();
 		//Left on ports 0-1-2, Right on ports 3-4-5
 		left = new SpeedControllerGroup(new Spark(0),new Spark(1),new Spark(2));
