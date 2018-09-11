@@ -14,7 +14,7 @@ public class BaseLine extends CommandGroup {
 			addSequential(new TurnAngle(-90));
 			addSequential(new MoveDistance(65));
 		}else {
-			addSequential(new MoveDistance(105));
+			addSequential(new MoveDistance(85));
 		}
 	}
 	

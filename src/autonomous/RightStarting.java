@@ -13,13 +13,13 @@ public class RightStarting extends CommandGroup {
 	
 	if (gd == 'R')
 	{
-		
-		if (au == 'W')
+		if (au == 'C')
+			addSequential(new MoveDistance(282.818));
+		else if (au == 'W')
 			addSequential(new MoveDistance(145));
 		addSequential(new TurnAngle(-90));
 		addSequential(new MoveDistance(8.219));
-		addSequential(new AutoLift(10));
-		addSequential(new MoveDistance(23));
+		addSequential(new AutoLift(12));
 	}
 	else {
 		addSequential(new TurnAngle(-90));
