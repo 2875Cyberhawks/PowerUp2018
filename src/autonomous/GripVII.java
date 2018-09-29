@@ -28,8 +28,6 @@ import org.opencv.objdetect.*;
 public class GripVII {
 
 	//Outputs
-	private Mat resizeImage0Output = new Mat();
-	private Mat resizeImage1Output = new Mat();
 	private Mat blur0Output = new Mat();
 	private Mat rgbThresholdOutput = new Mat();
 	private Mat blur1Output = new Mat();
@@ -44,22 +42,9 @@ public class GripVII {
 	}
 	
 	public void process(Mat source0) {
-		// Step Resize_Image0:
-		Mat resizeImage0Input = source0;
-		double resizeImage0Width = 256.0;
-		double resizeImage0Height = 144.0;
-		int resizeImage0Interpolation = Imgproc.INTER_CUBIC;
-		resizeImage(resizeImage0Input, resizeImage0Width, resizeImage0Height, resizeImage0Interpolation, resizeImage0Output);
-
-		// Step Resize_Image1:
-		Mat resizeImage1Input = resizeImage0Output;
-		double resizeImage1Width = 640.0;
-		double resizeImage1Height = 480.0;
-		int resizeImage1Interpolation = Imgproc.INTER_CUBIC;
-		resizeImage(resizeImage1Input, resizeImage1Width, resizeImage1Height, resizeImage1Interpolation, resizeImage1Output);
 
 		// Step Blur0:
-		Mat blur0Input = resizeImage1Output;
+		Mat blur0Input = source0;
 		BlurType blur0Type = BlurType.get("Median Filter");
 		double blur0Radius = 43.153153153153156;
 		blur(blur0Input, blur0Type, blur0Radius, blur0Output);
@@ -85,15 +70,7 @@ public class GripVII {
 		findBlobs(findBlobsInput, findBlobsMinArea, findBlobsCircularity, findBlobsDarkBlobs, findBlobsOutput);
 
 	}
-
-	public Mat resizeImage0Output() {
-		return resizeImage0Output;
-	}
-
-	public Mat resizeImage1Output() {
-		return resizeImage1Output;
-	}
-
+	
 	public Mat blur0Output() {
 		return blur0Output;
 	}
@@ -108,11 +85,6 @@ public class GripVII {
 
 	public MatOfKeyPoint findBlobsOutput() {
 		return findBlobsOutput;
-	}
-
-	private void resizeImage(Mat input, double width, double height,
-		int interpolation, Mat output) {
-		Imgproc.resize(input, output, new Size(width, height), 0.0, 0.0, interpolation);
 	}
 
 	private void rgbThreshold(Mat input, double[] red, double[] green, double[] blue,
