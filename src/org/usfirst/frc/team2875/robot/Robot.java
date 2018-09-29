@@ -52,13 +52,13 @@ import autonomous.TotalAuto;
 	public static Lift lift;
 	public static Clutch clutch;
 	public static int iter = 0;
+	public static UsbCamera cam;
 	public static boolean leftSwitch;
 	Command auto;
 	SendableChooser<Character> scaleChooser;
 	SendableChooser<Character> switchChooser;
 	SendableChooser<Character> startChooser;
 	SendableChooser<Character> autoChooser;
-	SendableChooser<Character> priorityChooser;
 	public static ADIS16448_IMU gyro;
 	//public static TurnAnglePID pidT;
 //	public static CameraThread vis;
@@ -69,8 +69,8 @@ import autonomous.TotalAuto;
 	 */
 	@Override
 	public void robotInit() {
-		UsbCamera a = CameraServer.getInstance().startAutomaticCapture();
-		a.setResolution(320, 240);
+		cam = CameraServer.getInstance().startAutomaticCapture();
+		cam.setResolution(320, 240);
 		dTrain = new Drivetrain();
 		//Left on ports 0-1-2, Right on ports 3-4-5
 		left = new SpeedControllerGroup(new Spark(0),new Spark(1),new Spark(2));

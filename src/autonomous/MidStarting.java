@@ -22,10 +22,7 @@ public class MidStarting extends CommandGroup {
 			if (au == 'C')
 				addSequential(new MoveDistance(140 + 10));
 			else if (au == 'W')
-			{
-				addSequential(new MoveDistance(53.188));
-				addSequential(new Marker("Finished MoveDistance"));
-			}
+				addSequential(new MoveDistance(119.823));
 			addSequential(new TurnAngle(-90));
 			addSequential(new Marker("Starting Lift for switch"));
 
@@ -60,8 +57,7 @@ public class MidStarting extends CommandGroup {
 				addSequential(new AutoLift(26));
 			}
 			if (au == 'W')
-				addSequential(new MoveDistance(80.910));
-			
+				addSequential(new MoveDistance(80.910));	
 		}
 	}	
 }

@@ -5,6 +5,7 @@ import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.LiftWheelSpeed;
 import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+import org.usfirst.frc.team2875.robot.commands.MoveToBox;
 import org.usfirst.frc.team2875.robot.commands.ToggleLift;
 import org.usfirst.frc.team2875.robot.commands.ToggleLiftVertical;
 import org.usfirst.frc.team2875.robot.commands.Wait;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 //TODO purge
 public class TotalAuto extends CommandGroup {
+	
 	private char scaleSide;
 	private char auto;
 	private char switchSide;
@@ -55,7 +57,14 @@ public class TotalAuto extends CommandGroup {
     		addSequential(new BaseLine(start));
     		return;
     	}else if(auto == 'T'){
+<<<<<<< HEAD
     		//addSequential(new AutoLift(10));
+=======
+    		addSequential(new MoveToBox());
+    		addSequential(new AutoLift(12));
+    		addSequential(new MoveDistance(18));
+    		addSequential(new ToggleLift());
+>>>>>>> ee4a9bcd99add0855b0434f2896f138b5c39b49d
     		return;
     	}
     	switch (start) {

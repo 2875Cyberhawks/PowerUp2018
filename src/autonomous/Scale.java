@@ -10,7 +10,7 @@ public class Scale {
 	public static void fromLeftSwitch()
 	{
 		/*if scaleRight
-		 * ifscalewLeft
+		 * ifscaleLeft
 		 */
 
 		/*if(true)
