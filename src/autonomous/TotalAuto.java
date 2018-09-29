@@ -82,7 +82,7 @@ public class TotalAuto extends CommandGroup {
     	addSequential(new Marker("Movement finished, starting lift"));
     	switch (auto) {
     		case 'C':
-    			addSequential(new MoveDistance(15));
+    			addSequential(new MoveDistance(20,.5));
     			addSequential(new ToggleLift());
     			//addSequential(new AutoLift(0));
     			addSequential(new Marker("Finished lift for scale"));

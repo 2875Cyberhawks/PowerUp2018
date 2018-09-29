@@ -47,7 +47,7 @@ public class MidStarting extends CommandGroup {
 				addSequential(new MoveDistance(69));
 			else if (au == 'C')
 				addSequential(new MoveDistance(140 + 10));
-			addSequential(new TurnAngle(90));
+			addSequential(new TurnAngle(90 + 3.5));
 			addSequential(new Marker("Starting Lift for switch"));
 			
 			if  (au == 'C') {
