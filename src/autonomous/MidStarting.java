@@ -49,15 +49,17 @@ public class MidStarting extends CommandGroup {
 				addSequential(new MoveDistance(140 + 10));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Starting Lift for switch"));
-			addSequential(new AutoLift(12));
+			
 			if  (au == 'C') {
 				addSequential(new MoveDistance(280 + 30)); //CAD Distance + Manual Offset
-				addSequential(new TurnAngle(-90));
+				addSequential(new TurnAngle(90));
 				addSequential(new ToggleLiftVertical());
 				addSequential(new AutoLift(26));
 			}
-			if (au == 'W')
-				addSequential(new MoveDistance(80.910));	
+			if (au == 'W') {
+				addSequential(new AutoLift(12));
+				addSequential(new MoveDistance(80.910));
+			}
 		}
 	}	
 }

@@ -57,14 +57,10 @@ public class TotalAuto extends CommandGroup {
     		addSequential(new BaseLine(start));
     		return;
     	}else if(auto == 'T'){
-<<<<<<< HEAD
-    		//addSequential(new AutoLift(10));
-=======
     		addSequential(new MoveToBox());
     		addSequential(new AutoLift(12));
     		addSequential(new MoveDistance(18));
     		addSequential(new ToggleLift());
->>>>>>> ee4a9bcd99add0855b0434f2896f138b5c39b49d
     		return;
     	}
     	switch (start) {
