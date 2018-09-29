@@ -3,6 +3,7 @@ package autonomous;
 import org.usfirst.frc.team2875.robot.commands.AutoLift;
 import org.usfirst.frc.team2875.robot.commands.Marker;
 import org.usfirst.frc.team2875.robot.commands.MoveDistance;
+import org.usfirst.frc.team2875.robot.commands.ToggleLiftVertical;
 import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -18,9 +19,9 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Started R"));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Finished turn"));
-			//if (au == 'C')
-			//	addSequential(new MoveDistance(119.823));d
-			if (au == 'W')
+			if (au == 'C')
+				addSequential(new MoveDistance(140 + 10));
+			else if (au == 'W')
 			{
 				addSequential(new MoveDistance(53.188));
 				addSequential(new Marker("Finished MoveDistance"));
@@ -29,14 +30,16 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Starting Lift for switch"));
 
 			addSequential(new Marker("Finished turn"));
-			//if (au == 'C')
-			//{
-			//	addSequential(new MoveDistance(279.33));
-			//	addSequential(new TurnAngle(-90));
-			//}
-			addSequential(new AutoLift(12));
+			if (au == 'C')
+			{
+				addSequential(new MoveDistance(280 + 30)); //CAD Distance + Manual Offset
+				addSequential(new TurnAngle(-90));
+				addSequential(new ToggleLiftVertical());
+				addSequential(new AutoLift(26));
+			}
 			if (au == 'W')
 			{
+				addSequential(new AutoLift(12));
 				addSequential(new MoveDistance(81));
 			}
 		}
@@ -45,15 +48,17 @@ public class MidStarting extends CommandGroup {
 			addSequential(new TurnAngle(-90));
 			if (au == 'W')
 				addSequential(new MoveDistance(69));
-			//else if (au == 'C')
-			//	addSequential(new MoveDistance(131.199));
+			else if (au == 'C')
+				addSequential(new MoveDistance(140 + 10));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Starting Lift for switch"));
 			addSequential(new AutoLift(12));
-			//if  (au == 'C') {
-			//	addSequential(new MoveDistance(279.33));
-			//	addSequential(new TurnAngle(90));
-			//}
+			if  (au == 'C') {
+				addSequential(new MoveDistance(280 + 30)); //CAD Distance + Manual Offset
+				addSequential(new TurnAngle(-90));
+				addSequential(new ToggleLiftVertical());
+				addSequential(new AutoLift(26));
+			}
 			if (au == 'W')
 				addSequential(new MoveDistance(80.910));
 			

@@ -42,9 +42,9 @@ public class TotalAuto extends CommandGroup {
     	if (auto == 'W')sideUsed = switchSide;
     	if (auto == 'N')start = 'N';
     	//Take control of box here
-    	addSequential(new ToggleLiftVertical());
-    	addSequential(new Wait(1));
-    	//addSequential(new LiftWheelSpeed(.5,.1));
+    	addSequential(new AutoLift(1));
+    	addSequential(new Wait(5));
+    	addSequential(new LiftWheelSpeed(.5,.5));
     	addSequential(new ToggleLiftVertical());
     	//addSequential(new ToggleLift());
     	//Move the bot
@@ -55,7 +55,7 @@ public class TotalAuto extends CommandGroup {
     		addSequential(new BaseLine(start));
     		return;
     	}else if(auto == 'T'){
-    		addSequential(new AutoLift(10));
+    		//addSequential(new AutoLift(10));
     		return;
     	}
     	switch (start) {
@@ -76,13 +76,12 @@ public class TotalAuto extends CommandGroup {
     	}
     	addSequential(new Marker("Movement finished, starting lift"));
     	switch (auto) {
-    		/*case 'C':
+    		case 'C':
     			addSequential(new MoveDistance(15));
-    			addSequential(new LiftWheelSpeed(-1,1.5));
-    			addSequential(new MoveDistance(-5,-.5));
+    			addSequential(new ToggleLift());
     			//addSequential(new AutoLift(0));
     			addSequential(new Marker("Finished lift for scale"));
-    			break;*/
+    			break;
     		case 'W':
 //    			//addSequential(new AutoLift(3));
     			addSequential(new ToggleLift());

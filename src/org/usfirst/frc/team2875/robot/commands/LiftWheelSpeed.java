@@ -10,21 +10,20 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class LiftWheelSpeed extends Command {
-	Timer time;
+	
+	long startT;
 	double totT;
 	double speed;
-    public LiftWheelSpeed(double speed, double t) {
+    public LiftWheelSpeed(double spd, double t) {
         requires(Robot.lift);
-        time = new Timer();
-        this.speed = speed;
+        this.speed = spd;
         totT = t;
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	time.reset();
-    	time.start();
+    	startT = System.currentTimeMillis();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -37,7 +36,7 @@ public class LiftWheelSpeed extends Command {
     // Make this return true when this Command no longer needs to run execute()
     @Override
     protected boolean isFinished() {
-        return time.hasPeriodPassed(totT);
+        return System.currentTimeMillis() - startT > (1000 * totT);
     }
 
     // Called once after isFinished returns true
