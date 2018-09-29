@@ -58,7 +58,6 @@ import autonomous.TotalAuto;
 	SendableChooser<Character> switchChooser;
 	SendableChooser<Character> startChooser;
 	SendableChooser<Character> autoChooser;
-	SendableChooser<Character> priorityChooser;
 	public static ADIS16448_IMU gyro;
 	//public static TurnAnglePID pidT;
 //	public static CameraThread vis;

@@ -18,8 +18,8 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Started R"));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Finished turn"));
-			//if (au == 'C')
-			//	addSequential(new MoveDistance(119.823));d
+			if (au == 'C')
+				addSequential(new MoveDistance(119.823));
 			if (au == 'W')
 			{
 				addSequential(new MoveDistance(53.188));
@@ -29,11 +29,11 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Starting Lift for switch"));
 
 			addSequential(new Marker("Finished turn"));
-			//if (au == 'C')
-			//{
-			//	addSequential(new MoveDistance(279.33));
-			//	addSequential(new TurnAngle(-90));
-			//}
+			if (au == 'C')
+			{
+				addSequential(new MoveDistance(279.33));
+				addSequential(new TurnAngle(-90));
+			}
 			addSequential(new AutoLift(12));
 			if (au == 'W')
 			{
@@ -45,15 +45,15 @@ public class MidStarting extends CommandGroup {
 			addSequential(new TurnAngle(-90));
 			if (au == 'W')
 				addSequential(new MoveDistance(69));
-			//else if (au == 'C')
-			//	addSequential(new MoveDistance(131.199));
+			else if (au == 'C')
+				addSequential(new MoveDistance(131.199));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Starting Lift for switch"));
 			addSequential(new AutoLift(12));
-			//if  (au == 'C') {
-			//	addSequential(new MoveDistance(279.33));
-			//	addSequential(new TurnAngle(90));
-			//}
+			if  (au == 'C') {
+				addSequential(new MoveDistance(279.33));
+				addSequential(new TurnAngle(90));
+			}
 			if (au == 'W')
 				addSequential(new MoveDistance(80.910));
 			
