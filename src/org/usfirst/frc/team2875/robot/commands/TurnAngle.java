@@ -3,20 +3,25 @@ package org.usfirst.frc.team2875.robot.commands;
 import org.usfirst.frc.team2875.robot.Robot;
 //import org.usfirst.frc.team2875.robot.subsystems.TurnAnglePID;
 
+import java.util.HashMap;
 import edu.wpi.first.wpilibj.command.Command;
-
-
- 
  
 //TODO add nonlinear function for speed
 public class TurnAngle extends Command {
 	private double goal;
-	private static final double ACCEPTABLE_RANGE = 5;
+	private static final double ACCEPTABLE_ANGLE = 3;
+	private static HashMap<double><double> DUMB_STUPID_PIECEWISE; //Do not touch
+
     public TurnAngle(double goalX) {
     	super("TurnAngle");
     	goal = goalX;
     	requires(Robot.dTrain);
-    	//goal = degree;
+    	
+    	DUMB_STUPID_PIECEWISE.put(180,1);
+    	DUMB_STUPID_PIECEWISE.put(90,.7);
+    	DUMB_STUPID_PIECEWISE.put(45,.5);
+    	DUMB_STUPID_PIECEWISE.put(10,.2);
+    	//goal = degree
     }
 
     // Called just before this Command runs the first time
@@ -26,19 +31,16 @@ public class TurnAngle extends Command {
     }
 
     // Called repeatedly when this Command is scheduled to run
-   @Override
+    @Override
     protected void execute() {
-	   Drive.turnAngleGyro(goal);
+    	//Get the largest possible piecewise
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
    @Override 
    protected boolean isFinished() {
-	   //System.out.println("Angle is: " + Robot.gyro.getAccelZ());
-	   //System.out.println("Goal is: " + goal);
-	   //if (movingForward)return Robot.gyro.getAngleZ() >= goal;
-	   //else return Robot.gyro.getAngleZ() <= goal;
-	   return (Math.abs(Robot.gyro.getAngleZ()-goal) <= ACCEPTABLE_RANGE);
+	   return goal - 
     }
 
     // Called once after isFinished returns true
