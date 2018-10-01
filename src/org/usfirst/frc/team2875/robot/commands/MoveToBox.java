@@ -37,8 +37,19 @@ public class MoveToBox extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Mat adragna = new Mat();
-    	CameraServer.getInstance().getVideo("cam0").grabFrame(adragna);
-		locator.process(adragna);
+    	try {
+    		CameraServer.getInstance().getVideo("cam0").grabFrame(adragna);
+    	}
+    	catch(Exception e){
+    		System.out.println("Camera0 was not found");
+    		CameraServer.getInstance().getVideo().grabFrame(adragna);
+    		System.out.println("Use default video");
+    	}
+    	if (adragna.empty())
+    	{
+    		System.out.println("Camera not outputting");
+    	}
+    	locator.process(adragna);
 		MatOfKeyPoint bob = locator.findBlobsOutput();
 		List<KeyPoint> roboRoomHyphenTE = bob.toList();
 		
@@ -69,6 +80,9 @@ public class MoveToBox extends Command {
 		double robonautsClimbAcc = INTO_ARMS - majorKey.pt.y; //Make as close to 0 as possible
 		double turnMag = (robotigersAvg  * majorKey.pt.y)/ (HEIGHT * WIDTH);
 		double movMag = (robonautsClimbAcc / INTO_ARMS);
+		
+		System.out.println("turnMag " + turnMag);
+		System.out.println("movMag " + movMag);
 		if (Math.abs(turnMag) > LEEWAY)
 		{
 			Robot.dTrain.setSpeed(turnMag, -turnMag);
