@@ -34,13 +34,33 @@ public class TurnAngle extends Command {
     @Override
     protected void execute() {
     	//Get the largest possible piecewise
-    	
+    	double speed;
+    	if (goal <= 10) {
+    		speed = DUMB_STUPID_PIECEWISE.get(10);
+    		Robot.right.set(speed);
+    		Robot.left.set(-speed);
+    	}
+    	else if (goal <= 45) {
+    		speed = DUMB_STUPID_PIECEWISE.get(45);
+    		Robot.right.set(speed);
+    		Robot.left.set(-speed);
+    	}
+    	else if(goal <= 90) {
+    		speed = DUMB_STUPID_PIECEWISE.get(90);
+    		Robot.right.set(speed);
+    		Robot.left.set(-speed);
+    	}
+    	else {
+    		speed = DUMB_STUPID_PIECEWISE.get(180);
+    		Robot.right.set(speed);
+    		Robot.left.set(-speed);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
    @Override 
    protected boolean isFinished() {
-	   return goal - 
+	   return goal - Robot.gyro.getAngleZ() <= ACCEPTABLE_ANGLE;
     }
 
     // Called once after isFinished returns true
