@@ -17,7 +17,7 @@ public class MoveToBox extends Command {
 	
 	private boolean isDone;
 	private final double LEEWAY = .04;
-	private final double INTO_ARMS = 214.5;
+	private final double INTO_ARMS = 214.6;
 	private final double HEIGHT = 240.0;
 	private final double WIDTH = 320.0;
 	private GripVII locator;
