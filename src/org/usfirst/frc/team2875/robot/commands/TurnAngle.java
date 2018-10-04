@@ -14,8 +14,8 @@ public class TurnAngle extends Command {
 	private int direc; // -1 is left, 1 is right
 	private double deltaTheta;
 	private static final double ACCEPTABLE_ANGLE = 3;
-	private static final double ROBOT_RADIUS = .32; //in m
-	private static final double MAX_TURN_SPEED = 100; //in m/s
+	//private static final double ROBOT_RADIUS = .32; //in m
+	private static final double MAX_TURN_SPEED = 360 / 1.4; //in m/s
 	private static HashMap<Double,Double> DUMB_STUPID_PIECEWISE; //Do not touch
 
     public TurnAngle(double goalX) {
@@ -63,9 +63,9 @@ public class TurnAngle extends Command {
     	Robot.right.set(speed);
 		Robot.left.set(-speed);
     	
-		double arcLength = (Math.PI * ROBOT_RADIUS * theta) / 180;
-		double carVel = MAX_TURN_SPEED * speed; // rotational velocity && "the snack that smiles back goldfish" - Paige Vegna, 2018
-		double deltaTPose = arcLength * Math.abs(carVel); // delta-spacito
+		//double arcLength = (Math.PI * ROBOT_RADIUS * theta) / 180;
+		double angVel = MAX_TURN_SPEED * speed; // rotational velocity && "the snack that smiles back goldfish" - Paige Vegna, 2018
+		double deltaTPose = deltaTheta * Math.abs(angVel); // delta-spacito
 		
 		Timer.delay(deltaTPose);
     }
