@@ -50,7 +50,7 @@ public class TurnAngle extends Command {
     		theta = deltaTheta;
     	else if (deltaTheta <= 10)
     		theta = 10;
-    	else if (deltaTheta <= 45
+    	else if (deltaTheta <= 45)
     		theta = 45;
     	else if (deltaTheta <= 90)
     		theta = 90;
