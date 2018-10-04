@@ -23,49 +23,59 @@ public class TurnAngle extends Command {
     	goal = Math.abs(goalX);
     	direc = (int)(goalX / goal);
     	deltaTheta = goal;
+    	DUMB_STUPID_PIECEWISE = new HashMap<Double,Double>();
     	
     	requires(Robot.dTrain);
     	
     	DUMB_STUPID_PIECEWISE.put(180.0,1.0);
     	DUMB_STUPID_PIECEWISE.put(90.0,.7);
     	DUMB_STUPID_PIECEWISE.put(45.0,.5);
-    	DUMB_STUPID_PIECEWISE.put(10.0,.2);
-    	DUMB_STUPID_PIECEWISE.put(5.0,.1);
+    	DUMB_STUPID_PIECEWISE.put(10.0,.4);
+    	DUMB_STUPID_PIECEWISE.put(5.0,.3);
     }
 
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-    	Robot.gyro.reset();    	
+    	System.out.println("Starting Meta-Turn of " + goal + " degrees");
+    	Robot.gyro.reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
     	//Get the largest possible piecewise
+    	System.out.println("Starting turn");
+    	System.out.println("DeltaTheta is " + deltaTheta);
     	double speed;
     	double theta;
     	
-    	if (deltaTheta <= 5)
+    	if (deltaTheta <= 5.0)
     		theta = deltaTheta;
-    	else if (deltaTheta <= 10)
-    		theta = 10;
-    	else if (deltaTheta <= 45)
-    		theta = 45;
-    	else if (deltaTheta <= 90)
-    		theta = 90;
+    	else if (deltaTheta <= 10.0)
+    		theta = 10.0;
+    	else if (deltaTheta <= 45.0)
+    		theta = 45.0;
+    	else if (deltaTheta <= 90.0)
+    		theta = 90.0;
     	else
-    		theta = 180;
+    		theta = 180.0;
     	
-    	speed = theta <= 5 ? DUMB_STUPID_PIECEWISE.get(5) : DUMB_STUPID_PIECEWISE.get(theta);
+    	System.out.println("Will turn for " + theta + " degrees");
+    	
+    	speed = theta <= 5 ? DUMB_STUPID_PIECEWISE.get(5.0) : DUMB_STUPID_PIECEWISE.get(theta);
     	speed *= direc;
     	
-    	Robot.right.set(speed);
-		Robot.left.set(-speed);
+    	System.out.println("Will turn at " + speed + " speed");
+    	
+    	Robot.right.set(-speed);
+		Robot.left.set(speed);
     	
 		//double arcLength = (Math.PI * ROBOT_RADIUS * theta) / 180;
 		double angVel = MAX_TURN_SPEED * speed; // rotational velocity && "the snack that smiles back goldfish" - Paige Vegna, 2018
-		double deltaTPose = deltaTheta * Math.abs(angVel); // delta-spacito
+		double deltaTPose = deltaTheta / Math.abs(angVel); // delta-spacito
+		
+		System.out.println("Will turn for " + deltaTPose + " seconds");
 		
 		Timer.delay(deltaTPose);
     }
@@ -77,7 +87,7 @@ public class TurnAngle extends Command {
 	   return deltaTheta <= ACCEPTABLE_ANGLE;
     }
 
-    // Called once after isFinished returns true
+    // Called once after isFinisheds returns true
    @Override 
    protected void end() {
 	   Robot.dTrain.stop();
