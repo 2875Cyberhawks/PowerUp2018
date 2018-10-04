@@ -21,7 +21,7 @@ public class TurnAngle extends Command {
     public TurnAngle(double goalX) {
     	super("TurnAngle");
     	goal = Math.abs(goalX);
-    	direc = goalX / goal;
+    	direc = (int)(goalX / goal);
     	deltaTheta = goal;
     	
     	requires(Robot.dTrain);
@@ -63,7 +63,7 @@ public class TurnAngle extends Command {
     	Robot.right.set(speed);
 		Robot.left.set(-speed);
     	
-		double arcLength = (Math.pi * ROBOT_RADIUS * theta) / 180;
+		double arcLength = (Math.PI * ROBOT_RADIUS * theta) / 180;
 		double carVel = MAX_TURN_SPEED * speed; // rotational velocity && "the snack that smiles back goldfish" - Paige Vegna, 2018
 		double deltaTPose = arcLength * Math.abs(carVel); // delta-spacito
 		
