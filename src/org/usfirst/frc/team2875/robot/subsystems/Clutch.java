@@ -1,4 +1,4 @@
-/*package org.usfirst.frc.team2875.robot.subsystems;
+package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.commands.ClutchCmd;
 
@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ */
  
 public class Clutch extends Subsystem {
 
@@ -40,4 +40,4 @@ public class Clutch extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new ClutchCmd());
     }
-}*/
+}
