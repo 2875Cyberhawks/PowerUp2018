@@ -46,9 +46,7 @@ public class MoveDistance extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected double getDistance() {
-    	double[] distances = Robot.dTrain.getDistances();
-        double avg = (Math.abs(distances[0]) + Math.abs(distances[1])) / 2;
-    	return avg;
+    	return Robot.dTrain.getDistance();
     }
     @Override
     protected boolean isFinished() {

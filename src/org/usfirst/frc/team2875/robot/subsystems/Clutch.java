@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2875.robot.subsystems;
+/*package org.usfirst.frc.team2875.robot.subsystems;
 
 import org.usfirst.frc.team2875.robot.commands.ClutchCmd;
 
@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
- */
+ 
 public class Clutch extends Subsystem {
 
     // Put methods for controlling this subsystem
@@ -32,7 +32,7 @@ public class Clutch extends Subsystem {
 		//	Robot.dTrain.right.engageClutch();
 		}
 		cEngaged = !cEngaged;
-		sole.set(cEngaged);
+//		//sole.set(cEngaged);
 	}
 	
 	public boolean engaged() {return cEngaged;}
@@ -40,4 +40,4 @@ public class Clutch extends Subsystem {
     public void initDefaultCommand() {
         setDefaultCommand(new ClutchCmd());
     }
-}
+}*/

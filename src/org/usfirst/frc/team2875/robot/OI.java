@@ -110,9 +110,9 @@ public class OI {
 	
 	//might want to reverse clutch and switch buttons
 	
-	public boolean getClutch(){
+/*	public boolean getClutch(){
 		return driveController.getRawButton(3);
-	}
+	}*/
 	
 	public boolean getLiftSol() {
 		return liftController.getRawButton(3);

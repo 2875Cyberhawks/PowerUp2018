@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2875.robot.commands;
+/*package org.usfirst.frc.team2875.robot.commands;
 
 import org.usfirst.frc.team2875.robot.Robot;
 
@@ -25,4 +25,4 @@ public class ClutchCmd extends Command {
     protected boolean isFinished() {
         return false;
     }
-}
+}*/

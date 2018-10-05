@@ -199,15 +199,15 @@ import autonomous.TotalAuto;
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		//System.out.println("Angle: " + Robot.gyro.getAngleZ());
-		SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
+		//SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
 		//System.out.println("" + dTrain.rEncode.getRate());
 		//System.out.println("X" + gyro.getAccelX());
-		if (iter == 10) {
+		//if (iter == 10) {
 		//System.out.println("Y " + gyro.getAccelY());
-		iter =0;
-		}
-		iter++;
+		//iter =0;
+		//}
+		//iter++;
 		//System.out.println("Z" + gyro.getAccelZ());
 	}
 

@@ -12,12 +12,12 @@ public class Drivetrain extends Subsystem {
 	public static final double wRadius = 4;
 //	public DriveSide right;
 //	public DriveSide left;
-	public Encoder l;
+	//public Encoder l;
 	public Encoder r;
 
 	public Drivetrain() {
-		l = new Encoder(0,1);
-    	l.setDistancePerPulse(((Math.PI * 2 * 4)/(360/3) * 13/12) * .8);
+		//l = new Encoder(0,1);
+    	//l.setDistancePerPulse(((Math.PI * 2 * 4)/(360/3) * 13/12) * .8);
     	r = new Encoder(2,3);
     	r.setDistancePerPulse(((Math.PI * 2 * 4)/(360/3) * 13/12)*2 * .8);
     	r.setReverseDirection(true);
@@ -37,7 +37,7 @@ public class Drivetrain extends Subsystem {
 	
 	public void reset()
 	{
-		l.reset();
+		//l.reset();
 		r.reset();
 	}
 	
@@ -51,11 +51,8 @@ public class Drivetrain extends Subsystem {
     	setDefaultCommand(new Drive());
     }
     
-    public double[] getDistances()
+    public double getDistance()
     {
-    	double[] m = new double[2];
-    	m[0] = r.getDistance();
-    	m[1] = l.getDistance();
-    	return m;
+    	return r.getDistance();
     }
 }
