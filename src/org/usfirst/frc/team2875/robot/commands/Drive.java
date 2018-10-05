@@ -69,7 +69,10 @@ public class Drive extends Command {
     	}else {
     		move(0,0);
     	}
-    	System.out.println(Robot.dTrain.getDistances()[0] + " " + Robot.dTrain.getDistances()[1]);
+    	System.out.println("Moving Straight:");
+    	System.out.println("Current turn error is " + currentError);
+    	System.out.println("Current forward speed is " + forward);
+    	//System.out.println(Robot.dTrain.getDistances()[0] + " " + Robot.dTrain.getDistances()[1]);
     	return currentError < 45;
     	
     }
@@ -81,6 +84,7 @@ public class Drive extends Command {
     	if (diff < 0) direction = 1;
     	double speed = direction * (.55 * (Math.abs(diff)/ANGLE_SPEED) + .45);
     	speed = speed * .7;
+    	System.out.println("Turning: " + diff + " - " + speed);
     	//if (diff < 0) speed = 4 * Math.log(1-(-diff/90));
     	//System.out.println("Difference :" + diff);
     	//System.out.println("Degree :" + degree);
