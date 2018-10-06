@@ -18,7 +18,7 @@ public class Drivetrain extends Subsystem {
 	public Drivetrain() {
 		//l = new Encoder(0,1);
     	//l.setDistancePerPulse(((Math.PI * 2 * 4)/(360/3) * 13/12) * .8);
-    	r = new Encoder(8, 9);
+    	r = new Encoder(2,3);
     	r.setDistancePerPulse(((Math.PI * 2 * 4)/(360/3) * 13/12)*2 * .8);
     	r.setReverseDirection(true);
 	}
