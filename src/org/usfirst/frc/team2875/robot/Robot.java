@@ -29,7 +29,7 @@ import org.usfirst.frc.team2875.robot.subsystems.Lift;
 import com.analog.adis16448.frc.ADIS16448_IMU;
 
 import autonomous.TestCommand;
-import autonomous.TotalAuto;
+import autonomous.TotalAuto2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -147,7 +147,7 @@ import autonomous.TotalAuto;
 		Robot.lift.toggleLiftSol();
 		//if (!Robot.lift.getOpenSol())
 		//Robot.lift.toggleOpenSol();
-		auto = new TotalAuto(autoChooser.getSelected(),startChooser.getSelected(),scaleChooser.getSelected(),switchChooser.getSelected());
+		auto = new TotalAuto2();
 		//auto.start();
 		//auto = new TestCommand();
 		auto.start();

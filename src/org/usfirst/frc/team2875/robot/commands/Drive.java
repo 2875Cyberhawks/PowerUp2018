@@ -69,9 +69,11 @@ public class Drive extends Command {
     	}else {
     		move(0,0);
     	}
-    	System.out.println("Moving Straight:");
-    	System.out.println("Current turn error is " + currentError);
-    	System.out.println("Current forward speed is " + forward);
+    	//System.out.println("Moving Straight:");
+    	//System.out.println("Current turn error is " + currentError);
+    	//System.out.println("Current forward speed is " + forward);
+    	//System.out.println("Str: " + currentError + " - " + forward);
+    	System.out.println("Encode " + Robot.dTrain.getDistance());
     	//System.out.println(Robot.dTrain.getDistances()[0] + " " + Robot.dTrain.getDistances()[1]);
     	return currentError < 45;
     	
@@ -92,11 +94,11 @@ public class Drive extends Command {
     	move(speed,0);
     }
     
-    public static boolean straightDriveEncoders(double forward) {
+    /*public static boolean straightDriveEncoders(double forward) {
     	double rateDiff = Robot.dTrain.l.getRate() - Robot.dTrain.r.getRate();
     	move(rateDiff / 5, forward);
     	return rateDiff < 90;
-    }
+    }*/
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

@@ -34,6 +34,7 @@ public class MoveDistance extends Command {
     @Override
     protected void execute() {
     	//Drive.move(0,speed);
+    	System.out.println("MD: " + distance + " - " + getDistance());
     	if (Math.abs(distance - getDistance()) <= 10){
     		Drive.straightDriveGyro(((speed * .4) + (speed * (Math.abs(distance - getDistance()))/10)*.4), 0);
     	}else{

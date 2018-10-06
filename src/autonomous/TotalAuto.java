@@ -9,6 +9,7 @@ import org.usfirst.frc.team2875.robot.commands.MoveToBox;
 import org.usfirst.frc.team2875.robot.commands.ToggleLift;
 import org.usfirst.frc.team2875.robot.commands.ToggleLiftVertical;
 import org.usfirst.frc.team2875.robot.commands.Wait;
+import org.usfirst.frc.team2875.robot.commands.TurnAngle;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 //TODO purge
@@ -51,17 +52,20 @@ public class TotalAuto extends CommandGroup {
     	//addSequential(new ToggleLift());
     	//Move the bot
     	//addSequential(new Marker("start position is: " + start));
-    	addSequential(new MoveDistance(30));
+    	addSequential(new MoveDistance(1));
     	if (auto == 'N')
     	{
     		addSequential(new BaseLine(start));
     		return;
     	}else if(auto == 'T'){
-    		addSequential(new ToggleLift());
-    		addSequential(new MoveToBox());
-    		addSequential(new AutoLift(12));
-    		addSequential(new MoveDistance(18));
-    		addSequential(new ToggleLift());
+    		addSequential(new Marker("Starting Turn"));
+    		addSequential(new TurnAngle(90));
+    		addSequential(new Marker("Ending Turn"));
+    		//addSequential(new ToggleLift());
+    		//addSequential(new MoveToBox());
+    		//addSequential(new AutoLift(12));
+    		//addSequential(new MoveDistance(18));
+    		//addSequential(new ToggleLift());
     		return;
     	}
     	switch (start) {

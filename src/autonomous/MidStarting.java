@@ -19,12 +19,12 @@ public class MidStarting extends CommandGroup {
 			addSequential(new Marker("Started R"));
 			addSequential(new TurnAngle(90));
 			addSequential(new Marker("Finished turn"));
-			if (au == 'C')
+			if (au == 'C') {
 				addSequential(new Marker("Moving 150 inches"));
-				addSequential(new MoveDistance(140 + 10));
-			else if (au == 'W')
+				addSequential(new MoveDistance(140 + 10));}
+			else if (au == 'W') {
 				addSequential(new Marker("Moving 120 inches"));
-				addSequential(new MoveDistance(119.823));
+				addSequential(new MoveDistance(119.823));}
 			addSequential(new Marker("Turning Left"));
 			addSequential(new TurnAngle(-90));
 			addSequential(new Marker("Starting Lift for switch"));

@@ -20,6 +20,7 @@ public class Clutch extends Subsystem {
 		super("Clutch");
 		sole = new Solenoid(s);
 		cEngaged = false;
+		sole.set(cEngaged);
 	}
 	
 	public void toggleClutch()
