@@ -198,6 +198,7 @@ import autonomous.TotalAuto2;
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		System.out.println("Dtrain: " + Robot.dTrain.getDistance());
 		//System.out.println("Angle: " + Robot.gyro.getAngleZ());
 		//SmartDashboard.putBoolean("Clutch engaged", oi.getClutch());
 		//System.out.println(""+ dTrain.lEncode.getRate());
