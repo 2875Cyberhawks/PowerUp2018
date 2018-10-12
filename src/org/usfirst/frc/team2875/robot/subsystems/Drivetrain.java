@@ -31,6 +31,7 @@ public class Drivetrain extends Subsystem {
 	{
 		Robot.left.set(-leftI);
 		Robot.right.set(rightI);
+		System.out.println("Moving at " + leftI + " and " + rightI);
 		//left.set(leftI);
 		//right.set(rightI);
 	}

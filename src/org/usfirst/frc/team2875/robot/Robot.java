@@ -182,6 +182,7 @@ import autonomous.TotalAuto2;
 
 	@Override
 	public void teleopInit() {
+		System.out.println("This code has run");
 		// This makes sure that the autonomous stops running when
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove

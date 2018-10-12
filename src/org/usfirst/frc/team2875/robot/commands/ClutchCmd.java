@@ -12,13 +12,7 @@ public class ClutchCmd extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(!clutchHasBeenPressed && Robot.oi.getClutch()) {
-    		clutchHasBeenPressed = true;
-    		Robot.clutch.toggleClutch();
-    	}else if(!Robot.oi.getClutch()) {
-    		clutchHasBeenPressed = false;
-    	}
-    	
+    	Robot.clutch.sole.set(Robot.oi.getClutch());
     }
 
     // Make this return true when this Command no longer needs to run execute()
